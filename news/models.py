@@ -6,7 +6,7 @@ from django.utils.timezone import now
 class News(models.Model):
     head = models.CharField(max_length=255)
     content = models.TextField()
-    date = models.DateField(default=django.utils.timezone.now)
+    date = models.DateField(default=now)
 
     def __str__(self):
         return self.head
