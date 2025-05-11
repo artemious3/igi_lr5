@@ -1,4 +1,4 @@
-{% extends "../base.html" %}
+{% extends "./base.html" %}
 
 {% block content %}
 
@@ -6,13 +6,14 @@
     <!-- Iterate over object_list -->
     {% for object in object_list %} 
 
-    <strong><h3><a href = "{% url 'vacancy_detail' object.id %}">{{ object.position }}</a></h3></strong> 
+    <strong><h3><a href = "{% url 'news_detail' object.id %}">{{ object.head }}</a></h3></strong> 
+    <p>{{object.date}}</p>
 
     <hr/>
 
     {% empty %} 
 
-    Company is not hiring right now
+    No news yet. 
 
     {% endfor %} 
 </ul>
