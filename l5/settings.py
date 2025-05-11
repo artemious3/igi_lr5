@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
     'news',
     'vacancies',
+    'faq'
 ]
 
 MIDDLEWARE = [
