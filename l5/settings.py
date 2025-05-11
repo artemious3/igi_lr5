@@ -40,7 +40,8 @@ INSTALLED_APPS = [
 
     'news',
     'vacancies',
-    'faq'
+    'faq',
+    'service_center'
 ]
 
 MIDDLEWARE = [
@@ -58,7 +59,7 @@ ROOT_URLCONF = 'l5.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / "html"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
