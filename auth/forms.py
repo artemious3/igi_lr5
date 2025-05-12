@@ -2,7 +2,7 @@ from typing import Required
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
-
+from django.contrib.auth.models import Group
 from service_center.models import Client
 
 User = get_user_model()
@@ -33,6 +33,9 @@ class SignUpForm(UserCreationForm):
 
     def save(self, commit=True):
         user = super().save()
+
+        client_group = Group.objects.get(name='Client')
+        user.groups.add(client_group)
 
         Client.objects.create(
                 user=user,

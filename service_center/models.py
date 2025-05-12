@@ -25,8 +25,8 @@ class SparePart(models.Model):
     price = models.IntegerField()
     device = models.ForeignKey(Device, on_delete=models.CASCADE)
 
-    def __str__(self):
-        return self.name
+    # def __str__(self):I
+    #     return self.name
 
 
 
@@ -51,6 +51,14 @@ class Order(models.Model):
     approved = models.BooleanField(default=False)
     services = models.ManyToManyField(Service)
     spare_parts = models.ManyToManyField(SparePart)
+
+
+    class Meta:
+        permissions = {
+                ("client_perm", "Can create order (clients)"),
+                ("employee_perm", "Can approve order (employees)")
+            }
+
 
 
 
