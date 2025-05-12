@@ -48,6 +48,7 @@ class Order(models.Model):
     client = models.ForeignKey(Client, on_delete=models.CASCADE)
     employee = models.ForeignKey(User, on_delete=models.CASCADE)
 
+    approved = models.BooleanField(default=False)
     services = models.ManyToManyField(Service)
     spare_parts = models.ManyToManyField(SparePart)
 
