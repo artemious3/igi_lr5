@@ -44,7 +44,7 @@ class Employee(models.Model):
 
 class Order(models.Model):
     date_created = models.DateField(default=now)
-    date_done = models.DateField(null=True)
+    date_scheduled = models.DateField()
     client = models.ForeignKey(Client, on_delete=models.CASCADE)
     employee = models.ForeignKey(User, on_delete=models.CASCADE)
 
