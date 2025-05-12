@@ -1,0 +1,29 @@
+{% extends "./base.html" %}
+
+{% block content %}
+
+<h2>Your orders</h2>
+
+
+    {% for order in order_list %} 
+
+    <p> <strong>ID:</strong>  {{order.id}} </p>
+    <p> <strong>Created:</strong>  {{order.date_created}} </p>
+    <p> <strong>Scheduled:</strong>  {{order.date_scheduled}} </p>
+    <hr>
+
+    {% empty %}
+
+    <p> No orders yet </p>
+
+    {% endfor %}
+
+
+
+    <a href="{% url 'order_new'%}">New order</a>
+
+
+
+{% endblock content %}
+
+

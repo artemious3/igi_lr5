@@ -44,13 +44,14 @@ class Employee(models.Model):
 
 class Order(models.Model):
     date_created = models.DateField(default=now)
-    date_scheduled = models.DateField()
+    # TMP : null = true
+    date_scheduled = models.DateField(null=True)
     client = models.ForeignKey(Client, on_delete=models.CASCADE)
-    employee = models.ForeignKey(User, on_delete=models.CASCADE)
+    employee = models.ForeignKey(Employee, on_delete=models.CASCADE, null=True)
 
     approved = models.BooleanField(default=False)
-    services = models.ManyToManyField(Service)
-    spare_parts = models.ManyToManyField(SparePart)
+    services = models.ManyToManyField(Service, blank=False)
+    spare_parts = models.ManyToManyField(SparePart, null=True)
 
 
     class Meta:
