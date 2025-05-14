@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'news',
     'vacancies',
     'faq',
-    'service_center'
+    'service_center',
+    'reviews'
 ]
 
 MIDDLEWARE = [

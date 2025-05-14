@@ -34,6 +34,7 @@ class SparePart(models.Model):
 class Client(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     phone_number = models.CharField(max_length=16)
+    birth_date = models.DateField()
     address = models.CharField(max_length=64)
     passport_id = models.CharField(max_length=10)
 

@@ -17,6 +17,7 @@ class SignUpForm(UserCreationForm):
     phone_number = forms.CharField(max_length=16)
     passport_id = forms.CharField(max_length=10)
     address = forms.CharField(max_length=64)
+    birth_date = forms.DateField()
 
 
     def __init__(self, *args, **kwargs):
@@ -41,7 +42,8 @@ class SignUpForm(UserCreationForm):
                 user=user,
                 phone_number = self.cleaned_data['phone_number'],
                 passport_id = self.cleaned_data['passport_id'],
-                address = self.cleaned_data['address']
+                address = self.cleaned_data['address'],
+                birth_date = self.cleaned_data['birth_date']
             )
 
         return user
