@@ -106,7 +106,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 
 LOGIN_URL = '/auth/login'
-LOGIN_REDIRECT_URL='/service/orders'
+LOGIN_REDIRECT_URL='/service/profile'
 LOGOUT_REDIRECT_URL = ''
 
 

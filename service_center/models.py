@@ -1,4 +1,5 @@
 from os import name
+from django.core.validators import MinValueValidator
 from django.db import models
 from django.utils.timezone import now
 from django.contrib.auth import get_user_model
@@ -25,8 +26,8 @@ class SparePart(models.Model):
     price = models.IntegerField()
     device = models.ForeignKey(Device, on_delete=models.CASCADE)
 
-    # def __str__(self):I
-    #     return self.name
+    def __str__(self):
+        return self.name
 
 
 
@@ -49,9 +50,10 @@ class Order(models.Model):
     client = models.ForeignKey(Client, on_delete=models.CASCADE)
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE, null=True)
 
+    submitted = models.BooleanField(default=False)
     approved = models.BooleanField(default=False)
-    services = models.ManyToManyField(Service, blank=False)
-    spare_parts = models.ManyToManyField(SparePart, null=True)
+    # services = models.ManyToManyField(Service, blank=False)
+    # spare_parts = models.ManyToManyField(SparePart, null=True)
 
 
     class Meta:
@@ -60,8 +62,18 @@ class Order(models.Model):
                 ("employee_perm", "Can approve order (employees)")
             }
 
+    def total_price(self):
+        return sum([service.service.price * service.number for service in self.order_services.all()])
 
 
+class OrderService(models.Model):
+    order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='order_services')
+    service = models.ForeignKey(Service, on_delete=models.CASCADE)
+    number = models.IntegerField(validators=[MinValueValidator(1)])
 
 
-    
+class OrderSpareParts(models.Model):
+    order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='order_spare_parts')
+    spare_part = models.ForeignKey(Service, on_delete=models.CASCADE)
+    number = models.IntegerField(validators=[MinValueValidator(1)])
+
