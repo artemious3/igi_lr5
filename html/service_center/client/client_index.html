@@ -2,11 +2,11 @@
 
 {% block content %}
 
-<p>Welcome, {{client.user.first_name}} {{client.user.last_name}}!</p>
+<p>Welcome, {{user.first_name}} {{user.last_name}}!</p>
 
 
 <a href=" {%url 'orders_approved'%} ">Your approved orders</a>
-
+<br>
 <a href=" {% url 'orders_unapproved'%}">Your unapproved orders</a>
 
 {% endblock %}

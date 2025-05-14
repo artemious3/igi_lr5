@@ -15,7 +15,7 @@ from .models import Client, Order, OrderService
 @login_required
 @permission_required('service_center.client_perm', raise_exception=True)
 def client_index(req):
-    return render(req, 'service_center/client/client_index.html')
+    return render(req, 'service_center/client/client_index.html', {"user":req.user})
 
 
 
