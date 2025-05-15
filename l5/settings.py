@@ -111,6 +111,28 @@ LOGIN_URL = '/auth/login'
 LOGIN_REDIRECT_URL='/service/profile'
 LOGOUT_REDIRECT_URL = ''
 
+LOGGING = {
+        "version": 1,
+        "disable_existing_loggers": False,
+        "handlers": {
+            "file": {
+                "level": "INFO",
+                "class": "logging.FileHandler",
+                "filename": "debug.log",
+                },
+            "console":{
+                "level": "INFO",
+                "class": "logging.StreamHandler",
+            }
+            },
+        "loggers": {
+            "django": {
+                "handlers": ["file", "console"],
+                "level": "DEBUG",
+                "propagate": True,
+                },
+            },
+        }
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
