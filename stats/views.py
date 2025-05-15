@@ -53,7 +53,7 @@ def http_barh_plot(req, names, values):
         fg,ax = plt.subplots()
         fg.gca().xaxis.set_major_locator(MaxNLocator(integer=True))
         bars = ax.barh(names,values)
-        ax.set(xlabel='Number of orders')
+        # ax.set(xlabel='Number of orders')
         
 
         for bar in bars:

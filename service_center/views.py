@@ -63,7 +63,7 @@ def orders_unapproved_view(req):
    user = req.user 
    client = Client.objects.get(user=user)
    orders = Order.objects.filter(client=client)
-   submitted_orders = orders.filter(submitted=True)
+   submitted_orders = orders.filter(submitted=True, approved=False)
    unsubmitted_orders = orders.filter(submitted=False)
    return render(req, 'service_center/client/orders_unapproved.html', {"submitted_orders":submitted_orders, 
                                                          "unsubmitted_orders":unsubmitted_orders})
@@ -74,11 +74,8 @@ def orders_unapproved_view(req):
 def orders_approved_view(req):
    user = req.user 
    client = Client.objects.get(user=user)
-   orders = Order.objects.filter(client=client)
-   submitted_orders = orders.filter(submitted=True)
-   unsubmitted_orders = orders.filter(submitted=False)
-   return render(req, 'service_center/client/orders_approved.html', {"submitted_orders":submitted_orders, 
-                                                     "unsubmitted_orders":unsubmitted_orders})
+   orders = Order.objects.filter(client=client).filter(approved=True)
+   return render(req, 'service_center/client/orders_approved.html', {"orders":orders})
 
 
 # @requires_csrf_token
