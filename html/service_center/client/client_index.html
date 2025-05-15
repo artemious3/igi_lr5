@@ -2,11 +2,29 @@
 
 {% block content %}
 
-<p>Welcome, {{user.first_name}} {{user.last_name}}!</p>
+<p>Welcome, {{client.user.first_name}} {{client.user.last_name}}!</p>
 
 
 <a href=" {% url 'orders_unapproved'%}">Your uncompleted orders</a>
 <br>
 <a href=" {%url 'orders_approved'%} ">History</a>
+
+
+<h2>Your personal info:</h2> 
+
+<p> <strong>First name:</strong> {{client.user.first_name}}   </p>
+<p> <strong>Last name:</strong> {{client.user.last_name}}   </p>
+<p> <strong>Phone number: </strong> {{client.phone_number}}   </p>
+<p> <strong>Address: </strong> {{client.address}}   </p>
+
+
+<h2>Time info:</h2>
+
+<p> <strong>Today:</strong> {% now "d/m/Y"%}   </p>
+<p> <strong>Timezone:</strong> {{timezone}}   </p>
+<p> <strong>Calendar:</strong> </p>
+<pre>
+{{calendar}}
+</pre>
 
 {% endblock %}
