@@ -59,11 +59,12 @@ def client_index(req):
                                                                    "calendar":cal})
 
 
-def service_index(req, order_by):
+def service_index(req, orderby):
     services = []
-    if order_by == '':
+    if orderby == '':
         services = Service.objects.all() 
-    services = Service.objects.order_by(order_by)
+    else:
+        services = Service.objects.order_by(orderby)
     return render(req, 'service_center/client/services_index.html', {"services":services})
 
 

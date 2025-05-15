@@ -4,6 +4,11 @@
 
 {% block content %}
 
+
+<p>Sort by:</p>
+<a href="{% url 'service_index' 'name' %}">Name</a> | 
+<a href="{% url 'service_index' '-price' %}">Price</a>
+
     <ul>
     {% for service in services %} 
 
