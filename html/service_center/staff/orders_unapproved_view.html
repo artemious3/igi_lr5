@@ -8,7 +8,9 @@
 
     {% for order in orders %} 
     <h3> Order {{order.id}} </h3>
-    <p> <strong>Client:</strong>  {{order.client.user.first_name}} {{order.client.user.last_name}} </p>
+    <p> <strong>Client:</strong>  {{order.client.user.first_name}} {{order.client.user.last_name}} 
+       <a href="{%url 'staff_client_info' order.client.id%}">(More)</a>
+    </p>
     <p> <strong>Created:</strong>  {{order.date_created}} </p>
     <p> <strong>Scheduled:</strong>  {{order.date_scheduled}} </p>
     <!-- <p> <strong>Scheduled:</strong>  {{order.date_scheduled}} </p> -->

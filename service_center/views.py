@@ -230,6 +230,11 @@ class AddSparePartView(CreateView, LoginRequiredMixin, PermissionRequiredMixin):
         return kwargs
 
 
+def client_info_view(req, pk):
+    client = Client.objects.get(pk=pk)
+    return render(req, 'service_center/staff/client_info.html', {"client":client})
+
+
 # def create_order_view(req):
 
 

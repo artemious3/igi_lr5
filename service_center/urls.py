@@ -26,6 +26,8 @@ urlpatterns = [
         path('staff/order/<int:pk>/sp/add', AddSparePartView.as_view(), name='staff_sp_add'),
         path('staff/order/sp/<int:pk>/update', SparePartUpdateView.as_view(), name='staff_sp_update'),
         path('staff/order/sp/<int:pk>/delete', SparePartDeleteView.as_view(), name='staff_sp_delete'),
+
+        path('staff/client/<int:pk>', client_info_view, name='staff_client_info'),
         
 
     ]
