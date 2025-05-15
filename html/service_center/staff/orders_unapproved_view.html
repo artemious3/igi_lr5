@@ -1,0 +1,41 @@
+
+{% extends './base.html' %}
+
+{% block content %}
+
+<h4>These orders were assigned to you and are waiting to be completed:</h4>
+
+
+    {% for order in orders %} 
+    <h3> Order {{order.id}} </h3>
+    <p> <strong>Client:</strong>  {{order.client.user.first_name}} {{order.client.user.last_name}} </p>
+    <p> <strong>Created:</strong>  {{order.date_created}} </p>
+    <p> <strong>Scheduled:</strong>  {{order.date_scheduled}} </p>
+    <!-- <p> <strong>Scheduled:</strong>  {{order.date_scheduled}} </p> -->
+
+    <h4> Services : </h4>
+    <ul>
+        {% for order_service in order.order_services.all %}
+            <li>
+                {{ order_service.service.name }} 
+                (Price: {{ order_service.service.price }} byn., 
+		Amount: {{ order_service.number }})
+            </li>
+        {% empty %}
+            <li>No services in the order</li>
+        {% endfor %}
+    </ul>
+
+    <p> <strong>Total:</strong>  {{order.total_price}} </p>
+
+    <a href="{% url 'staff_complete' order.id%}"> Mark as completed </a>
+    <hr>
+
+    {% empty %}
+
+    <p> No orders yet </p>
+
+    {% endfor %}
+
+{% endblock content %}
+
