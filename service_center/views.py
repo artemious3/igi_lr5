@@ -1,5 +1,5 @@
 from django.middleware import csrf
-from django.http import HttpResponseForbidden, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseForbidden, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
@@ -53,6 +53,8 @@ def order_submit_view(req, order_id):
         return HttpResponseForbidden();
 
     if req.method=="POST":
+        if not order.order_services.exists():
+            return render(req, 'service_center/client/order_cant_submit.html')
         order.submitted = True
         order.save()
         return HttpResponseRedirect(reverse_lazy('orders_unapproved'))
