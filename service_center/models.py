@@ -38,17 +38,24 @@ class Client(models.Model):
     address = models.CharField(max_length=64)
     passport_id = models.CharField(max_length=10)
 
+
+    def __str__(self):
+        return " ".join([self.user.first_name, self.user.last_name])
+
 class Employee(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     phone_number = models.CharField(max_length=16)
+
+    def __str__(self):
+        return " ".join([self.user.first_name, self.user.last_name])
 
 
 class Order(models.Model):
     date_created = models.DateField(default=now)
     # TMP : null = true
-    date_scheduled = models.DateField(null=True)
+    date_scheduled = models.DateField()
     client = models.ForeignKey(Client, on_delete=models.CASCADE)
-    employee = models.ForeignKey(Employee, on_delete=models.CASCADE, null=True)
+    employee = models.ForeignKey(Employee, on_delete=models.CASCADE, null=False)
 
     submitted = models.BooleanField(default=False)
     approved = models.BooleanField(default=False)

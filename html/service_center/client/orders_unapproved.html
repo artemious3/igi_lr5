@@ -8,8 +8,11 @@
     {% for order in unsubmitted_orders %} 
 
     <h3> Order {{order.id}} </h3>
+
+
     <p> <strong>Created:</strong>  {{order.date_created}} </p>
-    <!-- <p> <strong>Scheduled:</strong>  {{order.date_scheduled}} </p> -->
+    <p> <strong>Scheduled:</strong>  {{order.date_scheduled}} </p>
+    <p> <strong>Staff:</strong>  {{order.employee}} </p>
 
     <h4> Services : </h4>
     <ul>
@@ -50,6 +53,7 @@
 
     <h3> Order {{order.id}} </h3>
     <p> <strong>Created:</strong>  {{order.date_created}} </p>
+    <p> <strong>Staff:</strong>  {{order.employee}} </p>
     <p> <strong>Scheduled:</strong>  {{order.date_scheduled}} </p>
 
     <h4> Services : </h4>

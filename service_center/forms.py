@@ -1,8 +1,13 @@
 
+import datetime
+import django
+from django import forms
 from django.forms import ModelForm, ValidationError
+from django import forms
+from django.utils.timezone import now
 
 from news import models
-from .models import Order, OrderService
+from .models import Employee, Order, OrderService
 
 
 
@@ -36,6 +41,7 @@ class AddServiceForm(ModelForm):
 
 class NewOrderForm(ModelForm):
     """Create blank order"""
+    date_scheduled = forms.DateField(initial = datetime.date.today() + datetime.timedelta(days=1))
 
     def __init__(self, *args, **kvargs):
         self.client = kvargs.pop('client', None)
@@ -44,13 +50,20 @@ class NewOrderForm(ModelForm):
 
     class Meta:
         model = Order
-        fields = ()
+        fields = ("employee", "date_scheduled")
+
+    def clean_date_scheduled(self):
+        date = self.cleaned_data['date_scheduled']
+        if date <= datetime.date.today():
+            raise ValidationError("Date can't be in the past")
+        if date > datetime.date.today() + datetime.timedelta(days=180):
+            raise ValidationError("Date can't be later than 180 days after today")
+        return date
 
 
     def save(self, commit=True):
         order = super().save(commit=False)
         order.approved = False
-        order.date_scheduled = None
         order.client = self.client
 
         if commit:

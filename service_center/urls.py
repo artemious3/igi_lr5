@@ -19,8 +19,10 @@ urlpatterns = [
         path('orders/<int:pk>/delete-service/', OrderServiceDeleteView.as_view(), name='order_service_delete'),
 
 
-        path('staff/orders/list', staff_orders_view,  name='staff_orders'),
-        # path('staff/order/complete/', name='staff_complete'),
-        # path('staff/order/add-spare-part/', name='staff_add_spare_part'),
+        path('staff/index', staff_index,  name='staff_index'),
+        path('staff/orders/list-appr', staff_orders_approved_view,  name='staff_orders_appr'),
+        path('staff/orders/list-unappr', staff_orders_unapproved_view,  name='staff_orders_unappr'),
+        path('staff/order/<int:pk>/complete/', order_complete_view, name='staff_complete'),
+        # path('staff/order/<int:pk>/add-spare-part/', name='staff_add_spare_part'),
 
     ]

@@ -10,7 +10,7 @@ from django.views.decorators.csrf import requires_csrf_token
 from django.core.exceptions import PermissionDenied
 
 from service_center.forms import AddServiceForm, NewOrderForm
-from .models import Client, Order, OrderService
+from .models import Client, Employee, Order, OrderService
 
 ###################################################################
 ####################  COMMON ######################################
@@ -19,7 +19,7 @@ from .models import Client, Order, OrderService
 
 def redirect_to_user_index(req):
     if req.user.groups.filter(name='Employee').exists():
-        return HttpResponseRedirect(reverse_lazy('staff_orders'))
+        return HttpResponseRedirect(reverse_lazy('staff_index'))
     elif req.user.groups.filter(name='Client').exists():
         return HttpResponseRedirect(reverse_lazy('client_index'))
     else:
@@ -155,9 +155,39 @@ class AddServiceView(CreateView, LoginRequiredMixin, PermissionRequiredMixin):
 
 @login_required
 @permission_required('service_center.employee_perm', raise_exception=True)
-def staff_orders_view(req):
-    orders_subm = Order.objects.filter(submitted=True)
-    return render(req, 'service_center/staff/orders_view.html', {"orders":orders_subm})
+def staff_orders_unapproved_view(req):
+    employee = Employee.objects.get(user=req.user)
+    orders_subm = Order.objects.filter(submitted=True, approved=False, employee=employee).order_by('date_scheduled')
+    return render(req, 'service_center/staff/orders_unapproved_view.html', {"orders":orders_subm})
+
+@login_required
+@permission_required('service_center.employee_perm', raise_exception=True)
+def staff_orders_approved_view(req):
+    employee = Employee.objects.get(user=req.user)
+    orders_subm = Order.objects.filter(submitted=True, approved=True, employee=employee).order_by('-date_scheduled')
+    return render(req, 'service_center/staff/orders_approved_view.html', {"orders":orders_subm})
+
+@login_required
+@permission_required('service_center.employee_perm', raise_exception=True)
+def staff_index(req):
+    return render(req, 'service_center/staff/index.html')
+
+
+@login_required
+@permission_required('service_center.employee_perm', raise_exception=True)
+def order_complete_view(req, pk):
+    order = get_object_or_404(Order,pk=pk)
+    employee = Employee.objects.get(user=req.user)
+    if order.employee != employee:
+        return HttpResponseForbidden();
+
+    if req.method=="POST":
+        order.approved = True
+        order.save()
+        return HttpResponseRedirect(reverse_lazy('staff_orders'))
+    else:
+        return render(req, 'service_center/staff/order_complete.html', {"order": order,
+                                                                    "csrf_token":csrf.get_token(req)})
 
 
 
