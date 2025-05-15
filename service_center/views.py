@@ -1,3 +1,4 @@
+from django.db.models.base import pre_init
 from django.middleware import csrf
 from django.http import HttpResponse, HttpResponseForbidden, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
@@ -129,6 +130,17 @@ class AddServiceView(CreateView, LoginRequiredMixin, PermissionRequiredMixin):
         kwargs['order'] = self.order 
         return kwargs
 
+
+
+###################################################################
+####################  STAFF STUFF  ################################
+###################################################################
+
+@login_required
+@permission_required('service_center.employee_perm', raise_exception=True)
+def staff_orders_view(req):
+    orders_subm = Order.objects.filter(submitted=True)
+    return render(req, 'service_center/staff/orders_view.html', {"orders":orders_subm})
 
 
 

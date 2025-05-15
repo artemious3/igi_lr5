@@ -41,7 +41,6 @@ class Client(models.Model):
 class Employee(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     phone_number = models.CharField(max_length=16)
-    services = models.ManyToManyField(Service)
 
 
 class Order(models.Model):

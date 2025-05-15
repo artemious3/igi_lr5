@@ -3,7 +3,7 @@
 
 from django.urls import path
 
-from .views import AddServiceView, OrderServiceDeleteView, OrderNewView, OrderServiceUpdateView, client_index, orders_approved_view, orders_unapproved_view, order_submit_view, OrderDeleteView
+from .views import *
 
 urlpatterns = [
         path('profile/', client_index, name='client_index'),
@@ -15,4 +15,10 @@ urlpatterns = [
         path('order/<int:order_id>/add-service/', AddServiceView.as_view(), name='order_service_add'),
         path('orders/<int:pk>/update-service/', OrderServiceUpdateView.as_view(), name='order_service_update'),
         path('orders/<int:pk>/delete-service/', OrderServiceDeleteView.as_view(), name='order_service_delete'),
+
+
+        path('staff/orders/list', staff_orders_view,  name='staff_orders'),
+        # path('staff/order/complete/', name='staff_complete'),
+        # path('staff/order/add-spare-part/', name='staff_add_spare_part'),
+
     ]
