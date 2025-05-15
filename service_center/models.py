@@ -69,8 +69,14 @@ class Order(models.Model):
                 ("employee_perm", "Can approve order (employees)")
             }
 
-    def total_price(self):
+    def total_service_price(self):
         return sum([service.service.price * service.number for service in self.order_services.all()])
+
+    def total_spare_parts_price(self):
+        return sum([sp.spare_part.price * sp.number for sp in self.order_spare_parts.all()])
+
+    def total_price(self):
+        return self.total_spare_parts_price() + self.total_service_price()
 
 
 class OrderService(models.Model):

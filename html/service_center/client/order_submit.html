@@ -13,7 +13,7 @@
         {% for order_service in order.order_services.all %}
             <li>
                 {{ order_service.service.name }} 
-                (Price: {{ order_service.service.price }} byn., 
+                (Price: {{ order_service.service.price }}$., 
 		Amount: {{ order_service.number }})
             </li>
         {% empty %}
