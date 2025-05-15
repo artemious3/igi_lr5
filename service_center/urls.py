@@ -6,7 +6,9 @@ from django.urls import path
 from .views import *
 
 urlpatterns = [
-        path('profile/', client_index, name='client_index'),
+        path('profile', redirect_to_user_index, name='redirect'),
+
+        path('client/', client_index, name='client_index'),
         path('orders/approved', orders_approved_view, name='orders_approved'),
         path('orders/unapproved', orders_unapproved_view, name='orders_unapproved'),
         path('orders/<int:order_id>/submit/', order_submit_view, name='order_submit'),

@@ -12,6 +12,23 @@ from django.core.exceptions import PermissionDenied
 from service_center.forms import AddServiceForm, NewOrderForm
 from .models import Client, Order, OrderService
 
+###################################################################
+####################  COMMON ######################################
+###################################################################
+
+
+def redirect_to_user_index(req):
+    if req.user.groups.filter(name='Employee').exists():
+        return HttpResponseRedirect(reverse_lazy('staff_orders'))
+    elif req.user.groups.filter(name='Client').exists():
+        return HttpResponseRedirect(reverse_lazy('client_index'))
+    else:
+        return HttpResponseForbidden()
+
+
+###################################################################
+####################  CLIENT STUFF  ###############################
+###################################################################
 
 @login_required
 @permission_required('service_center.client_perm', raise_exception=True)
