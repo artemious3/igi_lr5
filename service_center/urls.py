@@ -23,6 +23,9 @@ urlpatterns = [
         path('staff/orders/list-appr', staff_orders_approved_view,  name='staff_orders_appr'),
         path('staff/orders/list-unappr', staff_orders_unapproved_view,  name='staff_orders_unappr'),
         path('staff/order/<int:pk>/complete/', order_complete_view, name='staff_complete'),
-        # path('staff/order/<int:pk>/add-spare-part/', name='staff_add_spare_part'),
+        path('staff/order/<int:pk>/sp/add', AddSparePartView.as_view(), name='staff_sp_add'),
+        path('staff/order/sp/<int:pk>/update', SparePartUpdateView.as_view(), name='staff_sp_update'),
+        path('staff/order/sp/<int:pk>/delete', SparePartDeleteView.as_view(), name='staff_sp_delete'),
+        
 
     ]

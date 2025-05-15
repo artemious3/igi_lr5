@@ -7,7 +7,7 @@ from django import forms
 from django.utils.timezone import now
 
 from news import models
-from .models import Employee, Order, OrderService
+from .models import Employee, Order, OrderService, OrderSpareParts
 
 
 
@@ -36,6 +36,30 @@ class AddServiceForm(ModelForm):
             order_to_service.save()
         return order_to_service
 
+class AddSparePartForm(ModelForm):
+    """Add spare part to an order"""
+
+    def __init__(self, *args, **kvargs):
+        self.order = kvargs.pop('order', None)
+        super(ModelForm, self).__init__(*args, **kvargs)
+
+    class Meta:
+        model = OrderSpareParts
+        fields = ("spare_part", "number")
+
+    def clean_service(self):
+        spare_part = self.cleaned_data['spare_part']
+        if OrderSpareParts.objects.filter(order=self.order).filter(spare_part=spare_part).exists():
+            raise ValidationError("This spare part is already added for order")
+        return spare_part
+
+    def save(self, commit=True):
+        order_to_sp = super().save(commit=False)
+        order_to_sp.order = self.order
+
+        if commit:
+            order_to_sp.save()
+        return order_to_sp
 
 
 

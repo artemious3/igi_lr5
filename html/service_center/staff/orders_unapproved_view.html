@@ -26,9 +26,27 @@
         {% endfor %}
     </ul>
 
+    <h4> Spare parts : </h4>
+    <ul>
+        {% for order_sp in order.order_spare_parts.all %}
+            <li>
+                {{ order_sp.spare_part.name }} 
+
+                (Price: {{ order_so.spare_part.price }} byn., 
+		Amount: {{ order_sp.number }})
+		<a href="{% url 'staff_sp_update' order_sp.id %}">Change</a>
+		<a href="{% url 'staff_sp_delete' order_sp.id %}">Delete</a>
+            </li>
+        {% empty %}
+            <li>No spare parts in the order</li>
+        {% endfor %}
+    </ul>
+
     <p> <strong>Total:</strong>  {{order.total_price}} </p>
 
     <a href="{% url 'staff_complete' order.id%}"> Mark as completed </a>
+    <br>
+    <a href="{% url 'staff_sp_add' order.id%}"> Add Spare Part</a>
     <hr>
 
     {% empty %}
