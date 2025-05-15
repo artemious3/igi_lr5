@@ -4,8 +4,18 @@ from django.contrib.auth.forms import UserCreationForm
 from django import forms
 from django.contrib.auth.models import Group
 from service_center.models import Client
+from django.core.exceptions import ValidationError
+from django.utils import timezone
 
 User = get_user_model()
+
+def validate_age_18(birth_date):
+    today = timezone.now().date()
+    print(today.year - birth_date.year)
+    if (today.year - birth_date.year) < 18 or \
+       (today.year - birth_date.year == 18 and 
+        (today.month, today.day) < (birth_date.month, birth_date.day)):
+        raise ValidationError("Client must be at least 18 years old.")
 
 class SignUpForm(UserCreationForm):
     # Additional fields to User itself
@@ -17,7 +27,7 @@ class SignUpForm(UserCreationForm):
     phone_number = forms.CharField(max_length=16)
     passport_id = forms.CharField(max_length=10)
     address = forms.CharField(max_length=64)
-    birth_date = forms.DateField()
+    birth_date = forms.DateField(validators=[validate_age_18])
 
 
     def __init__(self, *args, **kwargs):

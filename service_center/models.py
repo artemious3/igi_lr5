@@ -1,8 +1,11 @@
 from os import name
+from django.core import validators
 from django.core.validators import MinValueValidator
 from django.db import models
 from django.utils.timezone import now
 from django.contrib.auth import get_user_model
+from django.core.exceptions import ValidationError
+from django.utils import timezone
 
 User = get_user_model()
 
@@ -29,12 +32,18 @@ class SparePart(models.Model):
     def __str__(self):
         return self.name
 
-
+def validate_age_18(birth_date):
+    today = timezone.now().date()
+    print(today.year - birth_date.year)
+    if (today.year - birth_date.year) < 18 or \
+       (today.year - birth_date.year == 18 and 
+        (today.month, today.day) < (birth_date.month, birth_date.day)):
+        raise ValidationError("Client must be at least 18 years old.")
 
 class Client(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     phone_number = models.CharField(max_length=16)
-    birth_date = models.DateField()
+    birth_date = models.DateField(validators=[validate_age_18])
     address = models.CharField(max_length=64)
     passport_id = models.CharField(max_length=10)
 
