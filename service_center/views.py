@@ -9,8 +9,13 @@ from django.views.generic import CreateView, DeleteView, UpdateView
 from django.views.decorators.csrf import requires_csrf_token
 from django.core.exceptions import PermissionDenied
 
+from django.utils.html import escape
+
 from service_center.forms import AddServiceForm, AddSparePartForm, NewOrderForm
 from .models import Client, Employee, Order, OrderService, OrderSpareParts
+
+import datetime
+import calendar
 
 ###################################################################
 ####################  COMMON ######################################
@@ -33,7 +38,22 @@ def redirect_to_user_index(req):
 @login_required
 @permission_required('service_center.client_perm', raise_exception=True)
 def client_index(req):
-    return render(req, 'service_center/client/client_index.html', {"user":req.user})
+    client = req.user.client
+    now = datetime.datetime.now()
+    year = now.year
+    month = now.month
+
+    # Generate and print the calendar
+    cal = calendar.month(year, month)
+    timezone = ''
+    try:
+        timezone = req.COOKIES['django_timezone']
+    except KeyError:
+        timezone = 'Unknown'
+
+    return render(req, 'service_center/client/client_index.html', {"client":client,
+                                                                   "timezone":timezone,
+                                                                   "calendar":cal})
 
 
 
