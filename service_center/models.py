@@ -1,6 +1,6 @@
 from os import name
 from django.core import validators
-from django.core.validators import MinValueValidator
+from django.core.validators import MinValueValidator, RegexValidator
 from django.db import models
 from django.utils.timezone import now
 from django.contrib.auth import get_user_model
@@ -8,6 +8,7 @@ from django.core.exceptions import ValidationError
 from django.utils import timezone
 
 User = get_user_model()
+PhoneValidator = RegexValidator(r'\+375\s?\d{2}\s?\d{3}-?\d{2}-?\d{2}', message='Phone number should be +375 XX XXX-XX-XX')
 
 
 class Device(models.Model):
@@ -42,7 +43,7 @@ def validate_age_18(birth_date):
 
 class Client(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    phone_number = models.CharField(max_length=16)
+    phone_number = models.CharField(max_length=16, validators=[PhoneValidator])
     birth_date = models.DateField(validators=[validate_age_18])
     address = models.CharField(max_length=64)
     passport_id = models.CharField(max_length=10)
@@ -53,7 +54,7 @@ class Client(models.Model):
 
 class Employee(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    phone_number = models.CharField(max_length=16)
+    phone_number = models.CharField(max_length=16, validators=[PhoneValidator])
 
     def __str__(self):
         return " ".join([self.user.first_name, self.user.last_name])

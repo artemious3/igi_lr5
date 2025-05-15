@@ -3,6 +3,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
 from django.contrib.auth.models import Group
+from django.core.validators import RegexValidator
 from service_center.models import Client
 from django.core.exceptions import ValidationError
 from django.utils import timezone
@@ -24,11 +25,10 @@ class SignUpForm(UserCreationForm):
     email = forms.EmailField(required=True)
 
     # Fields for Client
-    phone_number = forms.CharField(max_length=16)
+    phone_number = forms.CharField(max_length=16, validators=[RegexValidator(r'\+375\s?\d{2}\s?\d{3}-?\d{2}-?\d{2}', message='Phone number should be +375 XX XXX-XX-XX')])
     passport_id = forms.CharField(max_length=10)
     address = forms.CharField(max_length=64)
     birth_date = forms.DateField(validators=[validate_age_18])
-
 
     def __init__(self, *args, **kwargs):
             super().__init__(*args, **kwargs)
