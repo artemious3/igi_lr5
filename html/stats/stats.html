@@ -1,0 +1,27 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Statistics </title>
+    </head>
+
+    <body>
+	    <header>
+		    <h1>STATISTICS </h1>
+	    </header>
+
+	    
+	    <p> <strong>Client median age:</strong>  {{age_median}} </p>
+	    <p> <strong>Client average age:</strong>  {{age_avg}} </p>
+
+
+	    <h3>Top 10 services (by number of ORDERS they appear)</h3>
+	    <img src="{%url 'most_popular_service' %}" alt="most profitable services "> 
+
+	    <h3>Top 10 services (by profit)</h3>
+	    <img src="{%url 'most_profitable_service' %}" alt="most profitable services "> 
+
+	    
+
+    </body>
+</html>

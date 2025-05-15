@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'vacancies',
     'faq',
     'service_center',
-    'reviews'
+    'reviews',
+    'stats'
 ]
 
 MIDDLEWARE = [
