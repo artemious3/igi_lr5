@@ -89,6 +89,10 @@ class Order(models.Model):
         return self.total_spare_parts_price() + self.total_service_price()
 
 
+    def __str__(self):
+        return f"Order {self.id} from {self.client}"
+
+
 class OrderService(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='order_services')
     service = models.ForeignKey(Service, on_delete=models.CASCADE)
