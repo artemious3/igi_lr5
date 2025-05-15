@@ -1,5 +1,5 @@
 {% extends './base.html' %}
-
+{% load tz %}
 {% block content %}
 
 <p>Welcome, {{client.user.first_name}} {{client.user.last_name}}!</p>
@@ -22,6 +22,13 @@
 
 <p> <strong>Today:</strong> {% now "d/m/Y"%}   </p>
 <p> <strong>Timezone:</strong> {{timezone}}   </p>
+
+<p> <strong>Time (UTC):</strong> {{dt_utc}}   </p>
+
+{% localtime on %}
+<p> <strong>Time (Local):</strong> {% now "H:i:s"%}   </p>
+{% endlocaltime %}
+
 <p> <strong>Calendar:</strong> </p>
 <pre>
 {{calendar}}

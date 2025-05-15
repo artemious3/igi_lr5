@@ -1,13 +1,12 @@
 
 
-
 from django.urls import path
 
 from .views import *
 
 urlpatterns = [
         path('profile', redirect_to_user_index, name='redirect'),
-
+        path('list-services/', service_index, name='service_index'),
         path('client/', client_index, name='client_index'),
         path('orders/approved', orders_approved_view, name='orders_approved'),
         path('orders/unapproved', orders_unapproved_view, name='orders_unapproved'),
@@ -28,6 +27,5 @@ urlpatterns = [
         path('staff/order/sp/<int:pk>/delete', SparePartDeleteView.as_view(), name='staff_sp_delete'),
 
         path('staff/client/<int:pk>', client_info_view, name='staff_client_info'),
-        
 
     ]

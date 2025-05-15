@@ -54,7 +54,11 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'service_center.middleware.tz.TimezoneMiddleware'
 ]
+
+
+TIME_ZONE = 'UTC'
 
 ROOT_URLCONF = 'l5.urls'
 

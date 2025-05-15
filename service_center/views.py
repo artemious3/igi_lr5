@@ -12,7 +12,7 @@ from django.core.exceptions import PermissionDenied
 from django.utils.html import escape
 
 from service_center.forms import AddServiceForm, AddSparePartForm, NewOrderForm
-from .models import Client, Employee, Order, OrderService, OrderSpareParts
+from .models import Client, Employee, Order, OrderService, OrderSpareParts, Service
 
 import datetime
 import calendar
@@ -51,10 +51,20 @@ def client_index(req):
     except KeyError:
         timezone = 'Unknown'
 
+    dt_utc = datetime.datetime.now(datetime.timezone.utc).strftime("%H:%M:%S")
+
     return render(req, 'service_center/client/client_index.html', {"client":client,
                                                                    "timezone":timezone,
+                                                                   "dt_utc":dt_utc,
                                                                    "calendar":cal})
 
+
+def service_index(req, order_by):
+    services = []
+    if order_by == '':
+        services = Service.objects.all() 
+    services = Service.objects.order_by(order_by)
+    return render(req, 'service_center/client/services_index.html', {"services":services})
 
 
 @login_required
