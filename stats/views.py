@@ -82,7 +82,10 @@ def most_popular_service_stat(req):
 def most_profitable_service_stat(req):
     srv = dict()
     for service in Service.objects.all():
-        srv[service.name] = OrderService.objects.filter(service=service).aggregate(total=Sum('number'))['total'] * service.price
+        sum = OrderService.objects.filter(service=service).aggregate(total=Sum('number'))['total']
+        if sum is None:
+            sum = 0
+        srv[service.name] = sum * service.price
     sorted_srv = sorted(srv.items(), key=lambda x : x[1], reverse=False)[:10]
     names = [item[0] for item in sorted_srv]
     values = [item[1] for item in sorted_srv]

@@ -18,6 +18,25 @@ import datetime
 import calendar
 
 ###################################################################
+####################  NO AUTH REQUIRED  ###########################
+###################################################################
+
+def service_index(req, orderby):
+    services = []
+    if orderby == '':
+        services = Service.objects.all() 
+    else:
+        services = Service.objects.order_by(orderby)
+
+    return render(req, 'service_center/client/services_index.html', {"services":services})
+
+
+def contacts_view(req):
+    employees = Employee.objects.all()
+    return render(req, 'service_center/client/contacts.html', {"employees":employees})
+
+
+###################################################################
 ####################  COMMON ######################################
 ###################################################################
 
@@ -58,14 +77,6 @@ def client_index(req):
                                                                    "dt_utc":dt_utc,
                                                                    "calendar":cal})
 
-
-def service_index(req, orderby):
-    services = []
-    if orderby == '':
-        services = Service.objects.all() 
-    else:
-        services = Service.objects.order_by(orderby)
-    return render(req, 'service_center/client/services_index.html', {"services":services})
 
 
 @login_required

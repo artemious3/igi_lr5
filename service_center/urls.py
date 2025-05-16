@@ -5,9 +5,10 @@ from django.urls import path, re_path
 from .views import *
 
 urlpatterns = [
-        path('profile', redirect_to_user_index, name='redirect'),
+        path('profile/', redirect_to_user_index, name='redirect'),
         re_path(r'^list-services/(?P<orderby>\-?\w*)/?$', service_index, name='service_index'),
         path('client/', client_index, name='client_index'),
+        path('contacts/', contacts_view, name='contacts'),
         path('orders/approved', orders_approved_view, name='orders_approved'),
         path('orders/unapproved', orders_unapproved_view, name='orders_unapproved'),
         path('orders/<int:order_id>/submit/', order_submit_view, name='order_submit'),

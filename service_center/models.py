@@ -55,6 +55,7 @@ class Client(models.Model):
 class Employee(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     phone_number = models.CharField(max_length=16, validators=[PhoneValidator])
+    image = models.ImageField(upload_to='employees/')
 
     def __str__(self):
         return " ".join([self.user.first_name, self.user.last_name])

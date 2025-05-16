@@ -1,0 +1,20 @@
+
+{% extends './base.html' %}
+
+
+{% block content %}
+
+{% for employee in employees %}
+
+<h2>{{employee}}</h2>
+<img src="{{employee.image.url}}" alt="" width="300" height="300">
+<p> <strong>Phone number:</strong>  {{employee.phone_number}} </p>
+<p> <strong>Email:</strong>  {{employee.user.email}} </p>
+<hr>
+
+
+{% empty %}
+
+{% endfor %}
+
+{% endblock %}
