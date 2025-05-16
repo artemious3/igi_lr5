@@ -7,6 +7,9 @@ from .views import *
 urlpatterns = [
         path('profile/', redirect_to_user_index, name='redirect'),
         re_path(r'^list-services/(?P<orderby>\-?\w*)/?$', service_index, name='service_index'),
+        path('conf-policy/', conf_policy_view, name='conf_policy'),
+        path('about/', about_view, name='about_view'),
+
         path('client/', client_index, name='client_index'),
         path('contacts/', contacts_view, name='contacts'),
         path('orders/approved', orders_approved_view, name='orders_approved'),

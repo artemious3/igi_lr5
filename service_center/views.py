@@ -36,6 +36,12 @@ def contacts_view(req):
     return render(req, 'service_center/client/contacts.html', {"employees":employees})
 
 
+def conf_policy_view(req):
+    return render(req, 'service_center/conf_policy.html')
+
+def about_view(req):
+    return render(req, 'service_center/about.html')
+
 ###################################################################
 ####################  COMMON ######################################
 ###################################################################
@@ -48,6 +54,8 @@ def redirect_to_user_index(req):
         return HttpResponseRedirect(reverse_lazy('client_index'))
     else:
         return HttpResponseForbidden()
+
+
 
 
 ###################################################################
@@ -104,7 +112,7 @@ def orders_approved_view(req):
 @login_required
 @permission_required('service_center.client_perm', raise_exception=True)
 def order_submit_view(req, order_id):
-    order = get_object_or_404(Order,pk=order_id)
+    order = get_object(Order,pk=order_id)
     client = Client.objects.get(user=req.user)
     if order.client != client:
         return HttpResponseForbidden();
