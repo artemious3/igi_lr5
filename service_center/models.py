@@ -102,6 +102,11 @@ class OrderService(models.Model):
 
 class OrderSpareParts(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='order_spare_parts')
-    spare_part = models.ForeignKey(Service, on_delete=models.CASCADE)
+    spare_part = models.ForeignKey(SparePart, on_delete=models.CASCADE)
     number = models.IntegerField(validators=[MinValueValidator(1)])
+
+
+class PromoCodes(models.Model):
+    code = models.CharField(max_length=32)
+    discount = models.PositiveIntegerField()
 

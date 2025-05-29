@@ -9,6 +9,7 @@ urlpatterns = [
         re_path(r'^list-services/(?P<orderby>\-?\w*)/?$', service_index, name='service_index'),
         path('conf-policy/', conf_policy_view, name='conf_policy'),
         path('about/', about_view, name='about_view'),
+        path('promocodes/', PromocodesView.as_view(), name='promocodes'),
 
         path('client/', client_index, name='client_index'),
         path('contacts/', contacts_view, name='contacts'),

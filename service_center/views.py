@@ -1,3 +1,4 @@
+from urllib import request
 from django.db.models.base import pre_init
 from django.middleware import csrf
 from django.http import HttpResponse, HttpResponseForbidden, HttpResponseRedirect
@@ -12,10 +13,12 @@ from django.core.exceptions import PermissionDenied
 from django.utils.html import escape
 
 from service_center.forms import AddServiceForm, AddSparePartForm, NewOrderForm
-from .models import Client, Employee, Order, OrderService, OrderSpareParts, Service
+from .models import Client, Employee, Order, OrderService, OrderSpareParts, Service, PromoCodes
 
 import datetime
 import calendar
+import requests
+
 
 ###################################################################
 ####################  NO AUTH REQUIRED  ###########################
@@ -40,7 +43,23 @@ def conf_policy_view(req):
     return render(req, 'service_center/conf_policy.html')
 
 def about_view(req):
-    return render(req, 'service_center/about.html')
+
+    resp = requests.get('https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY')
+    img_url = []
+    if resp.status_code == 200:
+        img_url = resp.json()["url"]
+    else:
+        img_url = ""
+
+    return render(req, 'service_center/about.html', {"imgurl":img_url})
+
+
+from django.views.generic import ListView
+
+class PromocodesView(ListView):
+    model = PromoCodes
+    template_name = 'service_center/client/promocodes.html'
+
 
 ###################################################################
 ####################  COMMON ######################################
@@ -80,10 +99,19 @@ def client_index(req):
 
     dt_utc = datetime.datetime.now(datetime.timezone.utc).strftime("%H:%M:%S")
 
+    resp = requests.get('https://catfact.ninja/fact')
+    cat_fact = []
+    if resp.status_code == 200:
+        cat_fact = resp.json()["fact"]
+    else:
+        cat_fact = ""
+
+
     return render(req, 'service_center/client/client_index.html', {"client":client,
                                                                    "timezone":timezone,
                                                                    "dt_utc":dt_utc,
-                                                                   "calendar":cal})
+                                                                   "calendar":cal, 
+                                                                   "cat_fact":cat_fact})
 
 
 
@@ -112,7 +140,7 @@ def orders_approved_view(req):
 @login_required
 @permission_required('service_center.client_perm', raise_exception=True)
 def order_submit_view(req, order_id):
-    order = get_object(Order,pk=order_id)
+    order = get_object_or_404(Order,pk=order_id)
     client = Client.objects.get(user=req.user)
     if order.client != client:
         return HttpResponseForbidden();

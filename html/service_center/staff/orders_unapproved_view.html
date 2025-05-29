@@ -34,7 +34,7 @@
             <li>
                 {{ order_sp.spare_part.name }} 
 
-                (Price: {{ order_so.spare_part.price }}$., 
+                (Price: {{ order_sp.spare_part.price }}$., 
 		Amount: {{ order_sp.number }})
 		<a href="{% url 'staff_sp_update' order_sp.id %}">Change</a>
 		<a href="{% url 'staff_sp_delete' order_sp.id %}">Delete</a>

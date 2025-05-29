@@ -20,10 +20,11 @@ from django.urls import path, include
 from django.conf.urls.static import static
 from . import views
 from . import settings
+import auth
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('auth/', include("django.contrib.auth.urls")),
+    # path('auth/', include("django.contrib.auth.urls")),
     path('auth/', include("auth.urls")),
     path('service/', include("service_center.urls")),
     path('admin/', admin.site.urls),

@@ -1,0 +1,23 @@
+
+{% extends "./base.html" %}
+
+{% block content %}
+
+<ul> 
+    <!-- Iterate over object_list -->
+    {% for object in object_list %} 
+
+<p> <strong>Code:</strong>  {{object.code}} </p>
+<p> <strong>Discount:</strong>  -{{object.discount}}% </p>
+
+
+    <hr/>
+
+    {% empty %} 
+
+    No promocodes yet. 
+
+    {% endfor %} 
+</ul>
+
+{% endblock content %}
