@@ -1,26 +1,11 @@
+{% extends "base.html" %}
+
+{% block title %}Service center{% endblock title %}
 
 
-<!DOCTYPE html>
-<html>
-	<head>
-		<title> Service center </title>
-		<script>
-			  const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-			  document.cookie = "django_timezone=" + timezone;
-		</script>
-	</head>
+{% block nav %}
+	{{ block.super }}
+	<a href="/service/client">Home</a>
+{% endblock nav %}
 
-	<body>
-		<header>
-			<h1>Service center</h1>
-
-			<a href="{% url 'client_index' %}"> Home page </a> | 
-			<a href="{% url 'index' %}"> Index </a> | 
-			<a href="{% url 'contacts' %}"> Contacts </a>
-		</header>
-
-
-		{% block content %}{% endblock content %}
-
-	</body>
-</html>
+{% block header %}Service center{% endblock header %}

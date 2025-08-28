@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+		<script>
+			  const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+			  document.cookie = "django_timezone=" + timezone;
+		</script>
+    <meta charset="utf-8" />
+    <meta name="author" content="Artsiom Padhaiski" />
+    <meta
+      name="description"
+      content="Service center, specialized on repair of computer and electronics devices, located in city X"
+    />
+    <link rel="shortcut icon" href="MEDIA/icon.jpg" type="image/x-icon" />
+    <title>{% block title %}Service center{% endblock title %}</title>
+  </head>
+  <body>
+    <header>
+      <nav>
+				{% block nav %}
+					<div><a href="/">Index</a> | <a href="/about">About</a></div>
+				{% endblock nav %}
+      </nav>
+			<h1>{% block header %}{% endblock header %}</h1>
+			<img src="/MEDIA/icon.jpg" alt="Icon">
+    </header>
+
+    <main>
+      <div>{% block content%}{% endblock content %}</div>
+    </main>
+
+    <footer>
+      <div>Artsiom Padhaiski. 2025. All rights reserved.</div>
+		</footer>
+
+  </body>
+</html>

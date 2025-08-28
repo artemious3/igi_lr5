@@ -1,15 +1,12 @@
 
-<!DOCTYPE html>
-<html>
-    <head>
-        <title> Service center </title>
-    </head>
+{% extends "base.html" %}
+		{% block title %} Service center {% endblock title %}
 
-    <body>
-	    <header>
-		    <h1>Service center</h1>
-	    </header>
+		{% block header %}
+		    Service center
+		{% endblock header %}
 
+		{% block content %}
 
 	    <h1>Recent news</h1>
 
@@ -20,7 +17,9 @@
 	    <h1>Index</h1>
 
 
+
 	    <a href="{% url 'login'%}">Log In</a>
+
 	    <br>
 
 	    <a href="{% url 'signup'%}">Sign Up</a>
@@ -45,7 +44,5 @@
 	    <a href="/stats">Stats</a>
 	    |
 	    <a href="/service/promocodes">Promocodes</a>
-	    
-
-    </body>
-</html>
+		
+		{% endblock content %}

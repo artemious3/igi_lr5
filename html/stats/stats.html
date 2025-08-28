@@ -1,16 +1,17 @@
 
-<!DOCTYPE html>
-<html>
-    <head>
-        <title> Statistics </title>
-    </head>
+{% extends "../base.html" %}
 
-    <body>
-	    <header>
-		    <h1>STATISTICS </h1>
-	    </header>
+{% block title %}
+Statistics
+{% endblock title %}
 
+
+{% block header %}
+STATISTICS
+{% endblock header %}
 	    
+
+{% block content %}
 	    <p> <strong>Client median age:</strong>  {{age_median}} </p>
 	    <p> <strong>Client average age:</strong>  {{age_avg}} </p>
 
@@ -21,7 +22,5 @@
 	    <h3>Top 10 services (by profit)</h3>
 	    <img src="{%url 'most_profitable_service' %}" alt="most profitable services "> 
 
+{% endblock content %}
 	    
-
-    </body>
-</html>

@@ -1,19 +1,8 @@
 
 
-<!DOCTYPE html>
-<html>
-    <head>
-        <title> Reviews </title>
-    </head>
+{% extends "../base.html" %}
 
-    <body>
-	    <header>
-		    <h1> Reviews </h1>
-		    <a href="{% url 'index' %}"> Index </a>
-	    </header>
+{% block title %}Reviews{% endblock title %}
 
-	    
-	    {% block content %}{% endblock content %}
+{% block header %}Reviews{% endblock header %}
 
-    </body>
-</html>

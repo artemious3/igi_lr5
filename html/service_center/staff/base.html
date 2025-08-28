@@ -1,22 +1,10 @@
+{% extends "base.html" %}
 
+{% block title %}Service center (STAFF){% endblock title %}
 
-<!DOCTYPE html>
-<html>
-    <head>
-        <title> Service center (STAFF)</title>
-    </head>
+{% block nav %}
+	{{ block.super }}
+	<a href="/service/staff/index">Home</a>
+{% endblock nav %}
 
-    <body>
-	    <header>
-		    <h1>Service center (STAFF) </h1>
-
-		    <a href="{% url 'index' %}"> Index </a>
-		    <br>
-		    <a href="{% url 'staff_index' %}"> Home </a>
-	    </header>
-
-	    
-	    {% block content %}{% endblock content %}
-
-    </body>
-</html>
+{% block header %}Service center (STAFF){% endblock header %}

@@ -1,28 +1,18 @@
+{% extends "base.html" %}
 
-<!DOCTYPE html>
-<html>
-    <head>
-        <title> FAQ </title>
-    </head>
+{% block title %}FAQ{% endblock title %}
 
-    <body>
-	    <header>
-		    <h1>FAQ</h1>
-	    </header>
+{% block header %}FAQ{% endblock header %}
 
-	    <ul>
-
-	    {% for faq in faq_list %} 
-
-	    <p><strong>Q: {{faq.question}}</strong> </p>
-	    <p>A: {{faq.answer}}</p>
-	    <p>{{faq.date}}</p>
-	    <hr/>
-
-	    {% empty %} 
-
-	    {% endfor %} 
-	    </ul>
-
-    </body>
-</html>
+{% block content %}
+<ul>
+    {% for faq in faq_list %}
+        <p><strong>Q: {{ faq.question }}</strong></p>
+        <p>A: {{ faq.answer }}</p>
+        <p>{{ faq.date }}</p>
+        <hr/>
+    {% empty %}
+        <p>No FAQs available at the moment.</p>
+    {% endfor %}
+</ul>
+{% endblock content %}

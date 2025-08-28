@@ -1,19 +1,18 @@
 
-<!DOCTYPE html>
-<html>
-	<head>
-		<title> About </title>
-	</head>
-
-	<body>
-		<header>
-			<h1>About</h1>
-		</header>
+{% extends "../base.html" %}
 
 
+{% block title %}
+About
+{% endblock title %}
+
+{% block header %}
+About
+{% endblock header %}
+
+
+{% block content %}
 		<p>We are the greatest company in the world</p>
-
 		<img src="{{imgurl}}" alt="">
+{% endblock content %}
 
-	</body>
-</html>
