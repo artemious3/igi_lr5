@@ -24,6 +24,7 @@ import auth
 
 urlpatterns = [
     path('', views.index, name='index'),
+    path('bamboleo/', views.bamboleo, name='bamboleo'),
     # path('auth/', include("django.contrib.auth.urls")),
     path('auth/', include("auth.urls")),
     path('service/', include("service_center.urls")),

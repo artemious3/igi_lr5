@@ -2,7 +2,7 @@
 {% load tz %}
 {% block content %}
 
-<p>Welcome, {{client.user.first_name}} {{client.user.last_name}}!</p>
+<p>Welcome, <i/>{{client.user.first_name}} {{client.user.last_name}}</i>!</p>
 
 
 <a href=" {% url 'orders_unapproved'%}">Your uncompleted orders</a>
