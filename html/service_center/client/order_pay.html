@@ -1,0 +1,14 @@
+
+{% extends './base.html' %}
+
+
+{% block content %}
+
+Pay for the order 
+
+	<form action="" method="post">
+	{% csrf_token %}
+	<button name="submit" value="true">Submit</button>
+	</form>
+{% endblock content %}
+

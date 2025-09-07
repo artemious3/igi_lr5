@@ -155,7 +155,6 @@ def order_submit_view(req, order_id):
         return render(req, 'service_center/client/order_submit.html', {"order": order,
                                                                 "csrf_token":csrf.get_token(req)})
 
-
 class OrderDeleteView( LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     model = Order
     permission_required = 'service_center.client_perm'
@@ -168,6 +167,19 @@ class OrderDeleteView( LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
         if self.order.client != self.request.user.client:
             raise PermissionDenied("You have no access to this order")
         return super().dispatch(request, *args, **kwargs)
+
+@login_required
+@permission_required('service_center.client_perm', raise_exception=True)
+def order_pay_post(req, order_id):
+    if req.method == "POST":
+        # TODO : check for user belonging
+        order = get_object_or_404(Order, id=order_id)
+        order.paid = True
+        order.save()
+        return HttpResponseRedirect(reverse_lazy('orders_unapproved'))
+    else:
+        return render(req, 'service_center/client/order_pay.html')
+
 
 
 class OrderNewView(LoginRequiredMixin, PermissionRequiredMixin, CreateView) :

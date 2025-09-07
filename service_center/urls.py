@@ -23,6 +23,7 @@ urlpatterns = [
         path('orders/<int:pk>/delete-service/', OrderServiceDeleteView.as_view(), name='order_service_delete'),
         path('orders/<int:order_id>/incr/<int:service_id>/', incr_service_in_order, name='incr'),
         path('orders/<int:order_id>/decr/<int:service_id>/', decr_service_in_order, name='decr'),
+        path('orders/<int:order_id>/pay/', order_pay_post, name='order_pay'),
 
         path('service/<int:service_id>/add/', AddSpecificServiceView.as_view(), name='service_add'),
         path('service/<int:service_id>/service_info/', service_info_view, name='service_info'),

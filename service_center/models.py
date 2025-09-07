@@ -71,6 +71,7 @@ class Order(models.Model):
 
     submitted = models.BooleanField(default=False)
     approved = models.BooleanField(default=False)
+    paid = models.BooleanField(default=False)
     # services = models.ManyToManyField(Service, blank=False)
     # spare_parts = models.ManyToManyField(SparePart, null=True)
 

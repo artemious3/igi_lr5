@@ -27,7 +27,6 @@
 			{% csrf_token %}
 				<button name="foo" value="upvote"><i class="fa-solid fa-plus"></i></button>
 		</form>
-
 		<form action="{% url 'decr' order_service.order.id order_service.service.id%}" method="post">
 			{% csrf_token %}
 				<button name="foo" value="upvote"><i class="fa-solid fa-minus"></i></button>
@@ -41,6 +40,14 @@
 
     <p> <strong>Total service price:</strong>  {{order.total_service_price}}$</p>
 
+		<p><strong>Paid:</strong> 
+		{% if order.paid %}
+		Yes
+		{% else %}
+		No
+		{%endif%}
+		</p>
+
     <p> !!! NOTE: spare parts price is not included here.</p>
 
     <a href="{% url 'order_service_add' order.id %}">Add Service</a>
@@ -48,6 +55,10 @@
     <a href="{% url 'order_submit' order.id %}">Submit</a>
     <br>
     <a href="{% url 'order_delete' order.id %}">Delete</a>
+		{% if not order.paid %}
+		<br>
+    <a href="{% url 'order_pay' order.id %}">Pay</a>
+		{% endif %}
 
     <hr>
 
@@ -81,9 +92,20 @@
         {% endfor %}
     </ul>
 
+		<p><strong>Paid:</strong> 
+		{% if order.paid %}
+		Yes
+		{% else %}
+		No
+		{%endif%}
+		</p>
     <p> <strong>Total:</strong>  {{order.total_price}}$ </p>
 
     <a href="{% url 'order_delete' order.id %}">Delete</a>
+		{% if not order.paid %}
+		<br>
+    <a href="{% url 'order_pay' order.id %}">Pay</a>
+		{% endif %}
 
     <hr>
 
@@ -94,9 +116,8 @@
     {% endfor %}
 
 
-
-
     <a href="{% url 'order_new'%}">New order</a>
+
 
 
 
