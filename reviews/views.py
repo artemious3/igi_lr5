@@ -13,7 +13,7 @@ User = get_user_model()
 
 class ReviewCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     login_url = '/auth/login'
-    # raise_exception = True
+    raise_exception = False
     permission_required = 'service_center.client_perm'
     form_class = ReviewNewForm
     template_name = 'reviews/review_new.html'

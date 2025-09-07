@@ -110,4 +110,5 @@ class OrderSpareParts(models.Model):
 class PromoCodes(models.Model):
     code = models.CharField(max_length=32)
     discount = models.PositiveIntegerField()
+    valid = models.BooleanField()
 
