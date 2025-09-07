@@ -9,8 +9,13 @@
 {% block content %}
 <ul>
     {% for faq in faq_list %}
-        <p><strong>Q: {{ faq.question }}</strong></p>
-        <p>A: {{ faq.answer }}</p>
+
+
+				<details>
+					<summary><strong>Q: {{ faq.question }}</strong></summary>
+					<p>{{faq.answer}}</p>
+				</details>
+
         <p>{{ faq.date }}</p>
         <hr/>
     {% empty %}
