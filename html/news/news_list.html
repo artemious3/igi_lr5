@@ -6,7 +6,12 @@
     <!-- Iterate over object_list -->
     {% for object in object_list %} 
 
-    <strong><h3><a href = "{% url 'news_detail' object.id %}">{{ object.head }}</a></h3></strong> 
+    <h3>{{ object.head }}</h3> 
+
+		<p>{{object.brief_content}}</p>
+
+	<a href="{% url 'news_detail' object.id %}"> Читать далее</a>
+
     <p>{{object.date}}</p>
 
     <hr/>
