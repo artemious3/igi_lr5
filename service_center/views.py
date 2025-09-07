@@ -12,7 +12,7 @@ from django.core.exceptions import PermissionDenied
 
 from django.utils.html import escape
 
-from service_center.forms import AddServiceForm, AddSparePartForm, NewOrderForm
+from service_center.forms import AddServiceForm, AddSparePartForm, NewOrderForm, AddSpecificServiceForm
 from .models import Client, Employee, Order, OrderService, OrderSpareParts, Service, PromoCodes
 
 import datetime
@@ -156,7 +156,7 @@ def order_submit_view(req, order_id):
                                                                 "csrf_token":csrf.get_token(req)})
 
 
-class OrderDeleteView(DeleteView, LoginRequiredMixin, PermissionRequiredMixin):
+class OrderDeleteView( LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     model = Order
     permission_required = 'service_center.client_perm'
     template_name = 'service_center/client/order_delete.html'
@@ -170,7 +170,7 @@ class OrderDeleteView(DeleteView, LoginRequiredMixin, PermissionRequiredMixin):
         return super().dispatch(request, *args, **kwargs)
 
 
-class OrderNewView(CreateView, LoginRequiredMixin, PermissionRequiredMixin):
+class OrderNewView(LoginRequiredMixin, PermissionRequiredMixin, CreateView) :
     form_class = NewOrderForm
     permission_required = 'service_center.client_perm'
     template_name = 'service_center/client/order_create.html'
@@ -182,7 +182,7 @@ class OrderNewView(CreateView, LoginRequiredMixin, PermissionRequiredMixin):
         return kwargs
 
 
-class OrderServiceUpdateView(UpdateView, LoginRequiredMixin, PermissionRequiredMixin):
+class OrderServiceUpdateView( LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     model = OrderService
     permission_required = 'service_center.client_perm'
     template_name = 'service_center/client/services_update.html'
@@ -191,7 +191,7 @@ class OrderServiceUpdateView(UpdateView, LoginRequiredMixin, PermissionRequiredM
 
     # TODO : check if order belongs to user
 
-class OrderServiceDeleteView(DeleteView, LoginRequiredMixin, PermissionRequiredMixin):
+class OrderServiceDeleteView( LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     model = OrderService
     permission_required = 'service_center.client_perm'
     template_name = 'service_center/client/services_delete.html'
@@ -201,7 +201,7 @@ class OrderServiceDeleteView(DeleteView, LoginRequiredMixin, PermissionRequiredM
 
 
 
-class AddServiceView(CreateView, LoginRequiredMixin, PermissionRequiredMixin):
+class AddServiceView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     form_class = AddServiceForm
     permission_required = 'service_center.client_perm'
     template_name = 'service_center/client/service_add.html'
@@ -222,6 +222,56 @@ class AddServiceView(CreateView, LoginRequiredMixin, PermissionRequiredMixin):
         kwargs['order'] = self.order 
         return kwargs
 
+
+class AddSpecificServiceView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
+    form_class = AddSpecificServiceForm
+    permission_required = 'service_center.client_perm'
+    template_name = 'service_center/client/add_to_cart.html'
+    success_url = reverse_lazy('orders_unapproved')
+
+    def dispatch(self, request, *args, **kwargs):
+        service_id = self.kwargs.get('service_id')
+        self.service = get_object_or_404(Service, id=service_id)
+        
+        return super(AddSpecificServiceView, self).dispatch(request, *args, **kwargs)
+
+    def get_form_kwargs(self):
+        kwargs = super(AddSpecificServiceView, self).get_form_kwargs()
+        kwargs['service'] = self.service 
+        kwargs['client'] = self.request.user.client
+        return kwargs
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['service'] = self.service
+        return context
+
+
+def service_info_view(req, service_id):
+    service = get_object_or_404(Service, id=service_id)
+    return render(req, 'service_center/client/service_info.html', {'object':service})
+
+
+@login_required
+@permission_required('service_center.client_perm', raise_exception=True)
+def incr_service_in_order(req, order_id, service_id):
+    if req.method == "POST":
+        order_service = get_object_or_404(OrderService, order = order_id, service = service_id)
+        number = order_service.number
+        order_service.number = number + 1
+        order_service.save()
+        return HttpResponseRedirect(reverse_lazy('orders_unapproved'))
+
+@login_required
+@permission_required('service_center.client_perm', raise_exception=True)
+def decr_service_in_order(req, order_id, service_id):
+    if req.method == "POST":
+        order_service = get_object_or_404(OrderService, order = order_id, service = service_id)
+        number = order_service.number
+        if number > 0:
+            order_service.number = number - 1
+        order_service.save()
+        return HttpResponseRedirect(reverse_lazy('orders_unapproved'))
 
 
 ###################################################################
@@ -282,7 +332,6 @@ class SparePartDeleteView(DeleteView, LoginRequiredMixin, PermissionRequiredMixi
     # TODO : check if order belongs to user
 
 
-
 class AddSparePartView(CreateView, LoginRequiredMixin, PermissionRequiredMixin):
     form_class = AddSparePartForm
     permission_required = 'service_center.client_perm'
@@ -308,6 +357,11 @@ class AddSparePartView(CreateView, LoginRequiredMixin, PermissionRequiredMixin):
 def client_info_view(req, pk):
     client = Client.objects.get(pk=pk)
     return render(req, 'service_center/staff/client_info.html', {"client":client})
+
+
+
+
+
 
 
 # def create_order_view(req):

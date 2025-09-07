@@ -1,0 +1,14 @@
+{% extends './base.html' %}
+
+{% block content %}
+
+<p>Add service {{service.name}} to one of your orders</p>
+<p>If you don't see any orders here, create them <a href="{% url 'orders_unapproved' %}">here</a></p>
+
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Add to the order</button>
+</form>
+
+{% endblock content%}

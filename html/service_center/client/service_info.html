@@ -1,0 +1,8 @@
+{% extends './base.html' %}
+
+{% block content %}
+
+    <li> {{object.name}}  ({{object.price}}$)</li>
+		<a href="{% url 'service_add' object.id%}"> Add to cart </a>
+
+{% endblock content %}

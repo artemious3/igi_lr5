@@ -36,6 +36,41 @@ class AddServiceForm(ModelForm):
             order_to_service.save()
         return order_to_service
 
+
+
+class AddSpecificServiceForm(ModelForm):
+    """Add service to an order"""
+
+    def __init__(self, *args, **kvargs):
+        self.service = kvargs.pop('service', None)
+        self.client = kvargs.pop('client', None)
+
+
+        super(ModelForm, self).__init__(*args, **kvargs)
+
+        if self.client:
+            self.fields['order'].queryset = self.fields['order'].queryset.filter(client=self.client).filter(submitted=False)
+        else:
+            self.fields['order'].queryset = self.fields['order'].queryset.none()
+
+    class Meta:
+        model = OrderService
+        fields = ("order", "number")
+
+    def clean_order(self):
+        order = self.cleaned_data['order']
+        if OrderService.objects.filter(order=order).filter(service=self.service).exists():
+            raise ValidationError("This service is already added for order")
+        return order
+
+    def save(self, commit=True):
+        order_to_service = super().save(commit=False)
+        order_to_service.service = self.service
+
+        if commit:
+            order_to_service.save()
+        return order_to_service
+
 class AddSparePartForm(ModelForm):
     """Add spare part to an order"""
 

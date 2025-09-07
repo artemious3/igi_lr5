@@ -22,7 +22,17 @@
                 (Price: {{ order_service.service.price }}$, 
 		Amount: {{ order_service.number }})
 		<a href="{% url 'order_service_update' order_service.id %}">Change</a>
-		<a href="{% url 'order_service_delete' order_service.id %}">Delete</a>
+
+		<form action="{% url 'incr' order_service.order.id order_service.service.id%}" method="post">
+			{% csrf_token %}
+				<button name="foo" value="upvote"><i class="fa-solid fa-plus"></i></button>
+		</form>
+
+		<form action="{% url 'decr' order_service.order.id order_service.service.id%}" method="post">
+			{% csrf_token %}
+				<button name="foo" value="upvote"><i class="fa-solid fa-minus"></i></button>
+		</form>
+		<a href="{% url 'order_service_delete' order_service.id %}"><i class="fa-solid fa-trash"></i></a>
             </li>
         {% empty %}
             <li>No services in the order</li>
