@@ -13,7 +13,7 @@ from django.core.exceptions import PermissionDenied
 from django.utils.html import escape
 
 from service_center.forms import AddServiceForm, AddSparePartForm, NewOrderForm, AddSpecificServiceForm
-from .models import Client, Employee, Order, OrderService, OrderSpareParts, Service, PromoCodes
+from .models import Client, Employee, Order, OrderService, OrderSpareParts, Service, PromoCodes, About
 
 import datetime
 import calendar
@@ -44,14 +44,16 @@ def conf_policy_view(req):
 
 def about_view(req):
 
-    resp = requests.get('https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY')
-    img_url = []
-    if resp.status_code == 200:
-        img_url = resp.json()["url"]
-    else:
-        img_url = ""
+    #resp = requests.get('https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY')
+    #img_url = []
+    #if resp.status_code == 200:
+    #    img_url = resp.json()["url"]
+    #else:
+    #    img_url = ""
 
-    return render(req, 'service_center/about.html', {"imgurl":img_url})
+    about = About.objects.first()
+
+    return render(req, 'service_center/about.html', {"about":about})
 
 
 from django.views.generic import ListView

@@ -113,3 +113,7 @@ class PromoCodes(models.Model):
     discount = models.PositiveIntegerField()
     valid = models.BooleanField()
 
+
+class About(models.Model):
+    content = models.TextField()
+

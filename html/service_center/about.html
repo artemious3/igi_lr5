@@ -12,58 +12,8 @@ About
 
 
 {% block content %}
-        <section>
-            <h2>Our <mark>Mission</mark></h2>
-            <p>
-                At <strong>Service Center</strong>, we believe that technology should serve people, not frustrate them. 
-                Our mission is to provide <em>fast, reliable, and affordable</em> repair services for smartphones, computers, 
-                and peripherals. We define <dfn>peripheral repair</dfn> as the restoration of functionality to external devices 
-                such as keyboards, mice, printers, and monitors that interface with primary computing systems.
-            </p>
-        </section>
 
-        <section>
-            <h2>Who We Are</h2>
-            <p>
-                Founded in 2015, Service Center began as a small workshop with a simple goal: to make tech repair accessible and transparent. 
-                As stated in <cite>“The Future of Consumer Electronics Maintenance”</cite> by Dr. Elena Martinez (2022), 
-                “Local service centers play a crucial role in extending device lifespans and reducing e-waste.” 
-                We take pride in being part of this sustainable movement.
-            </p>
-            <p>
-                Our team consists of <strong>certified technicians</strong> with expertise in both hardware and software diagnostics. 
-                Whether it’s a cracked smartphone screen or a failing laptop motherboard, we apply <mark>industry-standard procedures</mark> 
-                and use <strong>premium replacement parts</strong> to ensure lasting repairs.
-            </p>
-        </section>
-
-        <section>
-            <h2>Our <em>Core Values</em></h2>
-            <ul>
-                <li><strong>Integrity:</strong> Honest assessments and no hidden fees.</li>
-                <li><strong>Expertise:</strong> Ongoing training in the latest <dfn>micro-soldering</dfn> and diagnostic techniques.</li>
-                <li><strong>Customer Focus:</strong> Clear communication and timely service.</li>
-                <li><strong>Sustainability:</strong> We prioritize repair over replacement, supporting the right to repair movement.</li>
-            </ul>
-        </section>
-
-        <section>
-            <h2>Why Choose Us?</h2>
-            <p>
-                Unlike generic repair chains, we offer <mark>personalized service</mark> with same-day turnaround for most issues. 
-                We back our work with a <strong>90-day warranty</strong> on all repairs. 
-                As <cite>Consumer Tech Review Weekly</cite> noted in their 2023 report: 
-                “Independent service centers like Service Center often outperform larger franchises in customer satisfaction due to their attention to detail.”
-            </p>
-        </section>
-
-        <aside>
-            <h3>Did You Know?</h3>
-            <p>
-                According to the <cite>Global E-Waste Monitor 2024</cite>, only <strong>17.4%</strong> of electronic waste is properly recycled. 
-                Every device we repair helps reduce this growing environmental burden.
-            </p>
-        </aside>
+{{about.content|safe}}
 
 		<!-- <img src="{{imgurl}}" alt=""> -->
 {% endblock content %}

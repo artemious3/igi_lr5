@@ -9,6 +9,7 @@ admin.site.register(models.Service)
 admin.site.register(models.Device)
 admin.site.register(models.SparePart)
 admin.site.register(models.PromoCodes)
+admin.site.register(models.About)
 
 
 @admin.register(models.Order)
