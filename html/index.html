@@ -8,6 +8,9 @@
 
 		{% block content %}
 
+
+			<img src="/MEDIA/banner.png" style="max-width:80%;" alt="Баннер">
+
 	    <h1>Recent news</h1>
 
 	    <a href="{%url 'news_detail' news.id%}">{{news.head}}</a>
@@ -46,5 +49,20 @@
 	    <a href="/service/promocodes">Promocodes</a>
 			|
 	    <a href="/MEDIA/docs/user-agreement.pdf">User agreement</a>
+
+
+
+			<h1>Out partners</h1>
+<a href="https://www.google.com" target="_blank" class="social-icon">
+  <i class="fab fa-google"></i>
+</a>
+<a href="https://www.amazon.com" target="_blank" class="social-icon">
+  <i class="fab fa-amazon"></i>
+</a>
+<a href="https://www.apple.com" target="_blank" class="social-icon">
+  <i class="fab fa-apple"></i>
+</a>
+
+
 		
 		{% endblock content %}
