@@ -115,5 +115,11 @@ class PromoCodes(models.Model):
 
 
 class About(models.Model):
-    content = models.TextField()
+    title = models.CharField(max_length=64)
+    logo_path = models.CharField(max_length=64)
+    legal_address = models.TextField()
+    email = models.EmailField()
+    phone = models.CharField(max_length=32)
+    video_path = models.CharField(max_length=64)
+    description = models.TextField()
 

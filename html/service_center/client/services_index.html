@@ -9,13 +9,35 @@
 <a href="{% url 'service_index' 'name' %}">Name</a> | 
 <a href="{% url 'service_index' '-price' %}">Price</a>
 
-    <ul>
+<table rules="all">
+	<tr>
+
+		<th id="name">Название</th>
+		<th id="price">Цена</th>
+ <th></th>
+ <th></th>
+
+	</tr>
     {% for service in services %} 
 
-    <li> {{service.name}}  ({{service.price}}$)</li>
+		<tr>
+			<td headers="name">
+     {{service.name}} 
+			</td>
 
+			<td headers="price">
+		 ({{service.price}}$)
+			</td>
+
+			<td>
 		<a href="{% url 'service_info' service.id%}">Info</a>
+			</td>
+
+			<td>
 		<a href="{% url 'service_add' service.id%}"> Add to cart </a>
+			</td>
+
+		 </tr>
 
     {% empty %}
 
@@ -23,5 +45,12 @@
 
     {% endfor %}
 
-    </ul>
+
+		<tfoot>
+			<tr>
+				<td colspan="2">Объединённая ячейка</td>
+			</tr>
+		</tfoot>
+</table>
+
 {% endblock %}

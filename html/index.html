@@ -8,14 +8,17 @@
 
 		{% block content %}
 
+			<!-- <picture> -->
+			<!-- 			<source srcset="/MEDIA/banner.png" -->
+			<!-- 				 media="(width > 900px)"> -->
+			<!-- 			<img src="/MEDIA/banner-nr.png" style="max-width:80%;" alt="Баннер"> -->
+			<!-- </picture> -->
 
 			<img src="/MEDIA/banner.png" style="max-width:80%;" alt="Баннер">
 
 	    <h1>Recent news</h1>
 
 	    <a href="{%url 'news_detail' news.id%}">{{news.head}}</a>
-
-	    </hr>
 
 	    <h1>Index</h1>
 
@@ -50,7 +53,11 @@
 	    |
 			<a href="/service/contacts">Contacts</a>
 			|
-	    <a href="/MEDIA/docs/user-agreement.pdf">User agreement</a>
+	    <a href="/MEDIA/docs/user-agreement.pdf" download>User agreement</a>
+
+
+			|
+	    <a href="forms/">Forms demo</a>
 
 
 

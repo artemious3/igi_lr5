@@ -1,38 +1,16 @@
-
-{% extends "../base.html" %}
-
-
-{% block title %}
-About
-{% endblock title %}
-
-{% block header %}
-{{about.title}}
-{% endblock header %}
-
-
-{% block content %}
-<div class="verse-container">
-    <p class="verse">
-        Through circuits deep, <wbr>and screens so bright,<br>
-        Our skilled hands <wbr>bring your tech to light. <br>
-        From shattered glass <wbr>to power lost, <br>
-        We mend with care,<wbr>at lowest cost. <br>
-    </p>
-</div>
-
 <section>
              
             <h2>Our <mark>Mission</mark></h2>
-						<p>{{about.description|safe}}</p>
             <p>
-								We define <dfn title="peripheral repair">peripheral repair</dfn> as the restoration of functionality to external devices 
+                At <strong>Service Center</strong>, we believe that technology should serve people, not frustrate them. 
+                Our mission is to provide <em>fast, reliable, and affordable</em> repair services for smartphones, computers, 
+                and peripherals. We define <dfn title="peripheral repair">peripheral repair</dfn> as the restoration of functionality to external devices 
                 such as keyboards, mice, printers, and monitors that interface with primary computing systems.
             </p>
         </section>
 
            <video width="320" height="240" controls autoplay muted>
-						 <source src="{{about.video_path}}" type="video/mp4">
+                      <source src="/MEDIA/video/repair.mp4" type="video/mp4">
                        Your browser does not support the video tag.
             </video> 
 
@@ -82,10 +60,18 @@ About
 <section>
     <h2>Company Details</h2>
     <ul>
-			<li><strong>Company Name:</strong> {{about.title}}</li>
-				<li><strong>Legal Address:</strong> {{about.legal_address}}</li>
-				<li><strong>Phone:</strong> {{about.phone}}</li>
-				<li><strong>Email:</strong> {{about.email}}</li>
+        <li><strong>Company Name:</strong> "Smart-Service" LLC</li>
+        <li><strong>Legal Address:</strong> 123456, Moscow, Technical St., 15, office 20</li>
+        <li><strong>Mailing Address:</strong> 123456, Moscow, Technical St., 15, office 20</li>
+        <li><strong>TIN (Taxpayer Identification Number):</strong> 7701234567</li>
+        <li><strong>PSRN (Primary State Registration Number):</strong> 1122334455667</li>
+        <li><strong>IEC (Industrial Enterprise Classifier):</strong> 770101001</li>
+        <li><strong>Checking Account:</strong> 40702810123450000000 at "TechnoBank" JSC</li>
+        <li><strong>Correspondent Account:</strong> 30101810000000000000</li>
+        <li><strong>BIC (Bank Identifier Code):</strong> 044525000</li>
+        <li><strong>General Director:</strong> Ivan Ivanov</li>
+        <li><strong>Phone:</strong> +7 (495) 123-45-67</li>
+        <li><strong>Email:</strong> info@smart-service.ru</li>
     </ul>
 </section>
 
@@ -109,7 +95,7 @@ About
         This certifies that
     </p>
     <p class="company-name">
-		{{about.title}}
+        "Smart-Service" LLC
     </p>
     <p>
         is an authorized service center for the repair of smartphones and tablets manufactured by **"TechCorp"**.
@@ -137,7 +123,3 @@ About
         </p>
     </div>
 </div>
-
-		<!-- <img src="{{imgurl}}" alt=""> -->
-{% endblock content %}
-

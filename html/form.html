@@ -1,0 +1,129 @@
+
+
+{% extends "base.html" %}
+
+
+
+{% block content %}
+
+
+<div class="form-container">
+        <h1>HTML Form Demonstration</h1>
+        <form action="#" method="post">
+            
+            <div class="form-group">
+                <label for="name">Text Input (Name):</label>
+                <input type="text" id="name" name="name" placeholder="Enter your full name" class="w-full">
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email Input:</label>
+                <input type="email" id="email" name="email" placeholder="you@example.com" required class="w-full">
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password Input:</label>
+                <input type="password" id="password" name="password" placeholder="Enter your password" class="w-full">
+            </div>
+
+            <div class="form-group">
+                <label for="age">Number Input (Age):</label>
+                <input type="number" id="age" name="age" min="0" max="120" placeholder="e.g., 30" class="w-full">
+            </div>
+
+            <div class="form-group">
+                <label for="dob">Date Input:</label>
+                <input type="date" id="dob" name="dob" class="w-full">
+            </div>
+
+            <div class="form-group">
+                <label for="appt-time">Time Input:</label>
+                <input type="time" id="appt-time" name="appt-time" class="w-full">
+            </div>
+
+            <div class="form-group">
+                <label for="meeting-time">Datetime-local Input:</label>
+                <input type="datetime-local" id="meeting-time" name="meeting-time" class="w-full">
+            </div>
+
+            <div class="form-group">
+                <label for="fav-color">Color Input:</label>
+                <input type="color" id="fav-color" name="fav-color" value="#6a1b9a" class="w-full h-12">
+            </div>
+
+            <div class="form-group">
+                <label for="upload">File Input:</label>
+                <input type="file" id="upload" name="upload" class="w-full">
+            </div>
+
+            <div class="form-group">
+                <label for="satisfaction">Range Input (Satisfaction):</label>
+                <input type="range" id="satisfaction" name="satisfaction" min="1" max="100" value="50" class="w-full">
+            </div>
+
+            <div class="form-group">
+                <label for="search">Search Input:</label>
+                <input type="search" id="search" name="search" placeholder="Search..." class="w-full">
+            </div>
+            
+            <div class="form-group">
+                <label for="phone">Tel Input (Phone Number):</label>
+                <input type="tel" id="phone" name="phone" placeholder="e.g., 123-456-7890" class="w-full">
+            </div>
+
+            <div class="form-group">
+                <label for="website">URL Input:</label>
+                <input type="url" id="website" name="website" placeholder="https://www.example.com" class="w-full">
+            </div>
+
+            <div class="form-group">
+                <label>Radio Buttons (Gender):</label>
+                <div class="flex items-center gap-4 mt-2">
+                    <label><input type="radio" name="gender" value="male" class="text-blue-500"> Male</label>
+                    <label><input type="radio" name="gender" value="female"> Female</label>
+                    <label><input type="radio" name="gender" value="other"> Other</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Checkboxes (Interests):</label>
+                <div class="flex flex-col gap-2 mt-2">
+                    <label><input type="checkbox" name="interest" value="coding"> Coding</label>
+                    <label><input type="checkbox" name="interest" value="design"> Design</label>
+                    <label><input type="checkbox" name="interest" value="gaming"> Gaming</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="country">Select Dropdown (Country):</label>
+                <select id="country" name="country" class="w-full">
+                    <option value="">--Please choose an option--</option>
+                    <option value="usa">United States</option>
+                    <option value="can">Canada</option>
+                    <option value="uk">United Kingdom</option>
+                    <option value="aus">Australia</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="comments">Textarea (Comments):</label>
+                <textarea id="comments" name="comments" rows="4" placeholder="Your comments..." class="w-full"></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="disabled-input">Disabled Input:</label>
+                <input type="text" id="disabled-input" name="disabled-input" value="This input is disabled" disabled class="w-full">
+            </div>
+
+            <!-- Submit and Reset Buttons -->
+            <div class="button-group">
+                <button type="submit" class="submit-btn">Submit</button>
+                <button type="reset" class="reset-btn">Reset</button>
+            </div>
+
+        </form>
+    </div>
+
+
+
+{% endblock content %}

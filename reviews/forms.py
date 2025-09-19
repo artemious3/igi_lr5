@@ -1,4 +1,4 @@
-from django.forms import ModelForm, ChoiceField, Select
+from django.forms import ModelForm, ChoiceField, Select, RadioSelect
 
 from news import models
 from .models import Review
@@ -12,7 +12,7 @@ class ReviewNewForm(ModelForm):
 
     mark = ChoiceField(
             choices=[(i, str(i)) for i in range(1, 6)],  # Generates [(1, '1'), (2, '2'), ..., (5, '5')]
-            widget=Select,
+            widget=RadioSelect,
             label="Rating"
         )
 

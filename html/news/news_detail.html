@@ -1,10 +1,14 @@
 {% extends "./base.html" %} {% block content %}
 
-<div itemscope itemtype="https://service-center.org/News">
-  <h2 itemprop="title">{{news.head}}</h2>
-  <p itemprop="date">{{news.date}}</p>
-  <p itemprop="content">{{news.content}}</p>
-  <img itemprop="image" src="{{news.image.url}}" alt="" />
-</div>
+<article>
+	
+<section itemscope itemtype="https://schema.org/NewsArticle">
+  <h2 itemprop="headline">{{news.head}}</h2>
+	<p itemprop="datePublished">{{news.date}}</p>
+  <p itemprop="articleBody">{{news.content}}</p>
+  <img itemprop="thumbnail" src="{{news.image.url}}" alt="" />
+</section>
+
+</article>
 
 {% endblock content %}

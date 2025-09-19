@@ -101,19 +101,18 @@ def client_index(req):
 
     dt_utc = datetime.datetime.now(datetime.timezone.utc).strftime("%H:%M:%S")
 
-    resp = requests.get('https://catfact.ninja/fact')
-    cat_fact = []
-    if resp.status_code == 200:
-        cat_fact = resp.json()["fact"]
-    else:
-        cat_fact = ""
+    # resp = requests.get('https://catfact.ninja/fact')
+    # cat_fact = []
+    # if resp.status_code == 200:
+    #     cat_fact = resp.json()["fact"]
+    # else:
+    #     cat_fact = ""
 
 
     return render(req, 'service_center/client/client_index.html', {"client":client,
                                                                    "timezone":timezone,
                                                                    "dt_utc":dt_utc,
-                                                                   "calendar":cal, 
-                                                                   "cat_fact":cat_fact})
+                                                                   "calendar":cal, })
 
 
 

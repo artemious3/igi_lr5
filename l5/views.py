@@ -1,4 +1,5 @@
 
+from django.http import HttpResponseRedirect
 from news import models
 from django.shortcuts import render
 
@@ -9,3 +10,9 @@ def index(req):
 
 def bamboleo(req):
     return render(req, "video.html")
+
+def forms_demo(req):
+    if req.method=="POST":
+        return HttpResponseRedirect("service/index/")
+    else:
+        return render(req, "form.html")
