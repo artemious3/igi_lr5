@@ -13,20 +13,26 @@
       content="Service center, specialized on repair of computer and electronics devices, located in city X"
     />
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+		<link rel="stylesheet" href="/static/base.css">
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <title>{% block title %}Service center{% endblock title %}</title>
+		{% block styles %} {% endblock styles %}
   </head>
   <body>
     <header>
-      <nav>
+      <nav >
         {% block nav %}
-          <div id="top-nav">
-            <a href="/" target="_blank">Index</a> | <a href="/service/about">About</a> |
-            <a href="/service/profile">Home</a>
+          <div id="top-nav" class="top-nav">
+            <a class="nav-btn" href="/">Index</a>
+						<a class="nav-btn" href="/service/about">About</a>
+            <a class="nav-btn" href="/service/profile">Home</a>
           </div>
         {% endblock nav %}
       </nav>
       <h1>{% block header %}{% endblock header %}</h1>
-      <img src="/MEDIA/icon.jpg" alt="Icon" title="Service center"/>
+      <img class="top-icon border" src="/MEDIA/icon.jpg" alt="Icon" title="Service center"/>
     </header>
 
     <main>
@@ -34,8 +40,8 @@
     </main>
 
     <footer>
-      <div>Artsiom Padhaiski. &copy; 2025. All rights reserved<a style="text-decoration:none" href="/bamboleo">.</a></div>
-			<a href="#top-nav"><i class="fa-solid fa-arrow-up"></i></a>
+      <div class="copyright_note">Artsiom Padhaiski. &copy; 2025. All rights reserved<a style="text-decoration:none" href="/bamboleo">.</a></div>
+			<!-- <a href="#top-nav"><i class="fa-solid fa-arrow-up"></i></a> -->
     </footer>
   </body>
 </html>

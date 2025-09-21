@@ -2,8 +2,13 @@
 {% extends "base.html" %}
 		{% block title %} Service center {% endblock title %}
 
+
+		{% block styles %}
+			<link rel="stylesheet" href="/static/index.css">	
+		{% endblock styles %}
+
 		{% block header %}
-		    Service center
+		    Smart-Service
 		{% endblock header %}
 
 		{% block content %}
@@ -14,54 +19,46 @@
 			<!-- 			<img src="/MEDIA/banner-nr.png" style="max-width:80%;" alt="Баннер"> -->
 			<!-- </picture> -->
 
-			<img src="/MEDIA/banner.png" style="max-width:80%;" alt="Баннер">
 
-	    <h1>Recent news</h1>
+	    <h2>Authorization</h2>
+
+
+
+			<div class="auth-grid">
+				<a  href="{% url 'login'%}">Log In</a>
+				<a  href="{% url 'signup'%}">Sign Up</a>
+				<a  href="{% url 'logout'%}">Log out</a>
+			</div>
+
+	    <h2>Navigation</h2>
+
+			<div class="index-grid">
+
+				<a href="/service/list-services/">Services</a>
+				<a href="/news">News</a>
+				<a href="/vacancies">Vacancies</a>
+				<a href="/faq">FAQ</a>
+				<a href="/reviews/list">Reviews</a>
+				<a href="/service/about">About</a>
+				<a href="/service/conf-policy">Conf. policy</a>
+				<a href="/stats">Stats</a>
+				<a href="/service/promocodes">Promocodes</a>
+				<a href="/service/contacts">Contacts</a>
+				<a href="/MEDIA/docs/user-agreement.pdf" download>User agreement</a>
+				<a href="forms/">Forms demo</a>
+
+			</div>
+
+
+
+			<img class="banner border" src="/MEDIA/banner.png"  alt="Баннер">
+
+	    <h2>Recent news</h2>
 
 	    <a href="{%url 'news_detail' news.id%}">{{news.head}}</a>
 
-	    <h1>Index</h1>
 
-
-
-	    <a href="{% url 'login'%}">Log In</a>
-
-	    <br>
-
-	    <a href="{% url 'signup'%}">Sign Up</a>
-	    <br>
-	    <a href="{% url 'logout'%}">Log out</a>
-	    <br>
-
-	    <a href="/service/list-services/">Services</a>
-	    | 
-	    <a href="/news">News</a>
-	    | 
-	    <a href="/vacancies">Vacancies</a>
-	    |
-	    <a href="/faq">FAQ</a>
-	    |
-	    <a href="/reviews/list">Reviews</a>
-	    |
-	    <a href="/service/about">About</a>
-	    |
-	    <a href="/service/conf-policy">Confidentials policy</a>
-	    |
-	    <a href="/stats">Stats</a>
-	    |
-	    <a href="/service/promocodes">Promocodes</a>
-	    |
-			<a href="/service/contacts">Contacts</a>
-			|
-	    <a href="/MEDIA/docs/user-agreement.pdf" download>User agreement</a>
-
-
-			|
-	    <a href="forms/">Forms demo</a>
-
-
-
-			<h1>Out partners</h1>
+			<h2>Out partners</h2>
 <a href="https://www.google.com" target="_blank" class="social-icon">
   <i class="fab fa-google"></i>
 </a>
