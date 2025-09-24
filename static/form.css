@@ -1,0 +1,55 @@
+.form-container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.form-group {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  gap: 15px;
+
+	border : 3px solid #000000;
+	border-radius: 2px;
+}
+
+.form-group label {
+  text-align: left;
+  flex: 1;
+  margin: 5px;
+}
+
+.form-group input{
+  flex: 1;
+  text-align: right;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+	margin : 5px;
+}
+
+.form-group input:enabled{
+  background-color: white;
+}
+
+.form-group input:disabled{
+  background-color: grey;
+}
+
+.form-group input:invalid { 
+	border-color: red;
+	transform: 0.2s border-color ease-in;
+}
+
+.form-group input:required{ 
+	outline-color: black;
+	outline-width: 1px;
+	outline-style: solid;
+	outline-offset: 2px;
+}
+
+.form-group input:checked { 
+	border: none;
+  outline: 2px solid black;
+}

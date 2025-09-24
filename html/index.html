@@ -8,7 +8,7 @@
 		{% endblock styles %}
 
 		{% block header %}
-		    Smart-Service
+		    Smart-Service LTD
 		{% endblock header %}
 
 		{% block content %}
@@ -51,22 +51,32 @@
 
 
 
-			<img class="banner border" src="/MEDIA/banner.png"  alt="Баннер">
+			<div class="banner border">
+				<img class="banner-img" src="/MEDIA/banner.png"  alt="Баннер">
+			</div>
 
 	    <h2>Recent news</h2>
 
-	    <a href="{%url 'news_detail' news.id%}">{{news.head}}</a>
+		<div class="news border">
+			<div class="news-head">
+				<a href="{%url 'news_detail' news.id%}">{{news.head}}</a>
+			</div>
+			<div class="news-content">
+				<p >{{news.content|truncatechars:300}} </p>
+			</div>
+		</div>
+
 
 
 			<h2>Out partners</h2>
-<a href="https://www.google.com" target="_blank" class="social-icon">
-  <i class="fab fa-google"></i>
+<a href="https://www.google.com" target="_blank" class="partner-link social-icon">
+  <i class="border fab fa-google partner"></i>
 </a>
-<a href="https://www.amazon.com" target="_blank" class="social-icon">
-  <i class="fab fa-amazon"></i>
+<a href="https://www.amazon.com" target="_blank" class="partner-link social-icon">
+  <i class="border fab fa-amazon partner"></i>
 </a>
-<a href="https://www.apple.com" target="_blank" class="social-icon">
-  <i class="fab fa-apple"></i>
+<a href="https://www.apple.com" target="_blank" class="partner-link social-icon">
+  <i class="border fab fa-apple partner"></i>
 </a>
 
 

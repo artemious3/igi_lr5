@@ -3,21 +3,46 @@ body {
 	min-width: 500px;
 }
 
+a:focus { 
+	color : lightgreen !important;
+}
+
+a:link { 
+	color:white;
+}
+ 
+a:active, button:active { 
+	transform :	scaleX(0.95) !important;
+	transition : transform 0.1s ease-in;
+}
+
+a[download]::before {
+	content : "⬇"
+}
+
+
 * {
 	font-family : "Space Mono", monospace;
 	font-weight : 100;
 	text-align : center;
+}
 
 .border , h1, h2, button{
 	border : 3px solid #000000;
 	border-radius: 2px;
 }
 
+
 .top-nav {	
+  position: fixed;
+	top : 0px;
+	left : 10px;
 	border : 3px solid #000000;
 	border-radius: 2px;
-	margin : 0px 6px 6px 6px;
 	text-align : center;
+	background-color: white;
+	width: calc(100vw - 30px);
+
 }
 
 .enlarge-on-hover:hover {
@@ -41,9 +66,11 @@ body {
 h1 {
 	font-weight : 900;
 	padding : 2px;
-	margin : 6px 6px 0px 6px;
 	text-transform : uppercase;
 	font-weight : 900;
+	margin : 6px;
+	margin-top: 60px;
+	background-color: white;
 }
 
 h2 {
@@ -57,7 +84,7 @@ h2 {
 	width : 80px;
 	height : 80px;
 	position : absolute;
-	top : 25px;
+	top : 15px;
 	left : 30px;
 }
 
@@ -65,6 +92,29 @@ footer {
 	border : 1px solid #000000;
 	border-radius: 2px;
 	font-size : 9px;
+}
+
+.my-btn {
+	display : flex;
+	justify-content: center;
+	align-items: center;
+
+	border : 2px solid #000000;
+	border-radius : 2px;
+	padding : 5px;
+	margin : 5px;
+	width : 150px;
+
+	color : white;
+	background-color : black;
+	text-decoration: none;
+}
+
+q:lang(ru){ 
+	quotes: "«" "»"; 
+}
+q:lang(en){ 
+	quotes: "\201C" "\201D"; 
 }
 
 

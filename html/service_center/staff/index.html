@@ -4,9 +4,9 @@
 
 <p>Welcome, {{user.first_name}} {{user.last_name}}!</p>
 
+<div class="auth-grid">
+	<a  href=" {% url 'staff_orders_unappr'%}">Orders, assigned to you</a>
+	<a  href=" {% url 'staff_orders_appr'%} ">History</a>
+</div>
 
-<a href=" {% url 'staff_orders_unappr'%}">Orders, assigned to you</a>
-<br>
-<a href=" {%url 'staff_orders_appr'%} ">History</a>
-
-{% endblock %}
+{% endblock content%}

@@ -5,19 +5,50 @@
 <p>Welcome, <i/>{{client.user.first_name}} {{client.user.last_name}}</i>!</p>
 
 
-<a href=" {% url 'orders_unapproved'%}" accesskey="c">Cart</a>
-<br>
-<a href=" {%url 'orders_approved'%} " accesskey="h">History</a>
-<br>
-<a href=" {%url 'service_index' ''%} " accesskey="s">SERVICES</a>
+<div>
+
+<a class="my-btn" href=" {% url 'orders_unapproved'%}" accesskey="c">Cart</a>
+<a class="my-btn" href=" {%url 'orders_approved'%} " accesskey="h">History</a>
+<a class="my-btn" href=" {%url 'service_index' ''%} " accesskey="s">SERVICES</a>
+
+
+</div>
 
 
 <h2>Your personal info:</h2> 
 
-<p> <strong>First name:</strong> {{client.user.first_name}}   </p>
-<p> <strong>Last name:</strong> {{client.user.last_name}}   </p>
-<p> <strong>Phone number: </strong> {{client.phone_number}}   </p>
-<p> <strong>Address: </strong> {{client.address}}   </p>
+<table>
+<tr>
+	<th>
+		<strong>First name</strong>
+	</th>
+	<th>
+
+		{{client.user.first_name}}
+	</th>
+</tr>
+
+
+<tr>
+	<th>
+	<strong>Last name:</strong>
+	</th>
+	<th>{{client.user.last_name}} 
+	</th>
+</tr>
+
+
+
+<tr>
+	<th> <strong>Phone number: </strong></th>
+	<th>{{client.phone_number}}</th>
+</tr>
+
+<tr>
+	<th><strong>Address: </strong></th>
+	<th>{{client.address}}</th>
+</tr>
+</table>
 
 
 <h2>Time info:</h2>

@@ -2,18 +2,21 @@
 
 {% extends "base.html" %}
 
+{% block styles %}
+<link rel="stylesheet" href="/static/form.css">
+{% endblock styles %}
+
+		{% block title %} HTML Form Demo{% endblock title %}
+		{% block header %} HTML Form Demo{% endblock header %}
 
 
 {% block content %}
 
-
-<div class="form-container">
-        <h1>HTML Form Demonstration</h1>
         <form action="#" method="post">
-            
+					<div class="form-container">
             <div class="form-group">
                 <label for="name">Text Input (Name):</label>
-                <input type="text" id="name" name="name" placeholder="Enter your full name" class="w-full">
+                <input type="text" id="name" name="name" placeholder="Enter your full name" required class="w-full">
             </div>
 
             <div class="form-group">
@@ -23,7 +26,7 @@
 
             <div class="form-group">
                 <label for="password">Password Input:</label>
-                <input type="password" id="password" name="password" placeholder="Enter your password" class="w-full">
+                <input type="password" id="password" name="password" placeholder="Enter your password" required class="w-full">
             </div>
 
             <div class="form-group">
@@ -68,7 +71,7 @@
             
             <div class="form-group">
                 <label for="phone">Tel Input (Phone Number):</label>
-                <input type="tel" id="phone" name="phone" placeholder="e.g., 123-456-7890" class="w-full">
+                <input type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" id="phone" name="phone" placeholder="e.g., 123-456-7890" class="w-full">
             </div>
 
             <div class="form-group">
@@ -120,9 +123,8 @@
                 <button type="submit" class="submit-btn">Submit</button>
                 <button type="reset" class="reset-btn">Reset</button>
             </div>
-
-        </form>
-    </div>
+				</div>
+			</form>
 
 
 {% endblock content %}
