@@ -1,122 +1,278 @@
 {% extends "./base.html" %}
 
+{% block styles %}
+	<link rel="stylesheet" href="/static/cart.css">
+{% endblock styles %}
+
 {% block content %}
 
 <h2>Not submitted orders</h2>
 
 
-    {% for order in unsubmitted_orders %} 
+  <!--   {% for order in unsubmitted_orders %}  -->
+		<!---->
+  <!--   <h3> Order {{order.id}} </h3> -->
+		<!---->
+		<!---->
+  <!--   <p> <strong>Created:</strong>  {{order.date_created}} </p> -->
+  <!--   <p> <strong>Scheduled:</strong>  {{order.date_scheduled}} </p> -->
+  <!--   <p> <strong>Staff:</strong>  {{order.employee}} </p> -->
+		<!---->
+  <!--   <h4> Services : </h4> -->
+  <!--   <ul> -->
+  <!--       {% for order_service in order.order_services.all %} -->
+  <!--           <li> -->
+  <!--               {{ order_service.service.name }}  -->
+  <!--               (Price: {{ order_service.service.price }}$,  -->
+		<!-- Amount: {{ order_service.number }}) -->
+		<!-- <a href="{% url 'order_service_update' order_service.id %}">Change</a> -->
+		<!---->
+		<!-- <form action="{% url 'incr' order_service.order.id order_service.service.id%}" method="post"> -->
+		<!-- 	{% csrf_token %} -->
+		<!-- 		<button name="foo" value="upvote"><i class="fa-solid fa-plus"></i></button> -->
+		<!-- </form> -->
+		<!-- <form action="{% url 'decr' order_service.order.id order_service.service.id%}" method="post"> -->
+		<!-- 	{% csrf_token %} -->
+		<!-- 		<button name="foo" value="upvote"><i class="fa-solid fa-minus"></i></button> -->
+		<!-- </form> -->
+		<!-- <a href="{% url 'order_service_delete' order_service.id %}"><i class="fa-solid fa-trash"></i></a> -->
+  <!--           </li> -->
+  <!--       {% empty %} -->
+  <!--           <li>No services in the order</li> -->
+  <!--       {% endfor %} -->
+  <!--   </ul> -->
+		<!---->
+  <!--   <p> <strong>Total service price:</strong>  {{order.total_service_price}}$</p> -->
+		<!---->
+		<!-- <p><strong>Paid:</strong>  -->
+		<!-- {% if order.paid %} -->
+		<!-- Yes -->
+		<!-- {% else %} -->
+		<!-- No -->
+		<!-- {%endif%} -->
+		<!-- </p> -->
+		<!---->
+  <!--   <p> !!! NOTE: spare parts price is not included here.</p> -->
+		<!---->
+  <!--   <a href="{% url 'order_service_add' order.id %}">Add Service</a> -->
+  <!--   <br> -->
+  <!--   <a href="{% url 'order_submit' order.id %}">Submit</a> -->
+  <!--   <br> -->
+  <!--   <a href="{% url 'order_delete' order.id %}">Delete</a> -->
+		<!-- {% if not order.paid %} -->
+		<!-- <br> -->
+  <!--   <a href="{% url 'order_pay' order.id %}">Pay</a> -->
+		<!-- {% endif %} -->
+		<!---->
+  <!--   <hr> -->
+		<!---->
+  <!--   {% empty %} -->
+		<!---->
+  <!--   <p> No orders yet </p> -->
+		<!---->
+  <!--   {% endfor %} -->
+		<!---->
+		<!---->
+  <!--   <hr> -->
 
-    <h3> Order {{order.id}} </h3>
+	<div class="tcontainer">
+<table class="not-submitted-table">
+	<caption> 
+		Table caption
+	</caption>
+    <thead>
+        <tr>
+            <th>Order ID</th>
+            <th>Created</th>
+            <th>Scheduled</th>
+            <th>Staff</th>
+            <th>Services</th>
+            <th>Total Service Price</th>
+            <th>Paid</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody class="tbl-body">
+        {% for order in unsubmitted_orders %}
+        <tr>
+            <td>{{ order.id }}</td>
+            <td>{{ order.date_created }}</td>
+            <td>{{ order.date_scheduled }}</td>
+            <td>{{ order.employee }}</td>
+            <td class="services-list">
+										<table class="services-list-table">
+											{% for order_service in order.order_services.all %}
+												<tr>
+													<td>
 
+														<p style="text-align:left;">
+																&#8226; {{ order_service.service.name }} (Price: {{ order_service.service.price }}$., Amount: {{ order_service.number }})
 
-    <p> <strong>Created:</strong>  {{order.date_created}} </p>
-    <p> <strong>Scheduled:</strong>  {{order.date_scheduled}} </p>
-    <p> <strong>Staff:</strong>  {{order.employee}} </p>
+														</p>
 
-    <h4> Services : </h4>
-    <ul>
-        {% for order_service in order.order_services.all %}
-            <li>
-                {{ order_service.service.name }} 
-                (Price: {{ order_service.service.price }}$, 
-		Amount: {{ order_service.number }})
-		<a href="{% url 'order_service_update' order_service.id %}">Change</a>
+													</td>
 
-		<form action="{% url 'incr' order_service.order.id order_service.service.id%}" method="post">
-			{% csrf_token %}
-				<button name="foo" value="upvote"><i class="fa-solid fa-plus"></i></button>
-		</form>
-		<form action="{% url 'decr' order_service.order.id order_service.service.id%}" method="post">
-			{% csrf_token %}
-				<button name="foo" value="upvote"><i class="fa-solid fa-minus"></i></button>
-		</form>
-		<a href="{% url 'order_service_delete' order_service.id %}"><i class="fa-solid fa-trash"></i></a>
-            </li>
+													<td>
+
+                            <a href="{% url 'order_service_update' order_service.id %}">Change</a>
+                            <form action="{% url 'incr' order_service.order.id order_service.service.id%}"
+															method="post"
+															style="display:inline;">
+                                {% csrf_token %}
+                                <button type="submit" name="foo" value="upvote">➕</button>
+                            </form>
+                            <form action="{% url 'decr' order_service.order.id order_service.service.id%}"
+															method="post"
+															style="display:inline;">
+                                {% csrf_token %}
+                                <button type="submit" name="foo" value="upvote">➖</button>
+                            </form>
+                            <a href="{% url 'order_service_delete' order_service.id %}">🗑️</a>
+
+													</td>
+											</tr>
+											{% empty %}
+											<tr>
+													<td>No services in the order</td>
+											</tr>
+											{% endfor %}
+										</table>
+            </td>
+            <td>{{ order.total_service_price }}$</td>
+            <td>
+                {% if order.paid %}
+                    Yes
+                {% else %}
+                    No
+                {%endif%}
+            </td>
+            <td>
+                <a class="my-btn" href="{% url 'order_service_add' order.id %}">Add Service</a>
+                <a class="my-btn" href="{% url 'order_submit' order.id %}">Submit</a>
+                <a class="my-btn" href="{% url 'order_delete' order.id %}">Delete</a>
+                {% if not order.paid %}
+                    <a class="my-btn" href="{% url 'order_pay' order.id %}">Pay</a>
+                {% endif %}
+            </td>
+        </tr>
         {% empty %}
-            <li>No services in the order</li>
+        <tr>
+            <td colspan="8">No orders yet</td>
+        </tr>
         {% endfor %}
-    </ul>
+    </tbody>
+</table>
 
-    <p> <strong>Total service price:</strong>  {{order.total_service_price}}$</p>
+	</div>
 
-		<p><strong>Paid:</strong> 
-		{% if order.paid %}
-		Yes
-		{% else %}
-		No
-		{%endif%}
-		</p>
-
-    <p> !!! NOTE: spare parts price is not included here.</p>
-
-    <a href="{% url 'order_service_add' order.id %}">Add Service</a>
-    <br>
-    <a href="{% url 'order_submit' order.id %}">Submit</a>
-    <br>
-    <a href="{% url 'order_delete' order.id %}">Delete</a>
-		{% if not order.paid %}
-		<br>
-    <a href="{% url 'order_pay' order.id %}">Pay</a>
-		{% endif %}
-
-    <hr>
-
-    {% empty %}
-
-    <p> No orders yet </p>
-
-    {% endfor %}
-
-
-    <hr>
 <h2>Submitted orders</h2>
 
-    {% for order in submitted_orders %} 
+  <!--   {% for order in submitted_orders %}  -->
+		<!---->
+  <!--   <h3> Order {{order.id}} </h3> -->
+  <!--   <p> <strong>Created:</strong>  {{order.date_created}} </p> -->
+  <!--   <p> <strong>Staff:</strong>  {{order.employee}} </p> -->
+  <!--   <p> <strong>Scheduled:</strong>  {{order.date_scheduled}} </p> -->
+		<!---->
+  <!--   <h4> Services : </h4> -->
+  <!--   <ul> -->
+  <!--       {% for order_service in order.order_services.all %} -->
+  <!--           <li> -->
+  <!--               {{ order_service.service.name }}  -->
+  <!--               (Price: {{ order_service.service.price }}$.,  -->
+		<!-- Amount: {{ order_service.number }}) -->
+  <!--           </li> -->
+  <!--       {% empty %} -->
+  <!--           <li>No services in the order</li> -->
+  <!--       {% endfor %} -->
+  <!--   </ul> -->
+		<!---->
+		<!-- <p><strong>Paid:</strong>  -->
+		<!-- {% if order.paid %} -->
+		<!-- Yes -->
+		<!-- {% else %} -->
+		<!-- No -->
+		<!-- {%endif%} -->
+		<!-- </p> -->
+  <!--   <p> <strong>Total:</strong>  {{order.total_price}}$ </p> -->
+		<!---->
+  <!--   <a href="{% url 'order_delete' order.id %}">Delete</a> -->
+		<!-- {% if not order.paid %} -->
+		<!-- <br> -->
+  <!--   <a href="{% url 'order_pay' order.id %}">Pay</a> -->
+		<!-- {% endif %} -->
+		<!---->
+  <!--   <hr> -->
+		<!---->
+  <!--   {% empty %} -->
+		<!---->
+  <!--   <p> No orders yet </p> -->
+		<!---->
+  <!--   {% endfor %} -->
+		<!---->
 
-    <h3> Order {{order.id}} </h3>
-    <p> <strong>Created:</strong>  {{order.date_created}} </p>
-    <p> <strong>Staff:</strong>  {{order.employee}} </p>
-    <p> <strong>Scheduled:</strong>  {{order.date_scheduled}} </p>
 
-    <h4> Services : </h4>
-    <ul>
-        {% for order_service in order.order_services.all %}
-            <li>
-                {{ order_service.service.name }} 
-                (Price: {{ order_service.service.price }}$., 
-		Amount: {{ order_service.number }})
-            </li>
+		<div class="tcontainer">
+<table class="submitted-table">
+	<caption> 
+		Table caption
+	</caption>
+    <thead>
+        <tr>
+            <th>Order ID</th>
+            <th>Created</th>
+            <th>Staff</th>
+            <th>Scheduled</th>
+            <th>Services</th>
+            <th>Paid</th>
+            <th>Total Price</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody class="tbl-body">
+        {% for order in submitted_orders %}
+        <tr>
+            <td>{{ order.id }}</td>
+            <td>{{ order.date_created }}</td>
+            <td>{{ order.employee }}</td>
+            <td>{{ order.date_scheduled }}</td>
+            <td class="services-list">
+                <ul>
+                    {% for order_service in order.order_services.all %}
+                        <li class="service">{{ order_service.service.name }} (Price: {{ order_service.service.price }}$., Amount: {{ order_service.number }})</li>
+                    {% empty %}
+                        <li>No services in the order</li>
+                    {% endfor %}
+                </ul>
+            </td>
+            <td>
+                {% if order.paid %}
+                    Yes
+                {% else %}
+                    No
+                {%endif%}
+            </td>
+            <td>{{ order.total_price }}$</td>
+            <td>
+                <a class="my-btn" href="{% url 'order_delete' order.id %}">Delete</a>
+                {% if not order.paid %}
+                    <a class="my-btn" href="{% url 'order_pay' order.id %}">Pay</a>
+                {% endif %}
+            </td>
+        </tr>
         {% empty %}
-            <li>No services in the order</li>
+        <tr>
+            <td colspan="8">No orders yet</td>
+        </tr>
         {% endfor %}
-    </ul>
+				<tr><td colspan="8">Ниже расположена специально добавленная пустая ячейка</td></tr>
+				<tr><td colspan="8"></td></tr>
+    </tbody>
+</table>
 
-		<p><strong>Paid:</strong> 
-		{% if order.paid %}
-		Yes
-		{% else %}
-		No
-		{%endif%}
-		</p>
-    <p> <strong>Total:</strong>  {{order.total_price}}$ </p>
+	</div>
 
-    <a href="{% url 'order_delete' order.id %}">Delete</a>
-		{% if not order.paid %}
-		<br>
-    <a href="{% url 'order_pay' order.id %}">Pay</a>
-		{% endif %}
-
-    <hr>
-
-    {% empty %}
-
-    <p> No orders yet </p>
-
-    {% endfor %}
-
-
-    <a href="{% url 'order_new'%}">New order</a>
+    <a class="my-btn" href="{% url 'order_new'%}">New order</a>
 
 
 

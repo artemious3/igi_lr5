@@ -1,6 +1,9 @@
 
 {% extends "../base.html" %}
 
+{% block styles %}
+<link rel="stylesheet" href="/static/about.css">
+{% endblock styles %}
 
 {% block title %}
 About
@@ -24,6 +27,7 @@ About
 Всё ходит по цепи кругом;</q></p>
 </div>
 
+<div class="about">
 <section>
              
             <h2>Our <mark>Mission</mark></h2>
@@ -55,13 +59,15 @@ About
         </section>
 
         <section>
-            <h2>Our <em>Core Values</em></h2>
-            <ul>
+            <h2>Our <em class="core-values">Core Values</em></h2>
+            <ul class="about-list">
                 <li><strong>Integrity:</strong> Honest assessments and no hidden fees.</li>
                 <li><strong>Expertise:</strong> Ongoing training in the latest <dfn title="micro-soldering">micro-soldering</dfn> and diagnostic techniques.</li>
                 <li><strong>Customer Focus:</strong> Clear communication and timely service.</li>
                 <li><strong>Sustainability:</strong> We prioritize repair over replacement, supporting the right to repair movement.</li>
             </ul>
+
+						<span class="ligatures"> This is ligature font :  ff fi fl</span>
         </section>
 
         <section>
@@ -69,7 +75,7 @@ About
             <p>
                 Unlike generic repair chains, we offer <mark>personalized service</mark> with same-day turnaround for most issues. 
                 We back our work with a <strong>90-day warranty</strong> on all repairs. 
-                As <cite>Consumer Tech Review Weekly</cite> noted in their 2023 report: 
+                As <cite class="caps">Consumer Tech Review Weekly</cite> noted in their 2023 report: 
                 “Independent service centers like Service Center often outperform larger franchises in customer satisfaction due to their attention to detail.”
             </p>
         </section>
@@ -104,6 +110,7 @@ About
   referrerpolicy="no-referrer-when-downgrade">
 </iframe>
 </section>
+</div>
 
 <div class="certificate">
     <h2>CERTIFICATE</h2>

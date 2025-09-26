@@ -5,52 +5,57 @@
 
 <h2>Completed orders</h2>
 
-    {% for order in orders %} 
 
-    <h3> <s>Order {{order.id}}</s> </h3>
 
-    <p> <strong>Created:</strong>  {{order.date_created}} </p>
-    <p> <strong>Scheduled:</strong>  {{order.date_scheduled}} </p>
-
-    <h4> Services : </h4>
-    <ul>
-        {% for order_service in order.order_services.all %}
-            <li>
-                {{ order_service.service.name }} 
-                (Price: {{ order_service.service.price }}$., 
-		Amount: {{ order_service.number }})
-            </li>
+<table>
+    <thead>
+        <tr>
+            <th>Order ID</th>
+            <th>Created</th>
+            <th>Scheduled</th>
+            <th>Services</th>
+            <th>Spare Parts</th>
+            <th>Total Service Price</th>
+            <th>Total Spare Parts Price</th>
+            <th>Total Price</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for order in orders %}
+        <tr>
+            <td>{{ order.id }}</td>
+            <td>{{ order.date_created }}</td>
+            <td>{{ order.date_scheduled }}</td>
+            <td>
+                <ul>
+                    {% for order_service in order.order_services.all %}
+                        <li>{{ order_service.service.name }} (Price: {{ order_service.service.price }}$., Amount: {{ order_service.number }})</li>
+                    {% empty %}
+                        <li>No services in the order</li>
+                    {% endfor %}
+                </ul>
+            </td>
+            <td>
+                <ul>
+                    {% for order_sp in order.order_spare_parts.all %}
+                        <li>{{ order_sp.spare_part.name }} (Price: {{ order_sp.spare_part.price }}$., Amount: {{ order_sp.number }})</li>
+                    {% empty %}
+                        <li>No spare parts in the order</li>
+                    {% endfor %}
+                </ul>
+            </td>
+            <td>{{ order.total_service_price }}$</td>
+            <td>{{ order.total_spare_parts_price }}$</td>
+            <td>{{ order.total_price }}$</td>
+            <td><a class="my-btn" href="{% url 'order_delete' order.id %}">Delete</a></td>
+        </tr>
         {% empty %}
-            <li>No services in the order</li>
+        <tr>
+            <td colspan="9">No orders yet</td>
+        </tr>
         {% endfor %}
-    </ul>
-
-    <h4> Spare parts : </h4>
-    <ul>
-        {% for order_sp in order.order_spare_parts.all %}
-            <li>
-                {{ order_sp.spare_part.name }} 
-
-                (Price: {{ order_so.spare_part.price }}$., 
-		Amount: {{ order_sp.number }})
-            </li>
-        {% empty %}
-            <li>No spare parts in the order</li>
-        {% endfor %}
-    </ul>
-
-    <p> <strong>Total service price:</strong>  {{order.total_service_price}}$</p>
-    <p> <strong>Total spare parts price:</strong>  {{order.total_spare_parts_price}}$</p>
-    <p> <strong>Total:</strong>  {{order.total_price}}$</p>
-
-    <a href="{% url 'order_delete' order.id %}">Delete</a>
-
-    <hr>
-
-    {% empty %}
-
-    <p> No orders yet </p>
-
-    {% endfor %}
+    </tbody>
+</table>
 
 {% endblock %}

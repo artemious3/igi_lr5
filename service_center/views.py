@@ -74,7 +74,7 @@ def redirect_to_user_index(req):
     elif req.user.groups.filter(name='Client').exists():
         return HttpResponseRedirect(reverse_lazy('client_index'))
     else:
-        return HttpResponseForbidden()
+        return HttpResponseRedirect(reverse_lazy('login'))
 
 
 
