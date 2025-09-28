@@ -1,0 +1,14 @@
+.news-body { 
+	-webkit-columns: 100px 3;
+	-moz-columns: 100px 3;
+	columns: 100px 3;
+	padding : 10px;
+}
+
+.brief-content { 
+	color : grey;
+}
+
+.img-container { 
+	padding : 10px;
+}

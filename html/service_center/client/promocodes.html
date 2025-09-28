@@ -1,38 +1,40 @@
 
 {% extends "./base.html" %}
 
+{% block styles %}
+<link rel="stylesheet" href="/static/promocodes.css">
+{% endblock styles %}
+
 {% block content %}
 
-<h1>Valid codes</h1>
+<h2>Valid codes</h2>
 
     <!-- Iterate over object_list -->
+		<ul class="promolist">
+
     {% for object in object_list %} 
-
 		{% if object.valid %}
-		<p> <strong>Code:</strong>  {{object.code}} </p>
-		<p> <strong>Discount:</strong>  -{{object.discount}}% </p>
-    <hr/>
+		<li><span class="code">{{object.code}}</span>  ( -{{object.discount}}%  )</li> 
 		{% endif %}
-
-
     {% empty %} 
-
     {% endfor %} 
 
+		</ul>
 
-<h1>Archive</h1>
+<h2>Archive</h2>
+
+		<ul class="promolist">
     {% for object in object_list %} 
 
 		{% if not object.valid %}
-		<p> <strong>Code:</strong>  {{object.code}} </p>
-		<p> <strong>Discount:</strong>  -{{object.discount}}% </p>
-    <hr/>
+		<li><span class="code">{{object.code}}</span> ( -{{object.discount}}%  )</li> 
 		{% endif %}
 
     {% empty %} 
 
     {% endfor %} 
 
+		</ul>
 
 
 {% endblock content %}

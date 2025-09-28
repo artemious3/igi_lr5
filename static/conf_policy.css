@@ -1,0 +1,22 @@
+p, li { 
+	text-align: left;
+	text-indent: 20px;
+	line-height: 105%;
+	margin : 6px;
+	padding : 10px;
+
+	hyphens: auto;
+	word-break: normal;
+}
+
+h3 { 
+	margin : 6px;
+	padding : 10px;
+	font-size: 20pt;
+	text-align: left;
+}
+
+p::first-letter { 
+	font-size:30px;
+	color : red;
+}

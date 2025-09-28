@@ -1,20 +1,32 @@
 {% extends "./base.html" %}
 
+{% block styles %}
+<link rel="stylesheet" href="/static/vacancies.css">
+{% endblock styles %}
+
 {% block content %}
 
-<ul> 
+
     <!-- Iterate over object_list -->
     {% for object in object_list %} 
 
-    <strong><h3><a href = "{% url 'vacancy_detail' object.id %}">{{ object.position }}</a></h3></strong> 
 
-    <hr/>
+
+		<div class="vacancy-container">
+			<div class="vacancy-name">
+				{{object.position}}
+			</div>
+
+			<div class="vacancy-description">
+				{{object.description}}
+			</div>
+		</div>
 
     {% empty %} 
 
     Company is not hiring right now
 
     {% endfor %} 
-</ul>
+
 
 {% endblock content %}

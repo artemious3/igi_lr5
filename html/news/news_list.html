@@ -1,26 +1,26 @@
 {% extends "./base.html" %}
 
+{% block styles %}
+
+<link rel="stylesheet" href="/static/news_list.css">
+
+{% endblock styles %}
+
 {% block content %}
 
-<ul> 
-    <!-- Iterate over object_list -->
-    {% for object in object_list %} 
-
-    <h3>{{ object.head }}</h3> 
-
-		<p>{{object.brief_content}}</p>
-
-	<a href="{% url 'news_detail' object.id %}"> Читать далее</a>
-
-    <p>{{object.date}}</p>
-
-    <hr/>
-
-    {% empty %} 
-
-    No news yet. 
-
-    {% endfor %} 
-</ul>
+<div class="news-grid">
+  {% for object in object_list %}
+  <div class="news-item">
+    <h3>{{ object.head }}</h3>
+    <p class="content">{{ object.brief_content }}</p>
+		<div class="bottom">
+			<p class="date">{{ object.date }}</p>
+			<a href="{% url 'news_detail' object.id %}">Full article</a>
+		</div>
+  </div>
+  {% empty %}
+  <p>No news yet.</p>
+  {% endfor %}
+</div>
 
 {% endblock content %}

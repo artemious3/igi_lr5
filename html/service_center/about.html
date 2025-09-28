@@ -3,10 +3,11 @@
 
 {% block styles %}
 <link rel="stylesheet" href="/static/about.css">
+<link rel="stylesheet" href="/static/certificate.css">
 {% endblock styles %}
 
 {% block title %}
-About
+<p>About</p>
 {% endblock title %}
 
 {% block header %}
@@ -15,6 +16,13 @@ About
 
 
 {% block content %}
+
+
+
+<div class="img-container border">
+<img src="/MEDIA/icon.jpg" alt="">
+</div>
+
 <div class="verse-container">
 <p><q lang="en" class="verse">Through circuits deep, <wbr>and screens so bright,<br>
         Our skilled hands <wbr>bring your tech to light. <br>
@@ -38,15 +46,31 @@ About
             </p>
         </section>
 
-           <video width="320" height="240" controls autoplay muted>
+
+				<div class="video-container border">
+           <video  width="320" height="240" autoplay muted>
 						 <source src="{{about.video_path}}" type="video/mp4">
                        Your browser does not support the video tag.
-            </video> 
+            </video> </div>
 
         <section>
+
+				<h2>Our history</h2>
+
+				<ul class="history">
+					<li><strong>2015</strong> — SMART-SERVICE LTD was founded in Moscow.</li>
+					<li><strong>2016</strong> — Opened the first service center and launched online appointment booking.</li>
+					<li><strong>2018</strong> — Expanded the team to 15 technicians and introduced a warranty repair system.</li>
+					<li><strong>2020</strong> — Launched the official website and city-wide device pickup/delivery service.</li>
+					<li><strong>2022</strong> — Opened a second branch and started repairing tablets and laptops.</li>
+					<li><strong>2025</strong> — SMART-SERVICE LTD serves over 10,000 customers annually.</li>
+				</ul>
+
+
+
             <h2>Who We Are</h2>
             <p>
-                Founded in 2015, Service Center began as a small workshop with a simple goal: to make tech repair accessible and transparent. 
+                Founded in 2015, SMART-SERVICE LTD began as a small workshop with a simple goal: to make tech repair accessible and transparent. 
                 As stated in <cite>“The Future of Consumer Electronics Maintenance”</cite> by Dr. Elena Martinez (2022), 
                 “Local service centers play a crucial role in extending device lifespans and reducing e-waste.” 
                 We take pride in being part of this sustainable movement.
@@ -112,17 +136,21 @@ About
 </section>
 </div>
 
+<h2>CERTIFICATE</h2>
+
 <div class="certificate">
-    <h2>CERTIFICATE</h2>
-    <h3>Authorized Service Center</h3>
-    <p>
+	<div class="cert-head">
+		<h2>CERTIFICATE</h2>
+    <h3>of an Authorized Service Center</h3>
+	</div>
+    <p class="start">
         This certifies that
     </p>
     <p class="company-name">
 		{{about.title}}
     </p>
-    <p>
-        is an authorized service center for the repair of smartphones and tablets manufactured by **"TechCorp"**.
+    <p class="main-info">
+        is an authorized service center for the repair of smartphones and tablets manufactured by <span class="techcorp">**TechCorp Inc**</span>.
     </p>
     <p class="date">
         Date of Issue: September 7, 2025
@@ -130,22 +158,25 @@ About
     <p class="validity">
         Valid until: Indefinite
     </p>
-    <div class="signatures">
-        <p class="signature-line">
-            <span>Ivan Ivanov</span>
-        </p>
-        <p class="signature-line">
-            <span>Peter Petrov</span>
-        </p>
-    </div>
-    <div class="titles">
-        <p class="signature-title">
-            (General Director)
-        </p>
-        <p class="signature-title">
-            ("TechCorp" Representative)
-        </p>
-    </div>
+		<div class="cert-bottom">
+			<div class="signatures">
+					<p class="signature-line">
+							Ivan Ivanov
+					</p>
+					<p class="signature-line">
+							Peter Petrov
+					</p>
+			</div>
+			<div class="titles">
+					<p class="signature-title">
+							(General Director)
+					</p>
+					<p class="signature-title">
+							("TechCorp" Representative)
+					</p>
+			</div>
+		</div>
+		<img src="/static/stamp.png" class="stamp">
 </div>
 
 		<!-- <img src="{{imgurl}}" alt=""> -->

@@ -1,24 +1,30 @@
 
 {% extends "./base.html" %}
 
+{% block styles %}
+
+<link rel="stylesheet" href="/static/reviews.css">
+{% endblock styles %}
+
 {% block content %}
 
-    {% for review in reviews %} 
+<div class="reviews-grid">
+    {% for review in reviews %}
+    <div class="review-card">
+        <div class="review-header">
+            <strong>{{ review.user.first_name }} {{ review.user.last_name }}</strong>
+            <span class="review-date">{{ review.date }}</span>
+        </div>
+        <div class="review-rating">
+            <strong>Rating:</strong> {{ review.mark }} / 5
+        </div>
+        <p class="review-text">{{ review.text }}</p>
+    </div>
+    {% empty %}
+    <p>No reviews yet</p>
+    {% endfor %}
+</div>
 
-    <strong> {{review.user.first_name}} {{review.user.last_name}}</strong> 
-    <p><strong>Date: </strong> {{review.date}}</p> 
-    <p><strong>Mark: </strong> {{review.mark}} / 5 </p> 
-
-    <p>{{review.text}}</p>
-
-    <hr/>
-
-    {% empty %} 
-
-    No reviews yet
-
-    {% endfor %} 
-
-    <a href="{% url 'review_create' %}"> New review </a>
+<a href="{% url 'review_create' %}" class="my-btn new-review-link">New review</a>
 
 {% endblock content %}

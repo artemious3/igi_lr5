@@ -1,22 +1,33 @@
 
 {% extends './base.html' %}
 
+{% block styles %}
+
+<link rel="stylesheet" href="/static/contacts.css">
+
+{% endblock styles %}
 
 {% block content %}
 
+<div class="employee-container">
+
 {% for employee in employees %}
+
+<div class="employee">
 
 <h2>{{employee}}</h2>
 <img src="{{employee.image.url}}" alt="" width="300" height="300">
-<p> <strong>Phone number:</strong>  {{employee.phone_number}} </p>
-<p> <strong>Email:</strong>  {{employee.user.email}} </p>
+<p> <b>Phone number:</b>  {{employee.phone_number}} </p>
+<p> <b>Email:</b>  {{employee.user.email}} </p>
 
-<p> <strong>Specification:</strong> {{employee.specification}}</p>
-<hr>
+<p> <b>Specification:</b> {{employee.specification}}</p>
 
+</div>
 
 {% empty %}
 
 {% endfor %}
+
+</div>
 
 {% endblock %}

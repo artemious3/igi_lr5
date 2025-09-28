@@ -1,0 +1,59 @@
+.reviews-grid {
+    display: grid;
+    /* This creates a responsive grid that can have 1, 2, or 3 columns depending on the screen size. */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px; /* Adds space between each review card. */
+    padding: 20px;
+}
+
+.review-card {
+    border: 3px solid black;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex; /* Using flexbox inside the grid item for better content alignment. */
+    flex-direction: column;
+}
+
+.review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+		color: white;
+    background-color: black;
+    margin-bottom: 10px;
+		padding : 5px;
+		text-align: left;
+		height : 2.5em;
+}
+
+.review-header strong{
+	text-align: left;
+}
+
+.review-date {
+		text-align: right;
+    font-style: italic;
+    color: #555;
+    font-size: 0.9em;
+}
+
+.review-rating {
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.review-text {
+    line-height: 1.6;
+    color: #444;
+}
+
+.new-review-link {
+	display: block;
+	margin : 20px;
+}
+
+
+.new-review-link:hover {
+    background-color: #0056b3;
+}

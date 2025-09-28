@@ -1,3 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@100..900&display=swap');
+@font-face {
+    font-family: Flagfies;
+    src: url("/static/Flagfies.ttf") format("truetype");
+}
+
+
 .about p, .about li { 
 	text-align: left;
 	text-indent: 20px;
@@ -32,12 +39,55 @@
 	content: "\22c7 ";
 }
 
+
+.history li:first-child { 
+	text-transform: uppercase;
+	text-decoration: underline;
+}
+
+.history li:last-child { 
+	text-transform: uppercase;
+	text-decoration: underline;
+}
+
+.history { 
+	list-style : none;
+}
+
+.history li::before { 
+
+	content: "\2023" !important;
+
+}
+
+
+.history li, .history strong { 
+	font-weight: 100;
+	font-family: Flagfies;
+	font-variant-ligatures: discretionary-ligatures;
+}
+.history strong { 
+	font-weight: 700;
+}
+
+
 .caps { 
 	font-variant: small-caps;
 }
 
-.ligatures { 
-	font-family: Flagfies;
-	font-variant-ligatures: historical-ligatures;
-	text-transform: none;
+
+
+.video-container video { 
+	margin: 1px;
 }
+
+.img-container img {
+	transform: rotate3d(1,1,1,0deg);
+	transition: transform 2s ease-out;
+}
+
+.img-container img:hover {
+	transform: rotate3d(1,1,1,360deg);
+	transition: transform 2s ease-out;
+}
+

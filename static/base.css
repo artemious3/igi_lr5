@@ -1,10 +1,9 @@
-@font-face {
-    font-family: Flagfies;
-    src: url("/static/Flagfies.ttf") format("truetype");
-}
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@100..900&display=swap');
 
 body {
 	min-width: 500px;
+background: #ebebeb;
+background: linear-gradient(90deg, rgba(235, 235, 235, 1) 0%, rgba(255, 255, 255, 1) 50%, rgba(181, 181, 181, 1) 100%);
 }
 
 a:focus { 
@@ -115,12 +114,14 @@ footer {
 }
 
 q:lang(ru){ 
+
+	font-family: "Noto Sans Mono";
+	font-weight: 500;
 	quotes: "«" "»"; 
 }
 q:lang(en){ 
 	quotes: "\201C" "\201D"; 
 }
-
 
 
 

@@ -1,0 +1,127 @@
+@import url('https://fonts.googleapis.com/css2?family=Iceberg&family=Syne+Mono&display=swap');
+
+.certificate { 
+	width : 300pt;
+	height : 400pt;
+	padding: 0pt;
+
+	border : 100px solid black;
+	border-image : url(/static/myborder.png) 65 repeat repeat;
+	-moz-border-image : url(/static/myborder.png) 65 repeat repeat;
+	-webkit-border-image : url(/static/myborder.png) 65 repeat repeat;
+	-o-border-image : url(/static/myborder.png) 65 repeat repeat;
+
+	margin-top : 50pt;
+	margin-bottom: 50pt;
+	margin-left: auto;
+	margin-right: auto;
+
+	position: relative;
+
+	background-image: url(/static/spanner_faded.png);
+	background-position: 75pt 125pt;
+	background-size: 150pt 150pt;
+	background-repeat:no-repeat;
+}
+
+/* .background {  */
+/* 	position :absolute; */
+/* 	width : 200pt; */
+/* 	height : 200pt; */
+/* 	top : 100pt; */
+/* 	left : 50pt; */
+/* 	opacity: 10%; */
+/* 	z-index : -1; */
+/* } */
+
+.certificate * {
+	font-family: "Syne Mono";
+}
+
+
+.certificate .cert-head { 
+	line-height: 1em;
+	margin-bottom: 70px;
+}
+
+.start { 
+	margin-bottom:  0em;
+}
+
+.company-name { 
+	margin: 10pt;
+}
+
+.main-info { 
+	margin-top: 20pt;
+	margin-bottom: 70pt;
+}
+
+
+
+.certificate h2 { 
+	font-size : 40pt;
+}
+
+.certificate h2, .certificate h3, .company-name{ 
+	font-family: "Iceberg";
+}
+
+.company-name { 
+	font-size: 35pt;
+	height: 1em;
+}
+
+.techcorp { 
+	font-weight: bold;
+	text-decoration: underline;
+
+	background: #140505;
+	background: linear-gradient(0deg, rgba(20, 5, 5, 1) 0%, rgba(228, 18, 18, 1) 100%);
+	background-clip: text;
+	color:transparent;
+	font-size: 18pt;
+
+}
+
+.validity, .date { 
+	text-align: left;
+	font-size : 10pt;
+	color : #666666;
+}
+
+
+.certificate *  {
+	border: none;
+}
+
+.cert-bottom { 
+	margin-top: 20pt;
+	display : flex;
+	flex-direction: row;
+	justify-content: space-between;
+	color : #666666;
+}
+
+.signatures p { 
+	text-align: left;
+}
+.titles p { 
+	text-align: right;
+}
+
+.stamp { 
+	width : 120pt;
+	height : 120pt;
+	position: absolute;
+
+	right : -03pt;
+	bottom : -03pt;
+
+	z-index: -1;
+}
+
+
+
+
+

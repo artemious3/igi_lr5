@@ -1,14 +1,25 @@
-{% extends "./base.html" %} {% block content %}
+{% extends "./base.html" %} 
+
+{% block styles %}
+<link rel="stylesheet" href="/static/news_content.css">
+{% endblock styles %}
+
+{% block content %}
 
 <article>
 	
 <section itemscope itemtype="https://schema.org/NewsArticle">
   <h2 itemprop="headline">{{news.head}}</h2>
 	<p itemprop="datePublished">{{news.date}}</p>
-  <p itemprop="articleBody">{{news.content}}</p>
+	<p class="brief-content"> {{news.brief_content}}</p>
+  <p itemprop="articleBody" class="news-body border">{{news.content}}</p>
+	<div class="img-container border">
   <img itemprop="thumbnail" src="{{news.image.url}}" alt="" />
+	</div>
 </section>
 
 </article>
+
+
 
 {% endblock content %}

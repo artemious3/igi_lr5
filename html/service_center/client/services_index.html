@@ -2,63 +2,31 @@
 
 {% extends './base.html' %}
 
+{% block styles %}
+<link rel="stylesheet" href="/static/services.css">
+
+{% endblock styles %}
+
 {% block content %}
 
-
-<p>Sort by:</p>
-<a href="{% url 'service_index' 'name' %}">Name</a> | 
-<a href="{% url 'service_index' '-price' %}">Price</a>
-
-<div class="service-grid">
-
-	
-
+<div class="product-catalog">
+  {% for service in services %}
+    <div class="product-card">
+      <div class="product-name">
+        {{ service.name }}
+      </div>
+      <div class="product-price">
+        ({{ service.price }}$)
+      </div>
+      <div class="product-actions">
+        <a href="{% url 'service_info' service.id %}">Info</a>
+        <a href="{% url 'service_add' service.id %}">Add to cart</a>
+      </div>
+    </div>
+  {% empty %}
+    <p>No services yet</p>
+  {% endfor %}
 </div>
 
-
-
-<table rules="all">
-	<tr>
-
-		<th id="name">Название</th>
-		<th id="price">Цена</th>
- <th></th>
- <th></th>
-
-	</tr>
-    {% for service in services %} 
-
-		<tr>
-			<td headers="name">
-     {{service.name}} 
-			</td>
-
-			<td headers="price">
-		 ({{service.price}}$)
-			</td>
-
-			<td>
-		<a href="{% url 'service_info' service.id%}">Info</a>
-			</td>
-
-			<td>
-		<a href="{% url 'service_add' service.id%}"> Add to cart </a>
-			</td>
-
-		 </tr>
-
-    {% empty %}
-
-    <p> No services yet </p>
-
-    {% endfor %}
-
-
-		<tfoot>
-			<tr>
-				<td colspan="2">Объединённая ячейка</td>
-			</tr>
-		</tfoot>
-</table>
 
 {% endblock %}

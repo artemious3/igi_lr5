@@ -5,6 +5,9 @@
 
 		{% block styles %}
 			<link rel="stylesheet" href="/static/index.css">	
+			<link rel="stylesheet" href="/static/anim.css">	
+			<link rel="stylesheet" href="/static/preloader.css">	
+
 		{% endblock styles %}
 
 		{% block header %}
@@ -18,6 +21,32 @@
 			<!-- 				 media="(width > 900px)"> -->
 			<!-- 			<img src="/MEDIA/banner-nr.png" style="max-width:80%;" alt="Баннер"> -->
 			<!-- </picture> -->
+
+	    <h2>Welcome!</h2>
+
+			<div class="anim-container">
+
+
+					<p class="anim-name">Smart-Service LTD</p>
+
+
+				<div class="smartphone-container">
+					<img class="smartphone" src="/static/smartphone_a.png" alt="">
+					<img class="smartphone-glass" src="/static/broken_glass.webp" alt="">
+				</div>
+
+				<div class="laptop-container">
+					<img class="laptop" src="/static/laptop_a.png" alt="">
+					<img class="laptop-glass" src="/static/broken_glass.webp" alt="">
+				</div>
+
+					<img class="wand" src="/static/wand.webp" alt="">
+
+
+
+
+
+			</div>
 
 
 	    <h2>Authorization</h2>
@@ -78,6 +107,19 @@
 <a href="https://www.apple.com" target="_blank" class="partner-link social-icon">
   <i class="border fab fa-apple partner"></i>
 </a>
+
+
+<h2>Preloader</h2>
+
+<div class="preloader-container">
+
+<div class="circle1"></div>
+<div class="circle2"></div>
+<div class="circle3"></div>
+<div class="circle0"></div>
+
+</div>
+
 
 
 		

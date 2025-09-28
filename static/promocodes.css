@@ -1,0 +1,11 @@
+.promolist  li{ 
+	text-align: left;
+}
+
+.promolist li::marker { 
+	content : "\1F4B2"
+}
+
+.code { 
+	text-transform: uppercase;
+}

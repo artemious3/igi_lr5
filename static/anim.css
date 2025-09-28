@@ -1,0 +1,137 @@
+@import url('https://fonts.googleapis.com/css2?family=Saira+Stencil+One&display=swap');
+:root { 
+	--disappear-time : 1s;
+	--disappear-moment : 4.7s;
+}
+
+.anim-container, .smartphone-container, .laptop-container { 
+	position: relative;
+}
+.smartphone-container, .laptop-container { 
+	display: inline-block;
+}
+
+.wand, .laptop, .smartphone { 
+	display: inline-block;
+}
+
+.anim-container { 
+	overflow: clip;
+	overflow-clip-margin: 400px;
+
+	width : 700px;
+	margin-left : auto;
+	margin-right : auto;
+}
+
+
+
+.laptop { 
+	height: 200pt;
+	width: 200pt;
+
+	animation : disappear var(--disappear-time)  ease-in var(--disappear-moment);
+	animation-fill-mode: forwards;
+}
+
+.smartphone { 
+	height: 200pt;
+	width: 200pt;
+
+	animation : disappear var(--disappear-time)  ease-in var(--disappear-moment);
+	animation-fill-mode: forwards;
+}
+
+.smartphone-glass { 
+	display : inline-block;
+	position: absolute;
+	width : 76pt;
+	height : 133pt;
+	top : 29pt;
+	left : 63pt;
+
+	animation : disappear 0.2s ease-in 3.6s;
+	animation-fill-mode: forwards;
+}
+
+.laptop-glass { 
+	display: inline-block;
+	position: absolute;
+	height : 67pt;
+	width : 120pt;
+	top : 43pt;
+	left : 40pt;
+
+	animation : disappear 0.2s ease-in 1.6s;
+	animation-fill-mode: forwards;
+}
+
+.wand { 
+	position: absolute;
+	height: 100pt;
+	width: 100pt;
+	transform-origin: 95pt 95pt;
+	rotate: -90deg;
+
+	right : -100pt;
+	top : -100pt;
+
+	animation: wand_to_laptop 2s ease-in-out 0s,
+	          wand_to_between 1s ease-in 2s,
+	          wand_to_smartphone 1s ease-out 3s,
+						wand_out 2s ease-in 4s;
+	animation-fill-mode: forwards
+
+}
+
+.anim-name { 
+	font-family: "Saira Stencil One";
+	font-size : 60pt;
+	position: absolute;
+	top : 50%;
+  left : 50%;
+	transform : translate(-50%, -100%);
+	opacity: 0%;
+	width : 900px;
+
+	animation : appear var(--disappear-time) ease-in var(--disappear-moment);
+	animation-fill-mode: forwards;
+
+}
+
+.anim-name-container { 
+	position: relative;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+@keyframes wand_to_laptop { 
+	0% { right : -300pt;  }
+	100% { right : 30pt;  transform: rotate(-23deg);}
+}
+
+@keyframes wand_to_between { 
+	0% { right : 30pt; transform: rotate(-23deg);}
+	100% { right : 155pt;  transform: rotate(-12deg);}
+
+}
+
+@keyframes wand_to_smartphone { 
+	0% { right : 155pt;  transform: rotate(-12deg);}
+	100% { right : 260pt;  transform: rotate(-23deg);}
+} 
+
+@keyframes wand_out { 
+	0% { right : 260pt;  transform: rotate(-23deg);}
+	100% { right : 1000pt;  transform: rotate(10deg);}
+}
+
+@keyframes disappear { 
+	0% {opacity: 100%;}
+	100% {opacity: 0%;}
+}
+
+@keyframes appear { 
+	0% {opacity: 0%;}
+	100% {opacity: 100%;}
+}
