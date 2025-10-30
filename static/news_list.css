@@ -11,7 +11,7 @@
 
   display: flex;
   flex-direction: column;
-  height: 250px; 
+  height: 210px; 
 
   overflow: hidden;
 	text-overflow: ellipsis;
@@ -29,9 +29,8 @@
   font-size: 1em;
   color: #666;
   line-height: 1.5;
-  /* Allow brief_content to scroll if it overflows */
-  flex-grow: 1; /* Allows the content to fill the available space */
-  padding-right: 10px; /* Add some padding to prevent text from touching the scrollbar */
+  flex-grow: 1; 
+  padding-right: 10px; 
 	margin-left: 5px;
 }
 
@@ -42,7 +41,6 @@
 .content { 
 	padding-left : 3px;
 	padding-right : 3px;
-	height: 5em;
 
 	overflow: hidden;
 	white-space: nowrap;

@@ -1,0 +1,64 @@
+
+form {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+form > * {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 15px;
+  gap: 15px;
+
+	border : 3px solid #000000;
+	border-radius: 4px;
+}
+
+.form-container { 
+	display: block !important;
+}
+
+form > * label {
+  text-align: left;
+  flex: 1;
+  margin: 5px;
+}
+
+form > * input{
+  flex: 1;
+  text-align: right;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+	margin : 5px;
+}
+
+form > * input:enabled{
+  background-color: white;
+}
+
+form > * input:disabled{
+  background-color: grey;
+}
+
+form > * input:invalid { 
+	border-color: red;
+	transform: 0.2s border-color ease-in;
+}
+
+form > * input:required{ 
+	outline-color: black;
+	outline-width: 1px;
+	outline-style: solid;
+	outline-offset: 2px;
+}
+
+form > * input:checked { 
+	border: none;
+  outline: 2px solid black;
+}
+
+form button { 
+	margin : 5px;
+}

@@ -4,6 +4,14 @@
     src: url("/static/Flagfies.ttf") format("truetype");
 }
 
+.about { 
+	counter-reset: h2-cnt;
+}
+
+.about strong { 
+	font-weight: bold;
+}
+
 
 .about p, .about li { 
 	text-align: left;
@@ -17,8 +25,25 @@
 		
 }
 
+.about mark { 
+	background-color: #00000000;
+	padding: 0 0.1em;
+}
+
 .about h2 { 
 	text-transform: uppercase;
+	background-color: white;
+	position: sticky;
+	top: 60px;
+}
+
+.about h2::before { 
+	counter-increment: h2-cnt;
+	content: counter(h2-cnt) " ";
+}
+
+.about h2::after { 
+	content : " >"
 }
 
 .about p::selection { 
@@ -66,6 +91,7 @@
 	font-family: Flagfies;
 	font-variant-ligatures: discretionary-ligatures;
 }
+
 .history strong { 
 	font-weight: 700;
 }
@@ -86,7 +112,7 @@
 	transition: transform 2s ease-out;
 }
 
-.img-container img:hover {
+.img-container:hover img{
 	transform: rotate3d(1,1,1,360deg);
 	transition: transform 2s ease-out;
 }

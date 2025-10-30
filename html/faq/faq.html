@@ -6,20 +6,28 @@
 	<abbr title="Frequently Asked Questions">FAQ</abbr>
 {% endblock header %}
 
+
+{% block styles %}
+
+<link rel="stylesheet" href="/static/faq.css">
+{% endblock styles %}
+
 {% block content %}
-<ul>
+<div class="faq-container">
+
     {% for faq in faq_list %}
 
 
 				<details>
-					<summary><strong>Q: {{ faq.question }}</strong></summary>
+					<summary>Q: {{ faq.question }}</summary>
 					<p>{{faq.answer}}</p>
 				</details>
 
-        <p>{{ faq.date }}</p>
+        <p class="faq-date">{{ faq.date }}</p>
         <hr/>
     {% empty %}
         <p>No FAQs available at the moment.</p>
     {% endfor %}
-</ul>
+
+</div>
 {% endblock content %}

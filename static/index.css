@@ -56,6 +56,10 @@
 }
 
 
+a[href^="http"]::before { 
+	content : "!";
+	color : black;
+}
 
 .partner-link { 
 	text-decoration: none;

@@ -16,10 +16,10 @@
 }
 
 .anim-container { 
-	overflow: clip;
-	overflow-clip-margin: 400px;
+	overflow: hidden;
+	overflow-clip-margin: 100px;
 
-	width : 700px;
+	width : 100%;
 	margin-left : auto;
 	margin-right : auto;
 }
@@ -86,17 +86,24 @@
 
 .anim-name { 
 	font-family: "Saira Stencil One";
+	font-kerning: normal;
 	font-size : 60pt;
 	position: absolute;
 	top : 50%;
   left : 50%;
 	transform : translate(-50%, -100%);
 	opacity: 0%;
-	width : 900px;
+	width: 90%;
 
 	animation : appear var(--disappear-time) ease-in var(--disappear-moment);
 	animation-fill-mode: forwards;
 
+}
+
+@media screen and (max-width : 830px) {
+	.anim-name { 
+		font-size : 40pt;
+	}
 }
 
 .anim-name-container { 
@@ -106,23 +113,23 @@
 }
 
 @keyframes wand_to_laptop { 
-	0% { right : -300pt;  }
+	0% { right : -400pt;  }
 	100% { right : 30pt;  transform: rotate(-23deg);}
 }
 
 @keyframes wand_to_between { 
 	0% { right : 30pt; transform: rotate(-23deg);}
-	100% { right : 155pt;  transform: rotate(-12deg);}
+	100% { right : 140pt;  transform: rotate(-12deg);}
 
 }
 
 @keyframes wand_to_smartphone { 
-	0% { right : 155pt;  transform: rotate(-12deg);}
-	100% { right : 260pt;  transform: rotate(-23deg);}
+	0% { right : 140pt;  transform: rotate(-12deg);}
+	100% { right : 240pt;  transform: rotate(-23deg);}
 } 
 
 @keyframes wand_out { 
-	0% { right : 260pt;  transform: rotate(-23deg);}
+	0% { right : 240pt;  transform: rotate(-23deg);}
 	100% { right : 1000pt;  transform: rotate(10deg);}
 }
 

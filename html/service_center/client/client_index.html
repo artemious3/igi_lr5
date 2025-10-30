@@ -1,11 +1,17 @@
 {% extends './base.html' %}
 {% load tz %}
+
+
+{% block styles %}
+
+{% endblock styles %}
+
 {% block content %}
 
 <p>Welcome, <i/>{{client.user.first_name}} {{client.user.last_name}}</i>!</p>
 
 
-<div>
+<div class="auth-grid">
 
 <a class="my-btn" href=" {% url 'orders_unapproved'%}" accesskey="c">Cart</a>
 <a class="my-btn" href=" {%url 'orders_approved'%} " accesskey="h">History</a>
@@ -17,39 +23,20 @@
 
 <h2>Your personal info:</h2> 
 
-<table>
-<tr>
-	<th>
-		<strong>First name</strong>
-	</th>
-	<th>
-
+	<p>
+		<strong>First name:</strong>
 		{{client.user.first_name}}
-	</th>
-</tr>
+	</p>
 
-
-<tr>
-	<th>
+	<p>
 	<strong>Last name:</strong>
-	</th>
-	<th>{{client.user.last_name}} 
-	</th>
-</tr>
+	{{client.user.last_name}} 
+	</p>
 
+	<p> <strong>Phone number: </strong>
+	{{client.phone_number}}</p>
 
-
-<tr>
-	<th> <strong>Phone number: </strong></th>
-	<th>{{client.phone_number}}</th>
-</tr>
-
-<tr>
-	<th><strong>Address: </strong></th>
-	<th>{{client.address}}</th>
-</tr>
-</table>
-
+	<p><strong>Address: </strong> {{client.address}}</p>
 
 <h2>Time info:</h2>
 

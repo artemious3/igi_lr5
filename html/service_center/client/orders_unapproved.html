@@ -100,43 +100,45 @@
             <td>{{ order.date_scheduled }}</td>
             <td>{{ order.employee }}</td>
             <td class="services-list">
-										<table class="services-list-table">
-											{% for order_service in order.order_services.all %}
-												<tr>
-													<td>
+										<!-- <table class="services-list-table"> -->
 
-														<p style="text-align:left;">
+										{% for order_service in order.order_services.all %}
+										<!-- 		<tr> -->
+										<!-- 			<td> -->
+										<div class="services-container">
+														<p class="service-name">
 																&#8226; {{ order_service.service.name }} (Price: {{ order_service.service.price }}$., Amount: {{ order_service.number }})
-
 														</p>
+													<!-- </td> -->
 
-													</td>
+													<!-- <td> -->
 
-													<td>
-
-                            <a href="{% url 'order_service_update' order_service.id %}">Change</a>
-                            <form action="{% url 'incr' order_service.order.id order_service.service.id%}"
+                            <button class="service-action" href="{% url 'order_service_update' order_service.id %}">✏️</button>
+                            <form class="service-action" action="{% url 'incr' order_service.order.id order_service.service.id%}"
 															method="post"
 															style="display:inline;">
                                 {% csrf_token %}
                                 <button type="submit" name="foo" value="upvote">➕</button>
                             </form>
-                            <form action="{% url 'decr' order_service.order.id order_service.service.id%}"
+                            <form class="service-action" action="{% url 'decr' order_service.order.id order_service.service.id%}"
 															method="post"
 															style="display:inline;">
                                 {% csrf_token %}
                                 <button type="submit" name="foo" value="upvote">➖</button>
                             </form>
-                            <a href="{% url 'order_service_delete' order_service.id %}">🗑️</a>
+                            <button class="service-action"  href="{% url 'order_service_delete' order_service.id %}">🗑️</button>
+										</div>
 
-													</td>
-											</tr>
+											<!-- 		</td> -->
+											<!-- </tr> -->
 											{% empty %}
-											<tr>
-													<td>No services in the order</td>
-											</tr>
+											<!-- <tr> -->
+													<!-- <td> -->
+														No services in the order
+													<!-- </td> -->
+											<!-- </tr> -->
 											{% endfor %}
-										</table>
+										<!-- </table> -->
             </td>
             <td>{{ order.total_service_price }}$</td>
             <td>

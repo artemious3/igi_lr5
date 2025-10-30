@@ -1,0 +1,16 @@
+.faq-container summary::marker{ 
+	content : "❓"
+}
+
+.faq-container p,.faq-container summary{ 
+	text-align: left;
+}
+
+.faq-container summary { 
+	font-weight: bold;
+	text-align: left;
+}
+
+.faq-date { 
+	font-size: 8pt;
+}
