@@ -18,21 +18,21 @@
 	align-items: center;
 	justify-self: center;
 	justify-content: center;
-	color : black;
+	color : var(--fg-color);
 	text-decoration: none;
 	width : 400px;
 	margin : 6px;
 }
 
 .news-head { 
-	background-color: black;
-	color : white;
+	background-color: var(--fg-color);
+	color : var(--bg-color);
 	padding : 5px;
 }
 
 .news-head a { 
 	text-decoration: none;
-	color : white;
+	color : var(--bg-color);
 }
 
 .news-content p { 
@@ -40,7 +40,7 @@
 }
 
 .partner { 
-	color : black;
+	color : var(--fg-color);
 	text-decoration: none;
 	font-size : 70px;
 
@@ -58,7 +58,7 @@
 
 a[href^="http"]::before { 
 	content : "!";
-	color : black;
+	color : var(--fg-color);
 }
 
 .partner-link { 

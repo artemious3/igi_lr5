@@ -3,7 +3,8 @@
 body {
 	min-width: 600px;
 background: #ebebeb;
-background: linear-gradient(90deg, rgba(235, 235, 235, 1) 0%, rgba(255, 255, 255, 1) 50%, rgba(181, 181, 181, 1) 100%);
+background: var(--bg-gradient);
+color : var(--fg-color);
 }
 
 a:focus { 
@@ -11,7 +12,7 @@ a:focus {
 }
 
 a:link { 
-	color:white;
+	color:var(--fg-color);
 }
  
 a:active, button:active { 
@@ -43,7 +44,7 @@ a[download]::before {
 	border : 3px solid #000000;
 	border-radius: 2px;
 	text-align : center;
-	background-color: white;
+	background-color: var(--bg-color);
 	width: calc(100vw - 30px);
 	z-index: 1;
 
@@ -59,7 +60,7 @@ a[download]::before {
 	font-size : 14pt;
 	margin : 10px;
 	text-decoration: underline; 
-	color : black;
+	color : var(--fg-color);
 	display: inline-block;
 }
  .nav-btn:hover {
@@ -83,7 +84,7 @@ h1 {
 	font-weight : 900;
 	margin : 6px;
 	margin-top: 60px;
-	background-color: white;
+	background-color: var(--bg-color);
 }
 
 h2 {
@@ -128,8 +129,8 @@ footer {
 	margin : 5px;
 	width : 150px;
 
-	color : white;
-	background-color : black;
+	color : var(--fg-color);
+	background-color : var(--bg-color);
 	text-decoration: none;
 }
 

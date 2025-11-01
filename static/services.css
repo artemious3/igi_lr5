@@ -30,7 +30,7 @@
 
 
 .product-price {
-  color: black;
+  color: var(--fg-color);
   font-size: 1em;
   margin-bottom: 15px;
 }

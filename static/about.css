@@ -26,13 +26,14 @@
 }
 
 .about mark { 
-	background-color: #00000000;
+	color: var(--fg-color);
+	background-color: var(--mark-bg-color);
 	padding: 0 0.1em;
 }
 
 .about h2 { 
 	text-transform: uppercase;
-	background-color: white;
+	background-color: var(--bg-color);
 	position: sticky;
 	top: 60px;
 }
@@ -105,6 +106,10 @@
 
 .video-container video { 
 	margin: 1px;
+}
+
+.img-container img{ 
+	filter: var(--invert);
 }
 
 .img-container img {

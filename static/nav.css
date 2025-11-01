@@ -24,8 +24,8 @@
 	margin : 5px;
 	width : 150px;
 
-	color : white;
-	background-color : black;
+	color : var(--bg-color);
+	background-color : var(--fg-color);
 	text-decoration: none;
 }
 

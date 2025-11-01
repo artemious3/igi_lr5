@@ -32,6 +32,7 @@
 
 	animation : disappear var(--disappear-time)  ease-in var(--disappear-moment);
 	animation-fill-mode: forwards;
+	filter : var(--invert);
 }
 
 .smartphone { 
@@ -40,6 +41,7 @@
 
 	animation : disappear var(--disappear-time)  ease-in var(--disappear-moment);
 	animation-fill-mode: forwards;
+	filter : var(--invert);
 }
 
 .smartphone-glass { 
@@ -75,6 +77,7 @@
 
 	right : -100pt;
 	top : -100pt;
+	filter : var(--invert);
 
 	animation: wand_to_laptop 2s ease-in-out 0s,
 	          wand_to_between 1s ease-in 2s,

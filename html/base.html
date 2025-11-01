@@ -14,13 +14,20 @@
     />
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 		<link rel="stylesheet" href="/static/base.css">
+		<link rel="stylesheet" href="/static/theme-changer.css">
 		<link rel="stylesheet" href="/static/nav.css">
 		<link rel="stylesheet" href="/static/form_django.css">
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@100..900&display=swap">
+		<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@100..900&display=swap">
+
+		<script src="/static/js/theme-switcher.js"></script>
+
+
+
+		<!-- <script src="/static/js/theme-switcher.js"></script> -->
 
     <title>{% block title %}Service center{% endblock title %}</title>
 		{% block styles %} {% endblock styles %}
@@ -48,5 +55,10 @@
       <div class="copyright_note">Artsiom Padhaiski. &copy; 2025. All rights reserved<a style="text-decoration:none" href="/bamboleo">.</a></div>
 			<!-- <a href="#top-nav"><i class="fa-solid fa-arrow-up"></i></a> -->
     </footer>
+
+		<div class="theme-changer">
+			<p class="theme-light">light</p>
+			<p class="theme-dark">dark</p>
+		</div>
   </body>
 </html>
