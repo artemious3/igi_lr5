@@ -35,6 +35,7 @@ urlpatterns = [
     path('faq/', include('faq.urls')),
     path('reviews/', include('reviews.urls')),
     path('stats/', include('stats.urls')),
+    path('js/int', views.interactive_input),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

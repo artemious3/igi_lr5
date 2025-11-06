@@ -30,13 +30,13 @@
 
 /* colors themselves */
 
-/* :root{  */
-/* 	--fg-color : black; */
-/* 	--bg-color : white; */
-/* 	--bg-gradient : linear-gradient(90deg, rgba(235, 235, 235, 1) 0%, rgba(255, 255, 255, 1) 50%, rgba(181, 181, 181, 1) 100%); */
-/* 	--invert : invert(0); */
-/* 	--mark-bg-color : rgba(200,200,0,1); */
-/* } */
+:root{ 
+	--fg-color : black;
+	--bg-color : white;
+	--bg-gradient : linear-gradient(90deg, rgba(235, 235, 235, 1) 0%, rgba(255, 255, 255, 1) 50%, rgba(181, 181, 181, 1) 100%);
+	--invert : invert(0);
+	--mark-bg-color : rgba(200,200,0,1);
+}
 
 
 

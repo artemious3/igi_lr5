@@ -4,6 +4,8 @@
 {% block styles %}
 <link rel="stylesheet" href="/static/about.css">
 <link rel="stylesheet" href="/static/certificate.css">
+<link rel="stylesheet" href="/static/slider.css">
+<script src="/static/js/slider.js" defer></script>
 {% endblock styles %}
 
 {% block title %}
@@ -39,6 +41,8 @@
 <section>
              
             <h2>Our <mark>Mission</mark></h2>
+
+            {% include "./slider.html" %}
 						<p>{{about.description|safe}}</p>
             <p>
 								We define <dfn title="peripheral repair">peripheral repair</dfn> as the restoration of functionality to external devices 

@@ -16,3 +16,6 @@ def forms_demo(req):
         return HttpResponseRedirect("service/index/")
     else:
         return render(req, "form.html")
+
+def interactive_input(req):
+    return render(req, "jstest/interactive_input.html")
