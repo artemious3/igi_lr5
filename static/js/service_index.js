@@ -49,8 +49,8 @@ class ProductCatalog {
     });
   }
 
-  changePage(page) {
-    if(this.currentPage == page){
+  changePage(page, force=false) {
+    if(this.currentPage == page && !force){
       return;
     }
     this.currentPage = page;
@@ -69,8 +69,23 @@ class ProductCatalog {
     pager.id = "pager";
     pager.classList.add("pager");
 
-    //TODO : fix
-    const numPages = this.data.services.length / this.itemsPerPage;
+    const pagerSelect = document.createElement("select");
+    pagerSelect.innerHTML = `
+      <option value="2"> 2 </option>
+      <option value="3"> 3 </option>
+      <option value="4"> 4 </option>
+      <option value="5"> 5 </option>
+      `;
+    pagerSelect.classList.add("pager-input");
+    pagerSelect.value = this.itemsPerPage.toString();
+
+    pagerSelect.addEventListener("change", () => {
+      this.itemsPerPage = parseInt(pagerSelect.value,10);
+      this.totalPages = Math.ceil(this.data.services.length / this.itemsPerPage);
+      this.changePage(0, true);
+    });
+    pager.appendChild(pagerSelect);
+
 
     const prevBtn = document.createElement("button");
     prevBtn.classList.add("pager-btn");
@@ -80,7 +95,7 @@ class ProductCatalog {
     });
     pager.appendChild(prevBtn);
 
-    for (let i = 0; i < numPages; i++) {
+    for (let i = 0; i < this.totalPages; i++) {
       const btn = document.createElement("button");
       btn.classList.add("pager-btn");
       if(i == this.currentPage){
