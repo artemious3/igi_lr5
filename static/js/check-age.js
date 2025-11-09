@@ -59,7 +59,8 @@ function getAge(dateString) {
   if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
     age--;
   }
-  return age;
+  const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  return [age, days[birthDate.getDay()]];
 }
 
 function waitForAgeChecked() {
@@ -78,11 +79,12 @@ function waitForAgeChecked() {
         return;
       }
 
-      let age = getAge(ageInput.value);
+      let [age,day] = getAge(ageInput.value);
       if (age < 18) {
         disablePage();
         ageCheckFail();
       } else {
+        alert("You are born on " + day + " :>")
         enablePage();
         ageCheckSuccess();
       }
