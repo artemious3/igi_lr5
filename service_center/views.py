@@ -1,7 +1,8 @@
 from urllib import request
 from django.db.models.base import pre_init
 from django.middleware import csrf
-from django.http import HttpResponse, HttpResponseForbidden, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseForbidden, HttpResponseRedirect, JsonResponse
+from django.core.paginator import Paginator
 from django.shortcuts import get_object_or_404, render
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
@@ -27,7 +28,7 @@ import requests
 def service_index(req, orderby):
     services = []
     if orderby == '':
-        services = Service.objects.all() 
+        services = Service.objects.all()
     else:
         services = Service.objects.order_by(orderby)
 
@@ -54,6 +55,17 @@ def about_view(req):
     about = About.objects.first()
 
     return render(req, 'service_center/about.html', {"about":about})
+
+
+def service_json_index(req):
+    services_list = Service.objects.all().order_by('id')
+
+    services_data = list(services_list.values('id', 'name', 'price'))
+
+    return JsonResponse({
+        'services': services_data,
+    })
+
 
 
 from django.views.generic import ListView
@@ -119,19 +131,19 @@ def client_index(req):
 @login_required
 @permission_required('service_center.client_perm', raise_exception=True)
 def orders_unapproved_view(req):
-   user = req.user 
+   user = req.user
    client = Client.objects.get(user=user)
    orders = Order.objects.filter(client=client)
    submitted_orders = orders.filter(submitted=True, approved=False)
    unsubmitted_orders = orders.filter(submitted=False)
-   return render(req, 'service_center/client/orders_unapproved.html', {"submitted_orders":submitted_orders, 
+   return render(req, 'service_center/client/orders_unapproved.html', {"submitted_orders":submitted_orders,
                                                          "unsubmitted_orders":unsubmitted_orders})
 
 
 @login_required
 @permission_required('service_center.client_perm', raise_exception=True)
 def orders_approved_view(req):
-   user = req.user 
+   user = req.user
    client = Client.objects.get(user=user)
    orders = Order.objects.filter(client=client).filter(approved=True)
    return render(req, 'service_center/client/orders_approved.html', {"orders":orders})
@@ -227,12 +239,12 @@ class AddServiceView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
             raise PermissionDenied("You have no access to this order")
         if self.order.approved:
             raise PermissionDenied("Approved orders can not be changed")
-        
+
         return super(AddServiceView, self).dispatch(request, *args, **kwargs)
 
     def get_form_kwargs(self):
         kwargs = super(AddServiceView, self).get_form_kwargs()
-        kwargs['order'] = self.order 
+        kwargs['order'] = self.order
         return kwargs
 
 
@@ -245,12 +257,12 @@ class AddSpecificServiceView(LoginRequiredMixin, PermissionRequiredMixin, Create
     def dispatch(self, request, *args, **kwargs):
         service_id = self.kwargs.get('service_id')
         self.service = get_object_or_404(Service, id=service_id)
-        
+
         return super(AddSpecificServiceView, self).dispatch(request, *args, **kwargs)
 
     def get_form_kwargs(self):
         kwargs = super(AddSpecificServiceView, self).get_form_kwargs()
-        kwargs['service'] = self.service 
+        kwargs['service'] = self.service
         kwargs['client'] = self.request.user.client
         return kwargs
 
@@ -358,12 +370,12 @@ class AddSparePartView(CreateView, LoginRequiredMixin, PermissionRequiredMixin):
             raise PermissionDenied("You have no access to this order")
         if self.order.approved:
             raise PermissionDenied("Approved orders can not be changed")
-        
+
         return super(AddSparePartView, self).dispatch(request, *args, **kwargs)
 
     def get_form_kwargs(self):
         kwargs = super(AddSparePartView, self).get_form_kwargs()
-        kwargs['order'] = self.order 
+        kwargs['order'] = self.order
         return kwargs
 
 
@@ -378,5 +390,3 @@ def client_info_view(req, pk):
 
 
 # def create_order_view(req):
-
-

@@ -10,6 +10,7 @@ urlpatterns = [
         path('conf-policy/', conf_policy_view, name='conf_policy'),
         path('about/', about_view, name='about_view'),
         path('promocodes/', PromocodesView.as_view(), name='promocodes'),
+        path('api/services/', service_json_index, name='service_json_index'),
 
         path('client/', client_index, name='client_index'),
         path('contacts/', contacts_view, name='contacts'),
