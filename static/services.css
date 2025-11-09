@@ -14,10 +14,10 @@
   border-radius: 5px;
 	border-color : black;
   padding: 15px;
-  display: flex; 
+  display: flex;
 
   flex-direction: column;
-  justify-content: space-between; 
+  justify-content: space-between;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s ease-in-out;
 }
@@ -52,4 +52,30 @@
 
 .product-actions a:hover {
   transform: scale(1.15);
+}
+
+
+.pager {
+   left : auto;
+   right : auto;
+   display: flex;
+   flex-direction: row;
+   justify-content: center;
+   align-items: center;
+   margin-bottom: 15px;
+}
+
+.pager-btn{
+    width: 4ex;
+    height : 4ex;
+    text-align: center;
+    margin:3px;
+
+    border-width: 2px;
+    border-radius: 8px;
+}
+
+.pager-btn-current {
+    width: 6ex;
+    height: 6ex;
 }

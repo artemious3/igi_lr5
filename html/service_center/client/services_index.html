@@ -4,28 +4,15 @@
 
 {% block styles %}
 <link rel="stylesheet" href="/static/services.css">
+<script src="/static/js/service_index.js"></script>
 
 {% endblock styles %}
 
 {% block content %}
 
-<div class="product-catalog">
-  {% for service in services %}
-    <div class="product-card">
-      <div class="product-name">
-        {{ service.name }}
-      </div>
-      <div class="product-price">
-        ({{ service.price }}$)
-      </div>
-      <div class="product-actions">
-        <a href="{% url 'service_info' service.id %}">Info</a>
-        <a href="{% url 'service_add' service.id %}">Add to cart</a>
-      </div>
+<div id="catalog-container">
+    <div class="product-catalog" id="product-catalog">
     </div>
-  {% empty %}
-    <p>No services yet</p>
-  {% endfor %}
 </div>
 
 
