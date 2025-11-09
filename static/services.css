@@ -19,13 +19,18 @@
   flex-direction: column;
   justify-content: space-between;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease-in-out;
+  transition: transform 0.4s ease-out;
+
+  perspective: 1000px;
+  transform-style: preserve-3d;
 }
 
 .product-name {
   font-size: 1.2em;
   font-weight: bold;
   margin-bottom: 10px;
+
+  transform: translateZ(30px);
 }
 
 
@@ -33,12 +38,14 @@
   color: var(--fg-color);
   font-size: 1em;
   margin-bottom: 15px;
+  transform: translateZ(20px);
 }
 
 .product-actions {
   display: flex;
   justify-content: space-around;
   margin-top: auto; /* Прижимает блок с кнопками к низу карточки */
+  transform: translateZ(20px);
 }
 
 .product-actions a {

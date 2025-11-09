@@ -7,6 +7,13 @@ function escapeHtml(unsafe) {
     .replace(/'/g, "&#039;");
 }
 
+
+const catalogUpdated = new CustomEvent('catalogUpdated', {
+  detail: { message: 'Catalog loaded' },
+  bubbles: false,
+  cancelable: true
+});
+
 class ProductCatalog {
   data = {};
   currentPage = 0;
@@ -46,6 +53,7 @@ class ProductCatalog {
           </div>
         `;
       serviceCatalog.appendChild(serviceCard);
+      document.dispatchEvent(catalogUpdated);
     });
   }
 
