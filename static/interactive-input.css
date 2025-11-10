@@ -1,11 +1,33 @@
 .input-container{
     display:flex;
     flex-direction: column;
+    align-items: center;
+
+    border: solid 2px black;
+}
+
+#inputs button {
+    width: 100%;
+}
+
+.input-label{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.input-label p {
+    width: 200pt;
+    text-align: right;
+}
+
+.input-label input{
+    margin: 2px;
+    height:20pt;
+    width: 200pt;
 }
 
 .input-container input:invalid{
     border : solid red 3px;
-}
-.input-container label{
-    text-align: left;
 }

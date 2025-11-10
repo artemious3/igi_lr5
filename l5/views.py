@@ -19,3 +19,6 @@ def forms_demo(req):
 
 def interactive_input(req):
     return render(req, "jstest/interactive_input.html")
+
+def charts(req):
+    return render(req, "jstest/chart.html")

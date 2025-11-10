@@ -2,7 +2,8 @@ let gInputCnt = 0;
 
 function createInput(label, type) {
   let label_element = document.createElement("label");
-  label_element.innerHTML += label;
+  label_element.innerHTML += "<p>" + label + "</p>";
+  label_element.classList.add("input-label");
 
   let input = document.createElement("input");
   input.type = type;
@@ -20,8 +21,16 @@ function createAttributeChanger(label, type, target_element, event, attr) {
   return changer;
 }
 
+
 // @retunrs string
 function addInteractiveInput(htmlElement) {
+  const container = document.createElement("div");
+  container.classList.add("input-container");
+
+  const header = document.createElement("h2");
+  header.innerHTML = "Input group " + (gInputCnt+1).toString();
+  container.appendChild(header);
+
   let element = createInput("Interactive input: ", "number");
   let nameChanger = createAttributeChanger(
     "Name: ",
@@ -76,7 +85,7 @@ function addInteractiveInput(htmlElement) {
     }
   });
 
-  htmlElement.append(
+  container.append(
     element[0],
     nameChanger[0],
     minChanger[0],
@@ -86,8 +95,23 @@ function addInteractiveInput(htmlElement) {
     placeholderChanger[0],
     readonlyChanger[0],
   );
+  container.id = "ig" + gInputCnt.toString();
+
+  const removeBtn = document.createElement("button");
+  removeBtn.innerHTML = "Remove input group";
+  const thisInputCnt = gInputCnt;
+  removeBtn.addEventListener("click", ()=> {
+    document.getElementById("ig" + thisInputCnt.toString()).remove();
+  })
+  container.appendChild(removeBtn);
+
+
+
+  htmlElement.appendChild(container);
 
   gInputCnt++;
 }
 
-addInteractiveInput(document.querySelector(".input-container"));
+document.getElementById("input-add-btn").addEventListener("click", ()=>{
+  addInteractiveInput(document.getElementById("inputs"));
+})

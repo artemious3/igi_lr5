@@ -4,8 +4,8 @@ document.addEventListener("catalogUpdated", () => {
   cards.forEach((card) => {
     card.addEventListener("mousemove", (e) => {
       const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left; // Mouse x position within the card
-      const y = e.clientY - rect.top; // Mouse y position within the card
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
 
       const centerX = card.offsetWidth / 2;
       const centerY = card.offsetHeight / 2;
@@ -13,12 +13,10 @@ document.addEventListener("catalogUpdated", () => {
       const deltaX = x - centerX;
       const deltaY = y - centerY;
 
-      // Adjust the divisor for more or less intensity
       const maxRotation = 15;
       const rotateX = (deltaY / centerY) * -maxRotation;
       const rotateY = (deltaX / centerX) * maxRotation;
 
-      // Apply the 3D transformation
       card.style.transform = `perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
     });
 
