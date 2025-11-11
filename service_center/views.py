@@ -43,6 +43,8 @@ def contacts_view(req):
 def conf_policy_view(req):
     return render(req, 'service_center/conf_policy.html')
 
+from constance import config
+
 def about_view(req):
 
     #resp = requests.get('https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY')
@@ -54,7 +56,7 @@ def about_view(req):
 
     about = About.objects.first()
 
-    return render(req, 'service_center/about.html', {"about":about})
+    return render(req, 'service_center/about.html', {"about":about, "config":config})
 
 
 def service_json_index(req):

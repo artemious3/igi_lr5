@@ -3,8 +3,10 @@ class Slider {
   totalPages = 0;
   delayMs = 2000;
   loop = false;
-  autoIntervalId = null;
+  autoTimeoutId = null;
+  auto = false;
   pag_dots = [];
+  hoverActive = false;
 
   constructor() {
     const sliderEl = document.getElementById("slider");
@@ -14,6 +16,7 @@ class Slider {
     const navs = sliderEl.dataset.navs === 'true';
     const pags = sliderEl.dataset.pags === 'true';
     const auto = sliderEl.dataset.auto === 'true';
+    this.auto = auto;
     const stopMouseHover = sliderEl.dataset.stopMouseHover === 'true';
     const delayMs = sliderEl.dataset.delayMs ? parseInt(sliderEl.dataset.delayMs, 10) : 5000;
 
@@ -31,18 +34,23 @@ class Slider {
     this.show_nav(navs);
     this.show_pags(pags);
     this.create_pagination();
-    this.set_auto_timeout(auto);
     this.set_stop_mouse_hover(stopMouseHover);
     this.update_counter();
+
+    if(this.auto && !this.hoverActive){
+      this.schedule_auto_switch();
+    }
   }
 
   set_stop_mouse_hover(stopMouseHover) {
     if (stopMouseHover) {
       document.getElementById("slider").addEventListener("mouseenter", () => {
-        this.clear_auto_timeout();
+        this.cancel_auto_switch();
+        this.hoverActive = true;
       });
       document.getElementById("slider").addEventListener("mouseleave", () => {
-        this.set_auto_timeout(true);
+        this.schedule_auto_switch();
+        this.hoverActive = false;
       });
     }
   }
@@ -68,16 +76,11 @@ class Slider {
     }
   }
 
-  set_auto_timeout(auto) {
-    if (auto) {
-      this.autoIntervalId = setInterval(this.next.bind(this), this.delayMs);
-    }
+  schedule_auto_switch(){
+    this.autoTimeoutId = setTimeout(this.next.bind(this), this.delayMs);
   }
-
-  clear_auto_timeout() {
-    if (this.autoIntervalId != null) {
-      clearInterval(this.autoIntervalId);
-    }
+  cancel_auto_switch(){
+    clearTimeout(this.autoTimeoutId);
   }
 
   create_pagination() {
@@ -176,8 +179,10 @@ class Slider {
 
     this.currentPage = idx;
     this.update_counter();
-    this.clear_auto_timeout();
-    this.set_auto_timeout();
+    if(this.auto && !this.hoverActive){
+      this.cancel_auto_switch();
+      this.schedule_auto_switch();
+    }
   }
 
   next() {
