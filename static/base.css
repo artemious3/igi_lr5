@@ -7,15 +7,15 @@ background: var(--bg-gradient);
 color : var(--fg-color);
 }
 
-a:focus { 
+a:focus {
 	color : lightgreen !important;
 }
 
-a:link { 
+a:link {
 	color:var(--fg-color);
 }
- 
-a:active, button:active { 
+
+a:active, button:active {
 	transform :	scaleX(0.95) !important;
 	transition : transform 0.1s ease-in;
 }
@@ -37,7 +37,7 @@ a[download]::before {
 }
 
 
-.top-nav {	
+.top-nav {
   position: fixed;
 	top : 0px;
 	left : 10px;
@@ -59,7 +59,7 @@ a[download]::before {
 	font-weight : 800;
 	font-size : 14pt;
 	margin : 10px;
-	text-decoration: underline; 
+	text-decoration: underline;
 	color : var(--fg-color);
 	display: inline-block;
 }
@@ -67,13 +67,13 @@ a[download]::before {
   transform: scale(1.15);
  }
 
-.nav-btn.about { 
+.nav-btn.about {
 	cursor : help;
  }
 
 
- .index-grid a[target="_blank"] { 
-	 
+ .index-grid a[target="_blank"] {
+
 	 border-color: yellow;
  }
 
@@ -92,6 +92,7 @@ h2 {
 	padding : 2px;
 	margin : 6px 6px 0px 6px;
 	font-weight : 900;
+	z-index:11;
 }
 
 .top-icon {
@@ -106,10 +107,10 @@ h2 {
 
 @media screen and (max-width : 600px) {
 
-	.top-icon { 
+	.top-icon {
 		visibility: hidden;
 	}
-	
+
 }
 
 footer {
@@ -134,27 +135,23 @@ footer {
 	text-decoration: none;
 }
 
-input { 
+input {
 	margin-top: 20px;
 	margin-bottom: 20px;
 	text-align: left;
 }
 
-input label { 
+input label {
 	text-align: left;
 }
 
 
-q:lang(ru){ 
+q:lang(ru){
 
 	font-family: "Noto Sans Mono";
 	font-weight: 500;
-	quotes: "«" "»"; 
+	quotes: "«" "»";
 }
-q:lang(en){ 
-	quotes: "\201C" "\201D"; 
+q:lang(en){
+	quotes: "\201C" "\201D";
 }
-
-
-
-

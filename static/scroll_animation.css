@@ -1,0 +1,33 @@
+#scroll-container {
+    position: relative;
+    width: 100%;
+    min-height: 300px; /* Set a minimum height to ensure it's observable */
+    display: flex;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    align-items: center;
+    justify-content: center;
+}
+
+#scroll-container > div {
+    position: relative; /* Contain the absolutely positioned parts */
+    height: 300px;
+    width: 100%;
+    overflow: hidden;
+}
+
+.sparepart {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 150px; /* Smaller, icon-like parts */
+    max-height: 150px;
+    opacity: 0;
+}
+
+#smartphone {
+    opacity: 0;
+    max-width: 250px; /* Slightly larger final image */
+    max-height: 250px;
+}

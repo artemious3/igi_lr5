@@ -5,7 +5,9 @@
 <link rel="stylesheet" href="/static/about.css">
 <link rel="stylesheet" href="/static/certificate.css">
 <link rel="stylesheet" href="/static/slider.css">
+<link rel="stylesheet" href="/static/scroll_animation.css">
 <script src="/static/js/slider.js" defer></script>
+<script src="/static/js/scroll_animation.js"></script>
 {% endblock styles %}
 
 {% block title %}
@@ -37,15 +39,17 @@
 Всё ходит по цепи кругом;</q></p>
 </div>
 
+
+
 <div class="about">
 <section>
-             
+
             <h2>Our <mark>Mission</mark></h2>
 
             {% include "./slider.html" %}
 						<p>{{about.description|safe}}</p>
             <p>
-								We define <dfn title="peripheral repair">peripheral repair</dfn> as the restoration of functionality to external devices 
+								We define <dfn title="peripheral repair">peripheral repair</dfn> as the restoration of functionality to external devices
                 such as keyboards, mice, printers, and monitors that interface with primary computing systems.
             </p>
         </section>
@@ -73,15 +77,29 @@
 
 
             <h2>Who We Are</h2>
+
+            <div id="scroll-container">
+               <div>
+                  <img src="/static/scroll-img/motherboard.png" class="sparepart">
+                  <img src="/static/scroll-img/speaker.jpg" class="sparepart">
+                  <img src="/static/scroll-img/charging-port.png" class="sparepart">
+                  <img src="/static/scroll-img/accumulator.png" class="sparepart">
+                  <img src="/static/scroll-img/camera.webp" class="sparepart">
+                  <img src="/static/scroll-img/vibrator.png" class="sparepart">
+                  <img src="/static/scroll-img/case.png" class="sparepart">
+                  <img src="/static/scroll-img/smartphone.png" class="sparepart">
+               </div>
+            </div>
+
             <p>
-                Founded in 2015, SMART-SERVICE LTD began as a small workshop with a simple goal: to make tech repair accessible and transparent. 
-                As stated in <cite>“The Future of Consumer Electronics Maintenance”</cite> by Dr. Elena Martinez (2022), 
-                “Local service centers play a crucial role in extending device lifespans and reducing e-waste.” 
+                Founded in 2015, SMART-SERVICE LTD began as a small workshop with a simple goal: to make tech repair accessible and transparent.
+                As stated in <cite>“The Future of Consumer Electronics Maintenance”</cite> by Dr. Elena Martinez (2022),
+                “Local service centers play a crucial role in extending device lifespans and reducing e-waste.”
                 We take pride in being part of this sustainable movement.
             </p>
             <p>
-                Our team consists of <strong>certified technicians</strong> with expertise in both hardware and software diagnostics. 
-                Whether it’s a cracked smartphone screen or a failing laptop motherboard, we apply <mark>industry-standard procedures</mark> 
+                Our team consists of <strong>certified technicians</strong> with expertise in both hardware and software diagnostics.
+                Whether it’s a cracked smartphone screen or a failing laptop motherboard, we apply <mark>industry-standard procedures</mark>
                 and use <strong>premium replacement parts</strong> to ensure lasting repairs.
             </p>
         </section>
@@ -100,9 +118,9 @@
         <section>
             <h2>Why Choose Us?</h2>
             <p>
-                Unlike generic repair chains, we offer <mark>personalized service</mark> with same-day turnaround for most issues. 
-                We back our work with a <strong>90-day warranty</strong> on all repairs. 
-                As <cite class="caps">Consumer Tech Review Weekly</cite> noted in their 2023 report: 
+                Unlike generic repair chains, we offer <mark>personalized service</mark> with same-day turnaround for most issues.
+                We back our work with a <strong>90-day warranty</strong> on all repairs.
+                As <cite class="caps">Consumer Tech Review Weekly</cite> noted in their 2023 report:
                 “Independent service centers like Service Center often outperform larger franchises in customer satisfaction due to their attention to detail.”
             </p>
         </section>
@@ -110,7 +128,7 @@
         <aside>
             <h3>Did You Know?</h3>
             <p>
-                According to the <cite>Global E-Waste Monitor 2024</cite>, only <strong>17.4%</strong> of electronic waste is properly recycled. 
+                According to the <cite>Global E-Waste Monitor 2024</cite>, only <strong>17.4%</strong> of electronic waste is properly recycled.
                 Every device we repair helps reduce this growing environmental burden.
             </p>
         </aside>
@@ -184,4 +202,3 @@
 
 		<!-- <img src="{{imgurl}}" alt=""> -->
 {% endblock content %}
-
