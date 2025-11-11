@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 opacity = scrollPercent / 0.2; // Fade in
             } else {
                 opacity = (1 - scrollPercent) / 0.2; // Fade out
-                gtk-rs: }
+             }
             opacity = Math.max(0, Math.min(1, opacity));
 
             part.style.opacity = opacity;

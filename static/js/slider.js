@@ -6,11 +6,19 @@ class Slider {
   autoIntervalId = null;
   pag_dots = [];
 
-  constructor({ loop, navs, pags, auto, stopMouseHover, delayMs } = {}) {
-    this.delayMs = delayMs ?? 5000;
-    var imgs = document
-      .getElementById("slider")
-      .querySelectorAll(".slider-img");
+  constructor() {
+    const sliderEl = document.getElementById("slider");
+
+    // Get parameters from data attributes.
+    const loop = sliderEl.dataset.loop === 'true';
+    const navs = sliderEl.dataset.navs === 'true';
+    const pags = sliderEl.dataset.pags === 'true';
+    const auto = sliderEl.dataset.auto === 'true';
+    const stopMouseHover = sliderEl.dataset.stopMouseHover === 'true';
+    const delayMs = sliderEl.dataset.delayMs ? parseInt(sliderEl.dataset.delayMs, 10) : 5000;
+
+    this.delayMs = delayMs;
+    var imgs = sliderEl.querySelectorAll(".slider-img");
     this.totalPages = imgs.length;
     this.currentPage = Array.from(imgs).findIndex((c) =>
       c.classList.contains("slider-cur-r"),
@@ -168,6 +176,8 @@ class Slider {
 
     this.currentPage = idx;
     this.update_counter();
+    this.clear_auto_timeout();
+    this.set_auto_timeout();
   }
 
   next() {
@@ -185,14 +195,7 @@ class Slider {
   }
 }
 
-let slider = new Slider({
-  loop: false,
-  navs: true,
-  pags: true,
-  auto: true,
-  stopMouseHover: true,
-  delayMs: 3000,
-});
+let slider = new Slider();
 
 document.getElementById("slider-prev-btn").onclick = function () {
   slider.prev();
