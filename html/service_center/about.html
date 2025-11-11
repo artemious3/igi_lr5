@@ -1,204 +1,234 @@
-
-{% extends "../base.html" %}
-
-{% block styles %}
-<link rel="stylesheet" href="/static/about.css">
-<link rel="stylesheet" href="/static/certificate.css">
-<link rel="stylesheet" href="/static/slider.css">
-<link rel="stylesheet" href="/static/scroll_animation.css">
+{% extends "../base.html" %} {% block styles %}
+<link rel="stylesheet" href="/static/about.css" />
+<link rel="stylesheet" href="/static/certificate.css" />
+<link rel="stylesheet" href="/static/slider.css" />
+<link rel="stylesheet" href="/static/scroll_animation.css" />
 <script src="/static/js/slider.js" defer></script>
 <script src="/static/js/scroll_animation.js"></script>
-{% endblock styles %}
-
-{% block title %}
+{% endblock styles %} {% block title %}
 <p>About</p>
-{% endblock title %}
-
-{% block header %}
-{{about.title}}
-{% endblock header %}
-
-
-{% block content %}
-
-
+{% endblock title %} {% block header %} {{about.title}} {% endblock header %} {%
+block content %}
 
 <div class="img-container border">
-<img src="/MEDIA/icon.png" alt="">
+    <img src="/MEDIA/icon.png" alt="" />
 </div>
 
 <div class="verse-container">
-<p><q lang="en" class="verse">Through circuits deep, <wbr>and screens so bright,<br>
-        Our skilled hands <wbr>bring your tech to light. <br>
-        From shattered glass <wbr>to power lost, <br>
-        We mend with care,<wbr>at lowest cost.</q></p>
+    <p>
+        <q lang="en" class="verse"
+            >Through circuits deep, <wbr />and screens so bright,<br />
+            Our skilled hands <wbr />bring your tech to light. <br />
+            From shattered glass <wbr />to power lost, <br />
+            We mend with care,<wbr />at lowest cost.</q
+        >
+    </p>
 
-<p><q lang="ru" class="verse">У лукоморья дуб зелёный;<br>
-Златая цепь на дубе том:<br>
-И днём и ночью кот учёный <br>
-Всё ходит по цепи кругом;</q></p>
+    <p>
+        <q lang="ru" class="verse"
+            >У лукоморья дуб зелёный;<br />
+            Златая цепь на дубе том:<br />
+            И днём и ночью кот учёный <br />
+            Всё ходит по цепи кругом;</q
+        >
+    </p>
 </div>
 
-
-
 <div class="about">
-<section>
+    <section>
+        <h2>Our <mark>Mission</mark></h2>
 
-            <h2>Our <mark>Mission</mark></h2>
+        {% include "./slider.html" %}
+        <p>{{about.description|safe}}</p>
+        <p>
+            We define <dfn title="peripheral repair">peripheral repair</dfn> as
+            the restoration of functionality to external devices such as
+            keyboards, mice, printers, and monitors that interface with primary
+            computing systems.
+        </p>
+    </section>
 
-            {% include "./slider.html" %}
-						<p>{{about.description|safe}}</p>
-            <p>
-								We define <dfn title="peripheral repair">peripheral repair</dfn> as the restoration of functionality to external devices
-                such as keyboards, mice, printers, and monitors that interface with primary computing systems.
-            </p>
-        </section>
+    <div class="video-container border">
+        <video width="320" height="240" autoplay muted>
+            <source src="{{about.video_path}}" type="video/mp4" />
+            Your browser does not support the video tag.
+        </video>
+    </div>
 
+    <section>
+        <h2>Our history</h2>
 
-				<div class="video-container border">
-           <video  width="320" height="240" autoplay muted>
-						 <source src="{{about.video_path}}" type="video/mp4">
-                       Your browser does not support the video tag.
-            </video> </div>
+        <ul class="history">
+            <li>
+                <strong>2015</strong> — SMART-SERVICE LTD was founded in Moscow.
+            </li>
+            <li>
+                <strong>2016</strong> — Opened the first service center and
+                launched online appointment booking.
+            </li>
+            <li>
+                <strong>2018</strong> — Expanded the team to 15 technicians and
+                introduced a warranty repair system.
+            </li>
+            <li>
+                <strong>2020</strong> — Launched the official website and
+                city-wide device pickup/delivery service.
+            </li>
+            <li>
+                <strong>2022</strong> — Opened a second branch and started
+                repairing tablets and laptops.
+            </li>
+            <li>
+                <strong>2025</strong> — SMART-SERVICE LTD serves over 10,000
+                customers annually.
+            </li>
+        </ul>
 
-        <section>
+        <h2>Who We Are</h2>
 
-				<h2>Our history</h2>
-
-				<ul class="history">
-					<li><strong>2015</strong> — SMART-SERVICE LTD was founded in Moscow.</li>
-					<li><strong>2016</strong> — Opened the first service center and launched online appointment booking.</li>
-					<li><strong>2018</strong> — Expanded the team to 15 technicians and introduced a warranty repair system.</li>
-					<li><strong>2020</strong> — Launched the official website and city-wide device pickup/delivery service.</li>
-					<li><strong>2022</strong> — Opened a second branch and started repairing tablets and laptops.</li>
-					<li><strong>2025</strong> — SMART-SERVICE LTD serves over 10,000 customers annually.</li>
-				</ul>
-
-
-
-            <h2>Who We Are</h2>
-
-            <div id="scroll-container">
-               <div>
-                  <img src="/static/scroll-img/motherboard.png" class="sparepart">
-                  <img src="/static/scroll-img/speaker.jpg" class="sparepart">
-                  <img src="/static/scroll-img/charging-port.png" class="sparepart">
-                  <img src="/static/scroll-img/accumulator.png" class="sparepart">
-                  <img src="/static/scroll-img/camera.webp" class="sparepart">
-                  <img src="/static/scroll-img/vibrator.png" class="sparepart">
-                  <img src="/static/scroll-img/case.png" class="sparepart">
-                  <img src="/static/scroll-img/smartphone.png" class="sparepart">
-               </div>
+        <div id="scroll-container">
+            <div>
+                <img
+                    src="/static/scroll-img/motherboard.png"
+                    class="sparepart"
+                />
+                <img src="/static/scroll-img/speaker.jpg" class="sparepart" />
+                <img
+                    src="/static/scroll-img/charging-port.png"
+                    class="sparepart"
+                />
+                <img
+                    src="/static/scroll-img/accumulator.png"
+                    class="sparepart"
+                />
+                <img src="/static/scroll-img/camera.webp" class="sparepart" />
+                <img src="/static/scroll-img/vibrator.png" class="sparepart" />
+                <img src="/static/scroll-img/case.png" class="sparepart" />
+                <img
+                    src="/static/scroll-img/smartphone.png"
+                    class="sparepart"
+                />
             </div>
+        </div>
 
-            <p>
-                Founded in 2015, SMART-SERVICE LTD began as a small workshop with a simple goal: to make tech repair accessible and transparent.
-                As stated in <cite>“The Future of Consumer Electronics Maintenance”</cite> by Dr. Elena Martinez (2022),
-                “Local service centers play a crucial role in extending device lifespans and reducing e-waste.”
-                We take pride in being part of this sustainable movement.
-            </p>
-            <p>
-                Our team consists of <strong>certified technicians</strong> with expertise in both hardware and software diagnostics.
-                Whether it’s a cracked smartphone screen or a failing laptop motherboard, we apply <mark>industry-standard procedures</mark>
-                and use <strong>premium replacement parts</strong> to ensure lasting repairs.
-            </p>
-        </section>
+        <p>
+            Founded in 2015, SMART-SERVICE LTD began as a small workshop with a
+            simple goal: to make tech repair accessible and transparent. As
+            stated in
+            <cite>“The Future of Consumer Electronics Maintenance”</cite> by Dr.
+            Elena Martinez (2022), “Local service centers play a crucial role in
+            extending device lifespans and reducing e-waste.” We take pride in
+            being part of this sustainable movement.
+        </p>
+        <p>
+            Our team consists of <strong>certified technicians</strong> with
+            expertise in both hardware and software diagnostics. Whether it’s a
+            cracked smartphone screen or a failing laptop motherboard, we apply
+            <mark>industry-standard procedures</mark> and use
+            <strong>premium replacement parts</strong> to ensure lasting
+            repairs.
+        </p>
+    </section>
 
-        <section>
-            <h2>Our <em class="core-values">Core Values</em></h2>
-            <ul class="about-list">
-                <li><strong>Integrity:</strong> Honest assessments and no hidden fees.</li>
-                <li><strong>Expertise:</strong> Ongoing training in the latest <dfn title="micro-soldering">micro-soldering</dfn> and diagnostic techniques.</li>
-                <li><strong>Customer Focus:</strong> Clear communication and timely service.</li>
-                <li><strong>Sustainability:</strong> We prioritize repair over replacement, supporting the right to repair movement.</li>
-            </ul>
+    <section>
+        <h2>Our <em class="core-values">Core Values</em></h2>
+        <ul class="about-list">
+            <li>
+                <strong>Integrity:</strong> Honest assessments and no hidden
+                fees.
+            </li>
+            <li>
+                <strong>Expertise:</strong> Ongoing training in the latest
+                <dfn title="micro-soldering">micro-soldering</dfn> and
+                diagnostic techniques.
+            </li>
+            <li>
+                <strong>Customer Focus:</strong> Clear communication and timely
+                service.
+            </li>
+            <li>
+                <strong>Sustainability:</strong> We prioritize repair over
+                replacement, supporting the right to repair movement.
+            </li>
+        </ul>
+    </section>
 
-        </section>
+    <section>
+        <h2>Why Choose Us?</h2>
+        <p>
+            Unlike generic repair chains, we offer
+            <mark>personalized service</mark> with same-day turnaround for most
+            issues. We back our work with a <strong>90-day warranty</strong> on
+            all repairs. As
+            <cite class="caps">Consumer Tech Review Weekly</cite> noted in their
+            2023 report: “Independent service centers like Service Center often
+            outperform larger franchises in customer satisfaction due to their
+            attention to detail.”
+        </p>
+    </section>
 
-        <section>
-            <h2>Why Choose Us?</h2>
-            <p>
-                Unlike generic repair chains, we offer <mark>personalized service</mark> with same-day turnaround for most issues.
-                We back our work with a <strong>90-day warranty</strong> on all repairs.
-                As <cite class="caps">Consumer Tech Review Weekly</cite> noted in their 2023 report:
-                “Independent service centers like Service Center often outperform larger franchises in customer satisfaction due to their attention to detail.”
-            </p>
-        </section>
+    <aside>
+        <h3>Did You Know?</h3>
+        <p>
+            According to the <cite>Global E-Waste Monitor 2024</cite>, only
+            <strong>17.4%</strong> of electronic waste is properly recycled.
+            Every device we repair helps reduce this growing environmental
+            burden.
+        </p>
+    </aside>
 
-        <aside>
-            <h3>Did You Know?</h3>
-            <p>
-                According to the <cite>Global E-Waste Monitor 2024</cite>, only <strong>17.4%</strong> of electronic waste is properly recycled.
-                Every device we repair helps reduce this growing environmental burden.
-            </p>
-        </aside>
+    <section>
+        <h2>Company Details</h2>
+        <ul>
+            <li><strong>Company Name:</strong> {{about.title}}</li>
+            <li><strong>Legal Address:</strong> {{about.legal_address}}</li>
+            <li><strong>Phone:</strong> {{about.phone}}</li>
+            <li><strong>Email:</strong> {{about.email}}</li>
+        </ul>
+    </section>
 
-<section>
-    <h2>Company Details</h2>
-    <ul>
-			<li><strong>Company Name:</strong> {{about.title}}</li>
-				<li><strong>Legal Address:</strong> {{about.legal_address}}</li>
-				<li><strong>Phone:</strong> {{about.phone}}</li>
-				<li><strong>Email:</strong> {{about.email}}</li>
-    </ul>
-</section>
-
-<section>
-<h2>Where are we?</h2>
-<iframe
-  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2245.1234567890123!2d37.617635!3d55.755826!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46b54a5d7f0f0f0f%3A0x123456789abcdef0!2z0KHQsNC00LXQvdC40Y8g0YPQuy4sINCc0L7RgdC60LLQsCwg0KDQvtGB0YHQuNGPLCDQoNC-0YHRgdC40Y8sIDExNTAwMA!5e0!3m2!1sru!2sru!4v1234567890123"
-  width="600"
-  height="450"
-  style="border:0;"
-  allowfullscreen=""
-  loading="lazy"
-  referrerpolicy="no-referrer-when-downgrade">
-</iframe>
-</section>
+    <section>
+        <h2>Where are we?</h2>
+        <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2245.1234567890123!2d37.617635!3d55.755826!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46b54a5d7f0f0f0f%3A0x123456789abcdef0!2z0KHQsNC00LXQvdC40Y8g0YPQuy4sINCc0L7RgdC60LLQsCwg0KDQvtGB0YHQuNGPLCDQoNC-0YHRgdC40Y8sIDExNTAwMA!5e0!3m2!1sru!2sru!4v1234567890123"
+            width="600"
+            height="450"
+            style="border: 0"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+        >
+        </iframe>
+    </section>
 </div>
 
 <h2>CERTIFICATE</h2>
 
 <div class="certificate">
-	<div class="cert-head">
-		<h2>CERTIFICATE</h2>
-    <h3>of an Authorized Service Center</h3>
-	</div>
-    <p class="start">
-        This certifies that
-    </p>
-    <p class="company-name">
-		{{about.title}}
-    </p>
+    <div class="cert-head">
+        <h2>CERTIFICATE</h2>
+        <h3>of an Authorized Service Center</h3>
+    </div>
+    <p class="start">This certifies that</p>
+    <p class="company-name">{{about.title}}</p>
     <p class="main-info">
-        is an authorized service center for the repair of smartphones and tablets manufactured by <span class="techcorp">**TechCorp Inc**</span>.
+        is an authorized service center for the repair of smartphones and
+        tablets manufactured by <span class="techcorp">**TechCorp Inc**</span>.
     </p>
-    <p class="date">
-        Date of Issue: September 7, 2025
-    </p>
-    <p class="validity">
-        Valid until: Indefinite
-    </p>
-		<div class="cert-bottom">
-			<div class="signatures">
-					<p class="signature-line">
-							Ivan Ivanov
-					</p>
-					<p class="signature-line">
-							Peter Petrov
-					</p>
-			</div>
-			<div class="titles">
-					<p class="signature-title">
-							(General Director)
-					</p>
-					<p class="signature-title">
-							("TechCorp" Representative)
-					</p>
-			</div>
-		</div>
-		<img src="/static/stamp.png" class="stamp">
+    <p class="date">Date of Issue: September 7, 2025</p>
+    <p class="validity">Valid until: Indefinite</p>
+    <div class="cert-bottom">
+        <div class="signatures">
+            <p class="signature-line">Ivan Ivanov</p>
+            <p class="signature-line">Peter Petrov</p>
+        </div>
+        <div class="titles">
+            <p class="signature-title">(General Director)</p>
+            <p class="signature-title">("TechCorp" Representative)</p>
+        </div>
+    </div>
+    <img src="/static/stamp.png" class="stamp" />
 </div>
 
-		<!-- <img src="{{imgurl}}" alt=""> -->
+<!-- <img src="{{imgurl}}" alt=""> -->
 {% endblock content %}
