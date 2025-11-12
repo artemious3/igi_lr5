@@ -9,8 +9,8 @@
     justify-content: center;
 }
 
-#scroll-container > div {
-    position: relative; /* Contain the absolutely positioned parts */
+.smartphone-constructing {
+    position: absolute; /* Contain the absolutely positioned parts */
     height: 300px;
     width: 100%;
     overflow: hidden;
@@ -26,8 +26,69 @@
     opacity: 0;
 }
 
+
 #smartphone {
     opacity: 0;
     max-width: 250px; /* Slightly larger final image */
     max-height: 250px;
+}
+
+.gears-container {
+    position: absolute;
+    right: 50pt;
+    transform: translateY(-50%,0);
+    width : 250px;
+    height: 250px;
+}
+
+#smartphone-gears {
+    height : 190pt;
+}
+
+#gear-big {
+    position: absolute;
+    left : 18pt;
+    top : 55pt;
+    width : 70pt;
+    height : 70pt;
+}
+#gear-mid {
+    position: absolute;
+    left : 85pt;
+    top : 45pt;
+    width : 45pt;
+    height : 45pt;
+}
+#gear-small {
+    position: absolute;
+    left : 60pt;
+    top : 30pt;
+    width : 30pt;
+    height : 30pt;
+}
+
+.laptop-container {
+    position: absolute;
+    left : 30pt;
+    top : 15pt;
+    width : 200pt;
+    height : 200pt;
+}
+
+#laptop-circle {
+    position: absolute;
+    left : 50%;
+    top : 52%;
+    transform: translate(-50%,-50%);
+    width : 200pt;
+    height: 200pt;
+}
+
+#laptop {
+    position: absolute;
+    left : 50%;
+    top : 50%;
+    transform: translate(-50%,-50%);
+    width : 115pt;
+    height: 115pt;
 }

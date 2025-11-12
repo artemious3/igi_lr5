@@ -4,32 +4,32 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const containerDiv = scrollContainer.querySelector("#smartphone-constructing");
     const parts = Array.from(containerDiv.querySelectorAll('.sparepart'));
-    const smartphone = parts.pop(); 
+    const smartphone = parts.pop();
 
     smartphone.id = 'smartphone';
 
     const partOffsets = parts.map(() => ({
-        x: (Math.random() - 0.5) * 300, 
-        y: (Math.random() - 0.5) * 300,  
-        rot: (Math.random() - 0.5) * 90  
+        x: (Math.random() - 0.5) * 300,
+        y: (Math.random() - 0.5) * 300,
+        rot: (Math.random() - 0.5) * 90
     }));
 
     const animateParts = (scrollPercent) => {
         parts.forEach((part, index) => {
             const offset = partOffsets[index];
 
-            const mainTranslateX = -40 + (scrollPercent * 40); 
+            const mainTranslateX = -20 + (scrollPercent * 20);
 
-            const spreadFactor = 1 - scrollPercent; /
+            const spreadFactor = 1 - scrollPercent;
             const offsetX = offset.x * spreadFactor;
             const offsetY = offset.y * spreadFactor;
             const offsetRot = offset.rot * spreadFactor;
 
             let opacity = 0;
             if (scrollPercent < 0.8) {
-                opacity = scrollPercent / 0.2; /
+                opacity = scrollPercent / 0.2;
             } else {
-                opacity = (1 - scrollPercent) / 0.2; 
+                opacity = (1 - scrollPercent) / 0.2;
              }
             opacity = Math.max(0, Math.min(1, opacity));
 
@@ -46,21 +46,38 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
+    const gearBig = document.getElementById('gear-big');
+    const gearMid = document.getElementById('gear-mid');
+    const gearSmall = document.getElementById('gear-small');
+    const laptopWire = document.getElementById('laptop-circle');
+
+    const animateGears = (scrollPercent) => {
+        if (!gearBig || !gearMid || !gearSmall) return;
+        const rotation = scrollPercent * 500;
+        gearBig.style.transform = `rotate(${rotation}deg)`;
+        gearMid.style.transform = `rotate(${-rotation * 0.75}deg)`;
+        gearSmall.style.transform = `rotate(${rotation * 1.5}deg)`;
+        laptopWire.style.transform = `translate(-50%,-50%) rotate(${rotation*0.5}deg)`;
+    };
+
     const handleScroll = () => {
         const rect = scrollContainer.getBoundingClientRect();
         const viewportHeight = window.innerHeight;
 
-        const anim_start_pos = viewportHeight; 
+        const anim_start_pos = viewportHeight;
         const anim_end_pos = viewportHeight * 0.3 - rect.height / 2;
 
         const totalScrollableDist = anim_start_pos - anim_end_pos;
 
         const currentScrollDist = anim_start_pos - rect.top;
 
-        let scrollPercent = currentScrollDist / totalScrollableDist;
-        scrollPercent = Math.max(0, Math.min(1, scrollPercent));
+        let scrollPercentParts = currentScrollDist / totalScrollableDist;
+        let scrollPercentGears = rect.top / viewportHeight;
+        scrollPercentParts = Math.max(0, Math.min(1, scrollPercentParts));
+        scrollPercentGears = Math.max(0, Math.min(1, scrollPercentGears));
 
-        animateParts(scrollPercent);
+        animateParts(scrollPercentParts);
+        animateGears(scrollPercentGears);
     };
 
     const observer = new IntersectionObserver((entries) => {
