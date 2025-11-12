@@ -39,6 +39,25 @@ def contacts_view(req):
     employees = Employee.objects.all()
     return render(req, 'service_center/client/contacts.html', {"employees":employees})
 
+def contacts_json_view(req):
+    employees = Employee.objects.select_related('user').all()
+    employees_data = []
+    for employee in employees:
+        employees_data.append({
+            'user': {
+                'first_name': employee.user.first_name,
+                'last_name': employee.user.last_name,
+                'email': employee.user.email
+            },
+            'phone_number': employee.phone_number,
+            'image': employee.image.url if employee.image else None,
+            'specification': employee.specification
+        })
+
+    return JsonResponse({
+        'employees': employees_data,
+    })
+
 
 def conf_policy_view(req):
     return render(req, 'service_center/conf_policy.html')
