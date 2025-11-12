@@ -14,6 +14,8 @@ urlpatterns = [
 
         path('client/', client_index, name='client_index'),
         path('contacts/', contacts_view, name='contacts'),
+        path('api/contacts', contacts_json_view),
+        path('contacts_table/', contacts_table_view),
         path('orders/approved', orders_approved_view, name='orders_approved'),
         path('orders/unapproved', orders_unapproved_view, name='orders_unapproved'),
         path('orders/<int:order_id>/submit/', order_submit_view, name='order_submit'),
@@ -36,7 +38,6 @@ urlpatterns = [
         path('staff/order/<int:pk>/sp/add', AddSparePartView.as_view(), name='staff_sp_add'),
         path('staff/order/sp/<int:pk>/update', SparePartUpdateView.as_view(), name='staff_sp_update'),
         path('staff/order/sp/<int:pk>/delete', SparePartDeleteView.as_view(), name='staff_sp_delete'),
-        path('api/staff', contacts_json_view),
 
         path('staff/client/<int:pk>', client_info_view, name='staff_client_info'),
 

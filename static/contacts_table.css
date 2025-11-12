@@ -1,0 +1,13 @@
+
+table {
+    border-collapse: collapse;
+    margin-left : auto;
+    margin-right : auto;
+    margin-top: 10pt;
+    margin-bottom: 10pt;
+}
+
+table td {
+   border: solid 2px black;
+   padding: 4pt;
+}

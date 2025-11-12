@@ -39,6 +39,9 @@ def contacts_view(req):
     employees = Employee.objects.all()
     return render(req, 'service_center/client/contacts.html', {"employees":employees})
 
+def contacts_table_view(req):
+    return render(req, 'service_center/client/contacts_table.html')
+
 def contacts_json_view(req):
     employees = Employee.objects.select_related('user').all()
     employees_data = []
