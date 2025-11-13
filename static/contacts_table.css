@@ -37,6 +37,15 @@ thead td {
     text-align: right;
 }
 
+#filter-input {
+    border : solid 3px black;
+}
+
 #filter-btn-active {
     border : green solid 5px;
+}
+
+#find-btn {
+    margin-left: 5pt;
+    margin-right: 5pt;
 }

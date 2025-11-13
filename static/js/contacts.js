@@ -149,14 +149,32 @@ async function fetchContacts(id){
 
 let gContactsData = null;
 let gContactsSliceBuilder = null;
+let gActiveFilterProperty = null;
+
 
 function resetDataSliceBuilder(){
   return new DataSliceBuilder(gContactsData);
 }
 
+function applyFilter(){
+  if(gActiveFilterProperty === null){
+    alert("Select property to apply filter on");
+    return;
+  }
+  let filterInput = document.getElementById("filter-input");
+  gContactsSliceBuilder = resetDataSliceBuilder();
+  let filteredData =
+    gContactsSliceBuilder
+    .filterBy(gActiveFilterProperty, filterInput.value)
+      .build();
+  new ContactsTable(TABLE_ELEMENT_ID, filteredData);
+}
+
 
 function addSortOnClick(element){
-
+  if(element.dataset.prop == null){
+    return;
+  }
   let clickCounter = 0;
 
   function buildIcon(down){
@@ -198,6 +216,9 @@ function addSortOnClick(element){
 
 
 function addFilters(element){
+  if(element.dataset.prop == null){
+    return;
+  }
   function buildButton(){
     let i = document.createElement("i");
     i.classList.add("fa-solid");
@@ -210,13 +231,12 @@ function addFilters(element){
   let btn = buildButton();
   element.appendChild(btn);
 
-  let filterInput = document.getElementById("filter-input");
-
   btn.addEventListener('click', (ev)=> {
     ev.stopPropagation();
     if(btn.id == "filter-btn-active"){
       new ContactsTable(TABLE_ELEMENT_ID, gContactsData);
       btn.id = "";
+      gActiveFilterProperty = null;
       return;
     }
     let activeFiler = document.getElementById("filter-btn-active");
@@ -225,12 +245,8 @@ function addFilters(element){
     }
     btn.id = "filter-btn-active";
 
-    gContactsSliceBuilder = resetDataSliceBuilder();
-    let filteredData =
-      gContactsSliceBuilder
-      .filterBy(element.dataset.prop, filterInput.value)
-        .build();
-    new ContactsTable(TABLE_ELEMENT_ID, filteredData);
+    gActiveFilterProperty = element.dataset.prop;
+    applyFilter();
   })
 }
 
@@ -246,7 +262,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   gContactsSliceBuilder = new DataSliceBuilder(gContactsData);
   new ContactsTable(TABLE_ELEMENT_ID, gContactsData);
 
-  // and then set up buttons for sorting and filter
+  // set up buttons for sorting and filter at each column
   document.getElementById(TABLE_ELEMENT_ID)
     .querySelectorAll("thead td")
     .forEach((td) => {
@@ -254,5 +270,8 @@ document.addEventListener('DOMContentLoaded', async () => {
       addFilters(td);
     });
 
+
+  // set up handler for `find` button
+  document.getElementById("find-btn").addEventListener('click', applyFilter);
 
 })
