@@ -11,3 +11,8 @@ table td {
    border: solid 2px black;
    padding: 4pt;
 }
+
+table img {
+    width : 150pt;
+    height : 150pt;
+}
