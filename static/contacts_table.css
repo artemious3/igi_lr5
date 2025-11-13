@@ -16,3 +16,11 @@ table img {
     width : 150pt;
     height : 150pt;
 }
+
+thead td {
+    cursor: pointer;
+}
+
+#sort-icon {
+    padding-left : 5pt;
+}

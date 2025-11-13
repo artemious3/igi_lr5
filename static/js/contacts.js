@@ -1,4 +1,50 @@
 const API_ENDPOINT = '/service/api/contacts';
+const TABLE_ELEMENT_ID = "contacts";
+
+
+class DataSliceBuilder{
+
+  data = null;
+  slice = null;
+
+  constructor(data){
+    this.data = data.slice();
+    this.slice = this.data;
+  }
+
+  sortBy(propertyName, desc){
+    this.data.sort((a,b)=> {
+      if(a[propertyName] < b[propertyName]){
+        return desc ? +1 : -1;
+      } else if (a[propertyName] > b[propertyName]){
+        return desc ? -1 : +1;
+      }
+      return 0;
+    })
+    return this;
+  }
+
+  filterBy(propertyName, filter){
+    this.data = this.data.filter((item)=>{
+      item[propertyName].toString().includes(filter);
+    })
+    return this;
+  }
+
+  goToPage(page, itemsPerPage){
+    this.slice = this.data.slice(itemsPerPage * page, itemsPerPage * (page + 1));
+    return this;
+  }
+
+  length(){
+    return this.slice.length();
+  }
+
+  build(){
+    return this.slice;
+  }
+
+}
 
 class Employee {
 
@@ -51,43 +97,117 @@ class Employee {
 class ContactsTable {
 
   element = null;
-  data = null;
-
-  static async fetchAndBuild(id){
-    return fetch(API_ENDPOINT)
-      .then(async response => {
-        if (!response.ok) {
-          throw new Error(`HTTP error. Status : ${response.status} - ${response.statusText}`);
-        }
-        let employees_data =  (await response.json()).employees.map((emp, idx) => {
-          let employee = Employee.fromJson(emp);
-          employee.index = idx;
-          return employee;
-        });
-        return new ContactsTable(id, employees_data);
-      })
-      .catch(e => {
-        console.log(e);
-        return null;
-      });
-  }
+  shownData = null;
 
   constructor(id, data) {
     this.element = document.getElementById(id);
-    this.data = data;
+    this.shownData = data;
+    this.clear_data();
     this.show_data();
   }
 
+  clear_data(){
+    this.element.querySelectorAll("tbody tr").forEach((tr)=> {
+      tr.remove();
+    })
+  }
+
   show_data(){
-    for (let i = 0; i < this.data.length; i++){
-      this.element.appendChild(this.data[i].intoTr());
+    for (let i = 0; i < this.shownData.length; i++){
+      this.element.querySelector("tbody").appendChild(this.shownData[i].intoTr());
     }
+  }
+
+  set_data(newData){
+    this.shownData = newData;
+    this.clear_data();
+    this.show_data();
   }
 
 }
 
-let maybe_table = ContactsTable.fetchAndBuild("contacts");
-if(maybe_table == null){
-  document.getElementById("contacts").remove();
-  document.body.append(`<p>Error. Try again later</p>`);
+async function fetchContacts(id){
+  return fetch(API_ENDPOINT)
+    .then(async response => {
+      if (!response.ok) {
+        throw new Error(`HTTP error. Status : ${response.status} - ${response.statusText}`);
+      }
+      let employees_data =  (await response.json()).employees.map((emp, idx) => {
+        let employee = Employee.fromJson(emp);
+        employee.index = idx;
+        return employee;
+      });
+      return employees_data;
+    })
+    .catch(e => {
+      console.log(e);
+      return null;
+    });
 }
+
+
+
+let gContactsData = null;
+let gContactsSliceBuilder = null;
+
+
+function addSortOnClick(element){
+
+
+  let clickCounter = 0;
+
+  function buildIcon(down){
+    let i = document.createElement("i");
+    i.classList.add("fa-solid");
+    i.classList.add(down ? "fa-sort-down" : "fa-sort-up");
+    i.id = "sort-icon";
+    return i;
+  }
+
+  element.addEventListener('click', ()=>{
+
+    let sortIcon = document.getElementById("sort-icon");
+    let desc = false;
+    if(sortIcon != null){
+      sortIcon.remove();
+    }
+    if(clickCounter == 0){
+      element.appendChild(buildIcon(false));
+      clickCounter = 1;
+    } else if (clickCounter == 1){
+      element.appendChild(buildIcon(true));
+      clickCounter = 2;
+      desc = true;
+    } else {
+      clickCounter = 0;
+      return;
+    }
+
+    let sortedData =
+      (new DataSliceBuilder(gContactsData))
+        .sortBy(element.dataset.prop, desc)
+        .build();
+    new ContactsTable(TABLE_ELEMENT_ID, sortedData);
+  })
+
+}
+
+
+document.addEventListener('DOMContentLoaded', async () => {
+
+  gContactsData = await fetchContacts();
+  if (gContactsData === null) {
+    document.getElementById("contacts").remove();
+    document.body.append(`<p>Error. Try again later</p>`);
+  }
+  gContactsData = Array.from(gContactsData);
+
+  gContactsSliceBuilder = new DataSliceBuilder(gContactsData);
+  new ContactsTable(TABLE_ELEMENT_ID, gContactsData);
+
+  // and then set up buttons for sorting and filter
+  document.getElementById(TABLE_ELEMENT_ID)
+    .querySelectorAll("thead td")
+    .forEach(addSortOnClick);
+
+})
