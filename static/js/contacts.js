@@ -9,7 +9,6 @@ class DataSliceBuilder{
 
   constructor(data){
     this.data = data.slice();
-    this.slice = this.data;
   }
 
   sortBy(propertyName, desc){
@@ -25,9 +24,7 @@ class DataSliceBuilder{
   }
 
   filterBy(propertyName, filter){
-    this.data = this.data.filter((item)=>{
-      item[propertyName].toString().includes(filter);
-    })
+    this.data = this.data.filter((item) => item[propertyName].toString().includes(filter));
     return this;
   }
 
@@ -37,10 +34,13 @@ class DataSliceBuilder{
   }
 
   length(){
-    return this.slice.length();
+    return this.build().length();
   }
 
   build(){
+    if(this.slice === null){
+      return this.data;
+    }
     return this.slice;
   }
 
@@ -150,9 +150,12 @@ async function fetchContacts(id){
 let gContactsData = null;
 let gContactsSliceBuilder = null;
 
+function resetDataSliceBuilder(){
+  return new DataSliceBuilder(gContactsData);
+}
+
 
 function addSortOnClick(element){
-
 
   let clickCounter = 0;
 
@@ -180,11 +183,12 @@ function addSortOnClick(element){
       desc = true;
     } else {
       clickCounter = 0;
+      new ContactsTable(TABLE_ELEMENT_ID, gContactsData);
       return;
     }
 
     let sortedData =
-      (new DataSliceBuilder(gContactsData))
+        gContactsSliceBuilder
         .sortBy(element.dataset.prop, desc)
         .build();
     new ContactsTable(TABLE_ELEMENT_ID, sortedData);
@@ -192,6 +196,43 @@ function addSortOnClick(element){
 
 }
 
+
+function addFilters(element){
+  function buildButton(){
+    let i = document.createElement("i");
+    i.classList.add("fa-solid");
+    i.classList.add("fa-filter");
+    let btn = document.createElement("button");
+    btn.appendChild(i);
+    return btn;
+  }
+
+  let btn = buildButton();
+  element.appendChild(btn);
+
+  let filterInput = document.getElementById("filter-input");
+
+  btn.addEventListener('click', (ev)=> {
+    ev.stopPropagation();
+    if(btn.id == "filter-btn-active"){
+      new ContactsTable(TABLE_ELEMENT_ID, gContactsData);
+      btn.id = "";
+      return;
+    }
+    let activeFiler = document.getElementById("filter-btn-active");
+    if(activeFiler != null){
+      activeFiler.id = "";
+    }
+    btn.id = "filter-btn-active";
+
+    gContactsSliceBuilder = resetDataSliceBuilder();
+    let filteredData =
+      gContactsSliceBuilder
+      .filterBy(element.dataset.prop, filterInput.value)
+        .build();
+    new ContactsTable(TABLE_ELEMENT_ID, filteredData);
+  })
+}
 
 document.addEventListener('DOMContentLoaded', async () => {
 
@@ -208,6 +249,10 @@ document.addEventListener('DOMContentLoaded', async () => {
   // and then set up buttons for sorting and filter
   document.getElementById(TABLE_ELEMENT_ID)
     .querySelectorAll("thead td")
-    .forEach(addSortOnClick);
+    .forEach((td) => {
+      addSortOnClick(td);
+      addFilters(td);
+    });
+
 
 })

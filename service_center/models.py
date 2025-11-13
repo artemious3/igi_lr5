@@ -37,7 +37,7 @@ def validate_age_18(birth_date):
     today = timezone.now().date()
     print(today.year - birth_date.year)
     if (today.year - birth_date.year) < 18 or \
-       (today.year - birth_date.year == 18 and 
+       (today.year - birth_date.year == 18 and
         (today.month, today.day) < (birth_date.month, birth_date.day)):
         raise ValidationError("Client must be at least 18 years old.")
 
@@ -122,4 +122,3 @@ class About(models.Model):
     phone = models.CharField(max_length=32)
     video_path = models.CharField(max_length=64)
     description = models.TextField()
-

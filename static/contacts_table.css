@@ -24,3 +24,19 @@ thead td {
 #sort-icon {
     padding-left : 5pt;
 }
+
+.filter-input-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.filter-input-container p {
+    text-align: right;
+}
+
+#filter-btn-active {
+    border : green solid 5px;
+}
