@@ -1,10 +1,13 @@
 const API_ENDPOINT = "/service/api/contacts";
 const TABLE_ELEMENT_ID = "contacts";
+const ITEMS_PER_PAGE = 3;
 
 //global state variables
 let gContactsData = null;
 let gContactsSliceBuilder = null;
 let gActiveFilterProperty = null;
+let gCurrentPage = 0;
+
 
 class DataSliceBuilder {
   //filtered and sorted data
@@ -42,6 +45,10 @@ class DataSliceBuilder {
       itemsPerPage * (page + 1),
     );
     return this;
+  }
+
+  totalPages(itemsPerPage){
+    return Math.ceil(this.data.length / itemsPerPage);
   }
 
   length() {
@@ -169,8 +176,10 @@ function applyFilter() {
   gContactsSliceBuilder = resetDataSliceBuilder();
   let filteredData = gContactsSliceBuilder
     .filterBy(gActiveFilterProperty, filterInput.value)
+    .goToPage(0, ITEMS_PER_PAGE)
     .build();
   new ContactsTable(TABLE_ELEMENT_ID, filteredData);
+  addPager();
 }
 
 function addSortOnClick(element) {
@@ -202,14 +211,19 @@ function addSortOnClick(element) {
       desc = true;
     } else {
       clickCounter = 0;
-      new ContactsTable(TABLE_ELEMENT_ID, gContactsData);
+      gContactsSliceBuilder = resetDataSliceBuilder();
+      gContactsSliceBuilder.goToPage(0, ITEMS_PER_PAGE);
+      new ContactsTable(TABLE_ELEMENT_ID, gContactsSliceBuilder.build());
+      addPager();
       return;
     }
 
     let sortedData = gContactsSliceBuilder
       .sortBy(element.dataset.prop, desc)
+      .goToPage(0, ITEMS_PER_PAGE)
       .build();
     new ContactsTable(TABLE_ELEMENT_ID, sortedData);
+    addPager();
   });
 }
 
@@ -232,7 +246,10 @@ function addFilters(element) {
   btn.addEventListener("click", (ev) => {
     ev.stopPropagation();
     if (btn.id == "filter-btn-active") {
-      new ContactsTable(TABLE_ELEMENT_ID, gContactsData);
+      gContactsSliceBuilder = resetDataSliceBuilder();
+      gContactsSliceBuilder.goToPage(0, ITEMS_PER_PAGE);
+      new ContactsTable(TABLE_ELEMENT_ID, gContactsSliceBuilder.build());
+      addPager();
       btn.id = "";
       gActiveFilterProperty = null;
       return;
@@ -248,6 +265,62 @@ function addFilters(element) {
   });
 }
 
+function nextPage(){
+ if(gCurrentPage != gContactsSliceBuilder.totalPages(ITEMS_PER_PAGE)-1){
+   gContactsSliceBuilder.goToPage(gCurrentPage+1, ITEMS_PER_PAGE);
+   gCurrentPage++;
+ }
+ new ContactsTable(TABLE_ELEMENT_ID, gContactsSliceBuilder.build());
+}
+
+function prevPage(){
+ if(gCurrentPage != 0){
+   gContactsSliceBuilder.goToPage(gCurrentPage-1, ITEMS_PER_PAGE);
+   gCurrentPage--;
+ }
+ new ContactsTable(TABLE_ELEMENT_ID, gContactsSliceBuilder.build());
+}
+
+
+function addPager(){
+  const existingPager = document.getElementById("pager");
+  if(existingPager != null){
+    existingPager.remove();
+  }
+
+  const pager = document.createElement("div");
+  pager.id = "pager";
+  pager.classList.add("pager");
+
+  const prevBtn = document.createElement("button");
+  prevBtn.classList.add("pager-btn");
+  prevBtn.innerHTML = "<";
+  prevBtn.addEventListener("click", prevPage);
+  pager.appendChild(prevBtn);
+
+  for (let i = 0; i < gContactsSliceBuilder.totalPages(ITEMS_PER_PAGE); i++) {
+    const btn = document.createElement("button");
+    btn.classList.add("pager-btn");
+    if(i == this.currentPage){
+      btn.classList.add("pager-btn-current");
+    }
+    btn.innerHTML = (i + 1).toString();
+    btn.addEventListener("click", (ev) => {
+      gContactsSliceBuilder.goToPage(i, ITEMS_PER_PAGE);
+      new ContactsTable(TABLE_ELEMENT_ID, gContactsSliceBuilder.build());
+    });
+    pager.appendChild(btn);
+  }
+
+  const nextBtn = document.createElement("button");
+  nextBtn.classList.add("pager-btn");
+  nextBtn.innerHTML = ">";
+  nextBtn.addEventListener("click", nextPage);
+  pager.appendChild(nextBtn);
+
+  document.body.appendChild(pager);
+}
+
 document.addEventListener("DOMContentLoaded", async () => {
   gContactsData = await fetchContacts();
   if (gContactsData === null) {
@@ -257,7 +330,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   gContactsData = Array.from(gContactsData);
 
   gContactsSliceBuilder = new DataSliceBuilder(gContactsData);
-  new ContactsTable(TABLE_ELEMENT_ID, gContactsData);
+  gContactsSliceBuilder.goToPage(0, ITEMS_PER_PAGE);
+  new ContactsTable(TABLE_ELEMENT_ID, gContactsSliceBuilder.build());
 
   // set up buttons for sorting and filter at each column
   document
@@ -270,4 +344,5 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // set up handler for `find` button
   document.getElementById("find-btn").addEventListener("click", applyFilter);
+  addPager();
 });
