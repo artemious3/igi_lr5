@@ -318,7 +318,7 @@ function addPager(){
   nextBtn.addEventListener("click", nextPage);
   pager.appendChild(nextBtn);
 
-  document.body.appendChild(pager);
+  document.querySelector('main').appendChild(pager);
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
