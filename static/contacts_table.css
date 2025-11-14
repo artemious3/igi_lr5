@@ -1,4 +1,6 @@
 
+/******** TABLE **********/
+
 table {
     border-collapse: collapse;
     margin-left : auto;
@@ -25,6 +27,9 @@ thead td {
     padding-left : 5pt;
 }
 
+
+/******** FILTER **********/
+
 .filter-input-container {
     display: flex;
     flex-direction: row;
@@ -50,6 +55,8 @@ thead td {
     margin-right: 5pt;
 }
 
+/******** PAGER **********/
+
 .pager {
    left : auto;
    right : auto;
@@ -73,4 +80,33 @@ thead td {
 .pager-btn-current {
     width: 6ex;
     height: 6ex;
+}
+
+/******** EMPLOYEE CARD **********/
+
+.employee-card b {
+	font-weight: bold;
+}
+
+.employee-card img {
+	padding: 5px;
+	width: 300px;
+	height: 300px;
+}
+
+.employee-card h2 {
+	align-self: stretch;
+}
+
+.employee-card {
+
+	border : 3px solid black;
+	border-radius: 4px;
+
+	display: flex;
+	flex-direction: column;
+
+
+	align-items: center;
+
 }

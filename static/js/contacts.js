@@ -56,10 +56,17 @@ class DataSliceBuilder {
   }
 
   build() {
+    for (let i = 0; i < this.data.length; i++){
+      this.data[i].index = i;
+    }
     if (this.slice === null) {
       return this.data;
     }
     return this.slice;
+  }
+
+  atIndex(idx){
+    return this.data[idx];
   }
 }
 
@@ -87,6 +94,7 @@ class Employee {
 
   intoTr() {
     let tr = document.createElement("tr");
+    tr.dataset.idx = this.index;
 
     function createTd(content) {
       let td = document.createElement("td");
@@ -107,6 +115,25 @@ class Employee {
     tr.appendChild(createTd(this.specification));
 
     return tr;
+  }
+
+  intoCard(){
+
+    let employeeCard = document.createElement('div');
+    employeeCard.classList.add('employee-card');
+    employeeCard.id = 'employee-card';
+    employeeCard.innerHTML = `
+
+    <h2>${this.first_name + ' ' + this.last_name}</h2>
+    <img src="${this.image}" alt="" width="200" height="200">
+    <p> <b>Phone number:</b>  ${this.phone_number} </p>
+    <p> <b>Email:</b>  ${this.email} </p>
+
+    <p> <b>Specification:</b> ${this.specification}</p>
+
+    `;
+
+    return employeeCard;
   }
 }
 
@@ -178,6 +205,7 @@ function applyFilter() {
     .filterBy(gActiveFilterProperty, filterInput.value)
     .goToPage(0, ITEMS_PER_PAGE)
     .build();
+  gCurrentPage = 0;
   new ContactsTable(TABLE_ELEMENT_ID, filteredData);
   addPager();
 }
@@ -222,6 +250,7 @@ function addSortOnClick(element) {
       .sortBy(element.dataset.prop, desc)
       .goToPage(0, ITEMS_PER_PAGE)
       .build();
+    gCurrentPage = 0;
     new ContactsTable(TABLE_ELEMENT_ID, sortedData);
     addPager();
   });
@@ -336,4 +365,27 @@ document.addEventListener("DOMContentLoaded", async () => {
   // set up handler for `find` button
   document.getElementById("find-btn").addEventListener("click", applyFilter);
   addPager();
+
+  document.getElementsByTagName('tbody')[0].addEventListener('click', (e) => {
+    let existingCard = document.getElementById('employee-card');
+    if (existingCard) {
+      existingCard.remove();
+    }
+
+    let tr = function(tag){
+      let cursor = tag;
+      while(cursor != null && cursor.tagName != "TR"){
+        cursor = cursor.parentElement;
+      }
+      return cursor;
+    }(e.target);
+
+    if(tr == null){
+      return;
+    }
+
+    let table = document.getElementById("contacts");
+    table.insertAdjacentElement("afterend",gContactsSliceBuilder.atIndex(tr.dataset.idx).intoCard());
+  });
+
 });
