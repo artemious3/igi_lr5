@@ -265,21 +265,15 @@ function addFilters(element) {
   });
 }
 
-function nextPage(){
- if(gCurrentPage != gContactsSliceBuilder.totalPages(ITEMS_PER_PAGE)-1){
-   gContactsSliceBuilder.goToPage(gCurrentPage+1, ITEMS_PER_PAGE);
-   gCurrentPage++;
- }
- new ContactsTable(TABLE_ELEMENT_ID, gContactsSliceBuilder.build());
+function selectPage(i){
+  if(i >= 0 && i < gContactsSliceBuilder.totalPages(ITEMS_PER_PAGE)){
+    gCurrentPage = i;
+    gContactsSliceBuilder.goToPage(i, ITEMS_PER_PAGE);
+    new ContactsTable(TABLE_ELEMENT_ID, gContactsSliceBuilder.build());
+    addPager();
+  }
 }
 
-function prevPage(){
- if(gCurrentPage != 0){
-   gContactsSliceBuilder.goToPage(gCurrentPage-1, ITEMS_PER_PAGE);
-   gCurrentPage--;
- }
- new ContactsTable(TABLE_ELEMENT_ID, gContactsSliceBuilder.build());
-}
 
 
 function addPager(){
@@ -295,27 +289,24 @@ function addPager(){
   const prevBtn = document.createElement("button");
   prevBtn.classList.add("pager-btn");
   prevBtn.innerHTML = "<";
-  prevBtn.addEventListener("click", prevPage);
+  prevBtn.addEventListener("click", ()=>selectPage(gCurrentPage-1));
   pager.appendChild(prevBtn);
 
   for (let i = 0; i < gContactsSliceBuilder.totalPages(ITEMS_PER_PAGE); i++) {
     const btn = document.createElement("button");
     btn.classList.add("pager-btn");
-    if(i == this.currentPage){
+    btn.innerHTML = (i + 1).toString();
+    if(i == gCurrentPage){
       btn.classList.add("pager-btn-current");
     }
-    btn.innerHTML = (i + 1).toString();
-    btn.addEventListener("click", (ev) => {
-      gContactsSliceBuilder.goToPage(i, ITEMS_PER_PAGE);
-      new ContactsTable(TABLE_ELEMENT_ID, gContactsSliceBuilder.build());
-    });
+    btn.addEventListener("click", ()=>selectPage(i));
     pager.appendChild(btn);
   }
 
   const nextBtn = document.createElement("button");
   nextBtn.classList.add("pager-btn");
   nextBtn.innerHTML = ">";
-  nextBtn.addEventListener("click", nextPage);
+  nextBtn.addEventListener("click", ()=>selectPage(gCurrentPage+1));
   pager.appendChild(nextBtn);
 
   document.querySelector('main').appendChild(pager);

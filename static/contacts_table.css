@@ -49,3 +49,28 @@ thead td {
     margin-left: 5pt;
     margin-right: 5pt;
 }
+
+.pager {
+   left : auto;
+   right : auto;
+   display: flex;
+   flex-direction: row;
+   justify-content: center;
+   align-items: center;
+   margin-bottom: 15px;
+}
+
+.pager-btn{
+    width: 4ex;
+    height : 4ex;
+    text-align: center;
+    margin:3px;
+
+    border-width: 2px;
+    border-radius: 8px;
+}
+
+.pager-btn-current {
+    width: 6ex;
+    height: 6ex;
+}
