@@ -4,6 +4,7 @@
 
 <link rel="stylesheet" href="/static/contacts_table.css">
 <script src="/static/js/contacts.js"></script>
+<script src="/static/js/contacts_dialog.js"></script>
 
 {% endblock styles %}
 
@@ -32,5 +33,24 @@
 
     </tbody>
 </table>
+
+<button id="new-btn">New</button>
+
+<dialog id="dialog">
+    <h2>Add new employee</h2>
+    <form>
+        <label>First name:</label>
+        <input type="text">
+        <label>Last name:</label>
+        <input type="text">
+        <label>Username:</label>
+        <input type="text">
+        <label>Password:</label>
+        <input type="password">
+        <label>Specification:</label>
+        <textarea></textarea>
+    </form>
+
+</dialog>
 
 {% endblock content %}

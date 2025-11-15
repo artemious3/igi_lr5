@@ -113,3 +113,27 @@ thead td {
 	align-items: center;
 
 }
+
+/******** DIALOG **********/
+
+#new-btn {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0px;
+    margin-bottom: 15px;
+    width : 200px;
+}
+
+dialog form {
+    display:grid;
+    grid-template-columns: max-content max-content;
+    grid-gap:5px;
+}
+
+dialog label {
+    border : none;
+    margin-bottom: 1pt;
+}
+dialog input {
+    margin-bottom: 1pt;
+}
