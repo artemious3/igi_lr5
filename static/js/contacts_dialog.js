@@ -8,6 +8,43 @@ function validatePhoneNumber(phone){
     return /((80\d\d|8 \(0\d\d\) )\d{7}|\+375 \(\d\d\) \d{3}[- ]\d{2}[- ]\d{2})/gm.test(phone);
 }
 
+function validateUrlAndPhoneInputs(formData){
+  const errorMessages = document.getElementById('error-messages');
+  const phoneInput = document.querySelector('input[name="phone_number"');
+  const urlInput = document.querySelector('input[name="url"');
+
+  let err = false;
+  if(!validatePhoneNumber(formData.get('phone_number'))){
+    errorMessages.innerHTML += `<b>Phone number:</b> must be '80291112233', '8 (029) 1112233', '+375 (29) 111-22-33', '+375 (29) 111 22 33'\n`
+    err = true;
+    phoneInput.dataset.invalid = "true";
+  } else {
+    phoneInput.dataset.invalid = "false";
+  }
+
+  if(!validateUrl(formData.get('url'))){
+    errorMessages.innerHTML += `<b>Url:</b> must start with http:// or https:// and end with .php or .html`
+    err = true;
+    urlInput.dataset.invalid = "true";
+  } else {
+    urlInput.dataset.invalid = "false";
+  }
+  return !err;
+}
+
+async function refetchTable(){
+  gContactsData = await fetchContacts();
+  if (gContactsData === null) {
+    document.getElementById("contacts").remove();
+    document.body.append(`<p>Error. Try again later</p>`);
+  }
+  gContactsData = Array.from(gContactsData);
+  gContactsSliceBuilder = resetDataSliceBuilder();
+  addPager();
+  selectPage(0);
+  removeFilterAndSortIndication();
+}
+
 document.addEventListener('DOMContentLoaded', async () => {
   const dialog = document.getElementById('dialog');
   const inputElements = dialog.querySelectorAll('input,textarea');
@@ -18,6 +55,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     dialog.showModal();
   });
 
+  // submit button appears after all fields are filled
   dialog.addEventListener('input', async () => {
     let allNonEmpty = true;
     for (const inp of inputElements){
@@ -31,34 +69,18 @@ document.addEventListener('DOMContentLoaded', async () => {
       submitBtn.classList.remove('shown');
       submitBtn.disabled = true;
     }
-
   });
-
 
   form.addEventListener('submit', async (ev)=>{
     ev.preventDefault();
+    document.getElementById('error-messages').innerHTML = '';
     const inputDialog = document.getElementById('dialog');
     const successDialog = document.getElementById('success-dialog');
     const failDialog = document.getElementById('fail-dialog');
-    const errorMessages = document.getElementById('error-messages');
-    const phoneInput = document.querySelector('input[name="phone_number"');
-    errorMessages.innerHTML = '';
-
 
     let formData = new FormData(form);
 
-    let err = false;
-
-    if(!validatePhoneNumber(formData.get('phone_number'))){
-      errorMessages.innerHTML += `<b>Phone number:</b> should be '80291112233', '8 (029) 1112233', '+375 (29) 111-22-33', '+375 (29) 111 22 33'\n`
-      err = true;
-      phoneInput.dataset.invalid = "true";
-    } else {
-      phoneInput.dataset.invalid = "false";
-    }
-
-
-    if(err){
+    if(!validateUrlAndPhoneInputs(formData)){
       return;
     }
 
@@ -71,16 +93,10 @@ document.addEventListener('DOMContentLoaded', async () => {
    if(resp.ok) {
      inputDialog.close();
      successDialog.showModal();
-     gContactsSliceBuilder = resetDataSliceBuilder();
-     addPager();
-     selectPage(0);
-     removeFilterAndSortIndication();
-
+     await refetchTable();
    } else {
-
      inputDialog.close();
      failDialog.showModal();
-
      const body = await resp.text();
      console.log(body);
    }
