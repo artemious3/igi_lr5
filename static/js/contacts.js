@@ -466,6 +466,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           list.appendChild(li);
         }
         container.appendChild(list);
+        window.scrollTo(0, document.body.scrollHeight);
       }
     );
   });
