@@ -9,6 +9,7 @@
     justify-content: center;
 }
 
+
 .smartphone-constructing {
     position: absolute; /* Contain the absolutely positioned parts */
     height: 300px;
@@ -39,6 +40,7 @@
     transform: translateY(-50%,0);
     width : 250px;
     height: 250px;
+    filter : var(--invert)
 }
 
 #smartphone-gears {
@@ -73,6 +75,7 @@
     top : 15pt;
     width : 200pt;
     height : 200pt;
+    filter : var(--invert)
 }
 
 #laptop-circle {
