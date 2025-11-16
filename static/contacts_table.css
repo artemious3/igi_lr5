@@ -7,6 +7,7 @@ table {
     margin-right : auto;
     margin-top: 10pt;
     margin-bottom: 10pt;
+    width : 85%;
 }
 
 table td {
@@ -121,19 +122,15 @@ thead td {
     margin-right: auto;
     margin-top: 0px;
     margin-bottom: 15px;
-    width : 200px;
+    width : 85%;
+    font-size: 20pt;
+    padding : 5pt;
 }
 
-dialog form {
-    display:grid;
-    grid-template-columns: max-content max-content;
-    grid-gap:5px;
-}
 
-dialog label {
-    border : none;
-    margin-bottom: 1pt;
-}
-dialog input {
-    margin-bottom: 1pt;
+
+input[type="submit"]{
+    width: 95%;
+    text-align: center;
+    font-size: 16pt;
 }

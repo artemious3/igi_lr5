@@ -37,19 +37,19 @@
   background-color: grey;
 }
 
-.form-group input:invalid { 
+/*.form-group input:invalid {
 	border-color: red;
 	transform: 0.2s border-color ease-in;
-}
+}*/
 
-.form-group input:required{ 
+.form-group input:required{
 	outline-color: black;
 	outline-width: 1px;
 	outline-style: solid;
 	outline-offset: 2px;
 }
 
-.form-group input:checked { 
+.form-group input:checked {
 	border: none;
   outline: 2px solid black;
 }

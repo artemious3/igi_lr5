@@ -15,7 +15,7 @@ form > * {
 	border-radius: 4px;
 }
 
-.form-container { 
+.form-container {
 	display: block !important;
 }
 
@@ -42,23 +42,23 @@ form > * input:disabled{
   background-color: grey;
 }
 
-form > * input:invalid { 
+/*form > * input:invalid {
 	border-color: red;
 	transform: 0.2s border-color ease-in;
-}
+}*/
 
-form > * input:required{ 
+form > * input:required{
 	outline-color: black;
 	outline-width: 1px;
 	outline-style: solid;
 	outline-offset: 2px;
 }
 
-form > * input:checked { 
+form > * input:checked {
 	border: none;
   outline: 2px solid black;
 }
 
-form button { 
+form button {
 	margin : 5px;
 }

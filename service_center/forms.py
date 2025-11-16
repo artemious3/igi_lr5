@@ -1,10 +1,14 @@
 
 import datetime
+from tkinter import Widget
+from turtle import width
+from typing import Required
 import django
 from django import forms
 from django.forms import ModelForm, ValidationError
 from django import forms
 from django.utils.timezone import now
+from django.contrib.auth import get_user_model
 
 from news import models
 from .models import Employee, Order, OrderService, OrderSpareParts
@@ -129,3 +133,36 @@ class NewOrderForm(ModelForm):
             order.save()
         return order
 
+
+
+class NewEmployeeForm(forms.Form):
+    username = forms.CharField()
+    password = forms.CharField(widget=forms.PasswordInput(), label='Password')
+    first_name = forms.CharField(required=True,max_length=30,label='First Name')
+    last_name = forms.CharField(required=True, max_length=30,label='Last Name')
+
+    email = forms.EmailField(required=True, label='Email')
+    image = forms.ImageField(required=True)
+    phone_number = forms.CharField(max_length=19)
+    specification = forms.CharField(widget=forms.Textarea)
+
+    def save(self, commit=True):
+        User = get_user_model()
+        user = User.objects.create_user(
+            username=self.cleaned_data['username'],
+            email=self.cleaned_data['email'],
+            password=self.cleaned_data['password'],
+            first_name=self.cleaned_data['first_name'],
+            last_name=self.cleaned_data['last_name']
+        )
+
+        employee = Employee(
+            user=user,
+            image=self.cleaned_data['image'],
+            phone_number=self.cleaned_data['phone_number'],
+            specification=self.cleaned_data['specification']
+        )
+
+        if commit:
+            employee.save()
+        return employee

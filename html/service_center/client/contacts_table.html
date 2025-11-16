@@ -10,6 +10,7 @@
 
 {% block content %}
 
+<p>{{ validity }}</p>
 
 <div class="filter-input-container">
     <p>Filter:</p>
@@ -38,19 +39,11 @@
 
 <dialog id="dialog">
     <h2>Add new employee</h2>
-    <form>
-        <label>First name:</label>
-        <input type="text">
-        <label>Last name:</label>
-        <input type="text">
-        <label>Username:</label>
-        <input type="text">
-        <label>Password:</label>
-        <input type="password">
-        <label>Specification:</label>
-        <textarea></textarea>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Submit">
     </form>
-
 </dialog>
 
 {% endblock content %}

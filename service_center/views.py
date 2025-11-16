@@ -13,8 +13,8 @@ from django.core.exceptions import PermissionDenied
 
 from django.utils.html import escape
 
-from service_center.forms import AddServiceForm, AddSparePartForm, NewOrderForm, AddSpecificServiceForm
-from .models import Client, Employee, Order, OrderService, OrderSpareParts, Service, PromoCodes, About
+from service_center.forms import AddServiceForm, AddSparePartForm, NewEmployeeForm, NewOrderForm, AddSpecificServiceForm
+from .models import Client, Employee, Order, OrderService, OrderSpareParts, Service, PromoCodes, About, User
 
 import datetime
 import calendar
@@ -40,7 +40,18 @@ def contacts_view(req):
     return render(req, 'service_center/client/contacts.html', {"employees":employees})
 
 def contacts_table_view(req):
-    return render(req, 'service_center/client/contacts_table.html')
+    if req.method == "POST":
+        form = NewEmployeeForm(req.POST, req.FILES)
+        if form.is_valid():
+            form.save()
+            # Redirect to the same page or a success page
+            return redirect(req.path)
+        else:
+            return render(req, 'service_center/client/contacts_table.html', {"validity":form.errors})
+    else:
+        form = NewEmployeeForm()
+        return render(req, 'service_center/client/contacts_table.html', {"form":form})
+
 
 def contacts_json_view(req):
     employees = Employee.objects.select_related('user').all()
