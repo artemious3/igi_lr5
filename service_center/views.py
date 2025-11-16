@@ -1,3 +1,4 @@
+from http.client import BAD_REQUEST, METHOD_NOT_ALLOWED, OK
 from urllib import request
 from django.db.models.base import pre_init
 from django.middleware import csrf
@@ -43,14 +44,20 @@ def contacts_table_view(req):
     if req.method == "POST":
         form = NewEmployeeForm(req.POST, req.FILES)
         if form.is_valid():
-            form.save()
+            try:
+                form.save()
+            except Exception as e:
+                return HttpResponse(f'"error":"{str(e)}"', status=BAD_REQUEST)
+
             # Redirect to the same page or a success page
-            return redirect(req.path)
+            return HttpResponse('Ok', status=OK)
         else:
-            return render(req, 'service_center/client/contacts_table.html', {"validity":form.errors})
-    else:
+            return HttpResponse(form.errors, status=BAD_REQUEST)
+    elif req.method == "GET":
         form = NewEmployeeForm()
         return render(req, 'service_center/client/contacts_table.html', {"form":form})
+    else:
+        return HttpResponse('Bad method', status=METHOD_NOT_ALLOWED)
 
 
 def contacts_json_view(req):

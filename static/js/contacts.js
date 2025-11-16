@@ -303,6 +303,18 @@ function selectPage(i){
   }
 }
 
+function removeFilterAndSortIndication(){
+  let activeFiler = document.getElementById("filter-btn-active");
+  if (activeFiler != null) {
+    activeFiler.id = "";
+  }
+
+  let sortIcon = document.getElementById("sort-icon");
+  if (sortIcon != null) {
+    sortIcon.remove();
+  }
+}
+
 
 
 function addPager(){
@@ -351,6 +363,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   gContactsSliceBuilder = new DataSliceBuilder(gContactsData);
   gContactsSliceBuilder.goToPage(0, ITEMS_PER_PAGE);
+  gCurrentPage = 0;
+  gActiveFilterProperty = null;
   new ContactsTable(TABLE_ELEMENT_ID, gContactsSliceBuilder.build());
 
   // set up buttons for sorting and filter at each column
