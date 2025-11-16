@@ -26,8 +26,10 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     if(allNonEmpty){
       submitBtn.classList.add('shown');
+      submitBtn.disabled = false;
     } else {
       submitBtn.classList.remove('shown');
+      submitBtn.disabled = true;
     }
 
   });
@@ -39,6 +41,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const successDialog = document.getElementById('success-dialog');
     const failDialog = document.getElementById('fail-dialog');
     const errorMessages = document.getElementById('error-messages');
+    const phoneInput = document.querySelector('input[name="phone_number"');
     errorMessages.innerHTML = '';
 
 
@@ -49,7 +52,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     if(!validatePhoneNumber(formData.get('phone_number'))){
       errorMessages.innerHTML += `<b>Phone number:</b> should be '80291112233', '8 (029) 1112233', '+375 (29) 111-22-33', '+375 (29) 111 22 33'\n`
       err = true;
-      console.log('bad phone');
+      phoneInput.dataset.invalid = "true";
+    } else {
+      phoneInput.dataset.invalid = "false";
     }
 
 

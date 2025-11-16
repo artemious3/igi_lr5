@@ -132,7 +132,9 @@ dialog {
     padding : 5pt;
 }
 
-
+dialog input  {
+    width : 60%;
+}
 
 input[type="submit"]{
     opacity: 0%;
@@ -141,12 +143,20 @@ input[type="submit"]{
     font-size: 16pt;
     transition: opacity 0.2s ease-in;
 }
+
 input[type="submit"].shown{
     opacity: 100%;
+    enable
     transition: opacity 0.3s ease-in;
 }
 
 input[data-invalid="true"]{
-    background-color: pink;
+    background-color: pink !important;
     border: 2px red solid;
+}
+
+dialog textarea {
+    height : 8em;
+    width : 60%;
+    resize: none;
 }

@@ -42,7 +42,7 @@
     <form method="post" enctype="multipart/form-data" id="new-employee-form">
         {% csrf_token %}
         {{ form }}
-        <input type="submit" value="Submit">
+        <input type="submit" value="Submit" disabled>
     </form>
     <div id="error-messages">
 
