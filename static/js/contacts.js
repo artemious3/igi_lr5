@@ -353,7 +353,8 @@ function addPager(){
   nextBtn.addEventListener("click", ()=>selectPage(gCurrentPage+1));
   pager.appendChild(nextBtn);
 
-  document.querySelector('main').appendChild(pager);
+  let cnt = document.getElementById('pager-container');
+  cnt.appendChild(pager);
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -410,8 +411,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       existingCard.remove();
     }
 
-    let rewardBtn = document.getElementById("reward-btn");
-    rewardBtn.insertAdjacentElement("afterend",gContactsSliceBuilder.atIndex(tr.dataset.idx).intoCard());
+    let cnt = document.getElementById('card-container');
+    cnt.appendChild(gContactsSliceBuilder.atIndex(tr.dataset.idx).intoCard());
   });
 
 
