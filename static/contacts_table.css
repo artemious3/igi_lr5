@@ -181,3 +181,23 @@ dialog textarea {
 #rewarded-list li{
     text-align: left;
 }
+
+/******** PRELOADER **********/
+
+#preloader-overlay {
+    display : none;
+    left : 0%;
+    top : 0%;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(40px);
+    z-index : 100;
+}
+
+.preloader-container{
+    position:absolute;
+    top:42%;
+    left:50%;
+    transform: translate(-50%, -50%);
+}

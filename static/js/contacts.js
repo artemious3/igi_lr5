@@ -9,6 +9,24 @@ let gActiveFilterProperty = null;
 let gCurrentPage = 0;
 
 
+function showPreloader(){
+  document.getElementById('preloader-overlay').style.display = 'block';
+
+}
+
+function hidePreloader(){
+  document.getElementById('preloader-overlay').style.display = 'none';
+}
+
+async function showAndHidePreloader(callable,arg){
+  showPreloader();
+  try{
+    await callable(arg);
+  } finally{
+    hidePreloader();
+  }
+}
+
 class DataSliceBuilder {
   //filtered and sorted data
   data = null;
@@ -319,6 +337,9 @@ function removeFilterAndSortIndication(){
 }
 
 
+function delay(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
 
 function addPager(){
   const existingPager = document.getElementById("pager");
@@ -417,33 +438,36 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 
   document.getElementById('reward-btn').addEventListener('click', () => {
-    const rewarded = gContactsSliceBuilder.data.filter(emp => emp.selected);
-    const container = document.getElementById('rewarded-list');
-    container.style.display = 'block';
-    container.innerHTML = '';
+    showAndHidePreloader(
+      async () => {
+        await delay(1000);
+        const rewarded = gContactsSliceBuilder.data.filter(emp => emp.selected);
+        const container = document.getElementById('rewarded-list');
+        container.style.display = 'block';
+        container.innerHTML = '';
 
-    let header = document.createElement('h2');
-    header.innerHTML = "Rewarded employees";
-    container.appendChild(header);
+        let header = document.createElement('h2');
+        header.innerHTML = "Rewarded employees";
+        container.appendChild(header);
 
-    if(rewarded.length == 0){
-      let p = document.createElement('p');
-      p.innerHTML = 'Nobody is rewarded';
-      container.appendChild(p);
-      return;
-    }
+        if (rewarded.length == 0) {
+          let p = document.createElement('p');
+          p.innerHTML = 'Nobody is rewarded';
+          container.appendChild(p);
+          return;
+        }
 
-    let list = document.createElement('ol');
-
-
-    for(let employee of rewarded){
-      let li = document.createElement('li');
-      li.innerHTML = `${employee.first_name} ${employee.last_name}`;
-      list.appendChild(li);
-    }
+        let list = document.createElement('ol');
 
 
-    container.appendChild(list);
+        for (let employee of rewarded) {
+          let li = document.createElement('li');
+          li.innerHTML = `${employee.first_name} ${employee.last_name}`;
+          list.appendChild(li);
+        }
+        container.appendChild(list);
+      }
+    );
   });
 
 
