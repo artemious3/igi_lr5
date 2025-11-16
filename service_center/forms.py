@@ -144,6 +144,7 @@ class NewEmployeeForm(forms.Form):
     email = forms.EmailField(required=True, label='Email')
     image = forms.ImageField(required=True)
     phone_number = forms.CharField(max_length=19)
+    url = forms.CharField(max_length=255)
     specification = forms.CharField(widget=forms.Textarea)
 
     def save(self, commit=True):
@@ -160,7 +161,8 @@ class NewEmployeeForm(forms.Form):
             user=user,
             image=self.cleaned_data['image'],
             phone_number=self.cleaned_data['phone_number'],
-            specification=self.cleaned_data['specification']
+            specification=self.cleaned_data['specification'],
+            url=self.cleaned_data['url']
         )
 
         if commit:
