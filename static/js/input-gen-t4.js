@@ -1,4 +1,5 @@
 let gInputCnt = 0;
+let gInputStates = {};
 
 function createInput(label, type) {
   let label_element = document.createElement("label");
@@ -13,6 +14,7 @@ function createInput(label, type) {
 
 function createAttributeChanger(label, type, target_element, event, attr) {
   let changer = createInput(label, type);
+  changer[1].dataset.attr = attr;
 
   changer[1].addEventListener(event, function () {
     target_element.setAttribute(attr, changer[1].value);
@@ -22,13 +24,16 @@ function createAttributeChanger(label, type, target_element, event, attr) {
 }
 
 
-// @retunrs string
-function addInteractiveInput(htmlElement) {
+let attributes_order = [
+  "name", "min", "max", "step", "value", "placeholder"
+]
+
+function addInteractiveInput(htmlElement,id) {
   const container = document.createElement("div");
   container.classList.add("input-container");
 
   const header = document.createElement("h2");
-  header.innerHTML = "Input group " + (gInputCnt+1).toString();
+  header.innerHTML = "Input group " + (id+1).toString();
   container.appendChild(header);
 
   let element = createInput("Interactive input: ", "number");
@@ -95,23 +100,72 @@ function addInteractiveInput(htmlElement) {
     placeholderChanger[0],
     readonlyChanger[0],
   );
-  container.id = "ig" + gInputCnt.toString();
+  container.id = "ig" + id.toString();
 
   const removeBtn = document.createElement("button");
   removeBtn.innerHTML = "Remove input group";
-  const thisInputCnt = gInputCnt;
+  const thisInputCnt = id;
   removeBtn.addEventListener("click", ()=> {
     document.getElementById("ig" + thisInputCnt.toString()).remove();
+    delete gInputStates[id];
   })
   container.appendChild(removeBtn);
 
-
-
   htmlElement.appendChild(container);
 
-  gInputCnt++;
+  container.addEventListener('input', () => { updateInputGroup(id)});
+
+  return container;
 }
 
-document.getElementById("input-add-btn").addEventListener("click", ()=>{
-  addInteractiveInput(document.getElementById("inputs"));
-})
+function updateInputGroup(id){
+  const igroup = document.getElementById("ig" + id.toString());
+  if(igroup == null){
+    return;
+  }
+  let values = Array.from(igroup.getElementsByTagName('input')).map((el) => el.value);
+  gInputStates[id] = values;
+}
+
+function storeInputs(){
+  let state = {
+    "gInputCnt": gInputCnt,
+    "gInputStates": gInputStates
+  };
+  localStorage.setItem('interactive_input', JSON.stringify(state));
+}
+
+function restoreInputs(){
+  let state = JSON.parse(localStorage.getItem('interactive_input'));
+  if(state == null){
+    return;
+  }
+  gInputCnt = state["gInputCnt"];
+  gInputStates = state["gInputStates"];
+
+  const container = document.getElementById('inputs');
+  for (let id in gInputStates){
+    let restoredInput = addInteractiveInput(container, +id);
+    let inputs = restoredInput.getElementsByTagName('input');
+
+    for (let i = 0; i < inputs.length; i++){
+      inputs[i].value = gInputStates[id][i];
+    }
+
+    for (let i = 1; i < inputs.length-1; i++){
+      inputs[0].setAttribute(inputs[i].dataset.attr, inputs[i].value);
+    }
+  }
+}
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  restoreInputs();
+  document.getElementById("input-add-btn").addEventListener("click", ()=>{
+    addInteractiveInput(document.getElementById("inputs"),gInputCnt);
+    updateInputGroup(gInputCnt);
+    gInputCnt++;
+  })
+});
+
+window.addEventListener('beforeunload', storeInputs);
