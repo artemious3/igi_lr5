@@ -146,13 +146,16 @@ input[type="submit"]{
 
 input[type="submit"].shown{
     opacity: 100%;
-    enable
     transition: opacity 0.3s ease-in;
 }
 
 input[data-invalid="true"]{
     background-color: pink !important;
     border: 2px red solid;
+}
+
+#error-messages p{
+    text-align: left;
 }
 
 dialog textarea {

@@ -25,9 +25,8 @@ a[download]::before {
 }
 
 
-* {
+html * {
 	font-family : "Space Mono", monospace;
-	font-weight : 100;
 	text-align : center;
 }
 

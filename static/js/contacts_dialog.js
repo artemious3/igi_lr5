@@ -15,7 +15,7 @@ function validateUrlAndPhoneInputs(formData){
 
   let err = false;
   if(!validatePhoneNumber(formData.get('phone_number'))){
-    errorMessages.innerHTML += `<b>Phone number:</b> must be '80291112233', '8 (029) 1112233', '+375 (29) 111-22-33', '+375 (29) 111 22 33'\n`
+    errorMessages.innerHTML += `<p><b>Phone number:</b> must be '80291112233', '8 (029) 1112233', '+375 (29) 111-22-33', '+375 (29) 111 22 33'</p>`
     err = true;
     phoneInput.dataset.invalid = "true";
   } else {
@@ -23,7 +23,7 @@ function validateUrlAndPhoneInputs(formData){
   }
 
   if(!validateUrl(formData.get('url'))){
-    errorMessages.innerHTML += `<b>Url:</b> must start with http:// or https:// and end with .php or .html`
+    errorMessages.innerHTML += `<p><b>Url:</b> must start with http:// or https:// and end with .php or .html</p>`
     err = true;
     urlInput.dataset.invalid = "true";
   } else {
