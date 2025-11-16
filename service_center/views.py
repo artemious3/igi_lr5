@@ -72,7 +72,8 @@ def contacts_json_view(req):
             },
             'phone_number': employee.phone_number,
             'image': employee.image.url if employee.image else None,
-            'specification': employee.specification
+            'specification': employee.specification,
+            'url': employee.url
         })
 
     return JsonResponse({

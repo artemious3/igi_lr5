@@ -77,6 +77,7 @@ class Employee {
   first_name = null;
   last_name = null;
   email = null;
+  url = null;
   selected = false;
   index = null;
 
@@ -88,6 +89,7 @@ class Employee {
     emp.first_name = obj.user.first_name;
     emp.last_name = obj.user.last_name;
     emp.email = obj.user.email;
+    emp.url = obj.url;
     emp.selected = false;
     return emp;
   }
@@ -112,6 +114,7 @@ class Employee {
     tr.appendChild(createTd(this.last_name));
     tr.appendChild(createTd(this.email));
     tr.appendChild(createTd(this.phone_number));
+    tr.appendChild(createTd(`<a href=${this.url}>Link</a>`));
     tr.appendChild(createTd(this.specification));
 
     return tr;
