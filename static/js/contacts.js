@@ -384,11 +384,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   addPager();
 
   document.getElementsByTagName('tbody')[0].addEventListener('click', (e) => {
-    let existingCard = document.getElementById('employee-card');
-    if (existingCard) {
-      existingCard.remove();
-    }
 
+    // walk the parents to find tr element with data-idx property
     let tr = function(tag){
       let cursor = tag;
       while(cursor != null && cursor.tagName != "TR"){
@@ -399,6 +396,18 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     if(tr == null){
       return;
+    }
+
+    // if click is inside checkbox, just mark the employee as selected
+    if(e.target.tagName = "INPUT" && e.target.type == "checkbox"){
+      gContactsSliceBuilder.atIndex(tr.dataset.idx).selected = e.target.checked;
+      return;
+    }
+
+    //otherwise, show the card
+    let existingCard = document.getElementById('employee-card');
+    if (existingCard) {
+      existingCard.remove();
     }
 
     let table = document.getElementById("contacts");
