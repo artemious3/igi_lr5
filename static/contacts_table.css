@@ -125,7 +125,7 @@ dialog {
     max-width: 600px;
 }
 
-#new-btn {
+.btn {
     margin-left: auto;
     margin-right: auto;
     margin-top: 0px;
@@ -165,4 +165,19 @@ dialog textarea {
     height : 8em;
     width : 60%;
     resize: none;
+}
+
+
+/********* REWARD ************/
+
+#rewarded-list{
+    display : none;
+    width : 50%;
+    margin-left: auto;
+    margin-right: auto;
+    border: solid 5pt darkgreen;
+}
+
+#rewarded-list li{
+    text-align: left;
 }

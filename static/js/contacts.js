@@ -410,8 +410,40 @@ document.addEventListener("DOMContentLoaded", async () => {
       existingCard.remove();
     }
 
-    let table = document.getElementById("contacts");
-    table.insertAdjacentElement("afterend",gContactsSliceBuilder.atIndex(tr.dataset.idx).intoCard());
+    let rewardBtn = document.getElementById("reward-btn");
+    rewardBtn.insertAdjacentElement("afterend",gContactsSliceBuilder.atIndex(tr.dataset.idx).intoCard());
   });
+
+
+  document.getElementById('reward-btn').addEventListener('click', () => {
+    const rewarded = gContactsSliceBuilder.data.filter(emp => emp.selected);
+    const container = document.getElementById('rewarded-list');
+    container.style.display = 'block';
+    container.innerHTML = '';
+
+    let header = document.createElement('h2');
+    header.innerHTML = "Rewarded employees";
+    container.appendChild(header);
+
+    if(rewarded.length == 0){
+      let p = document.createElement('p');
+      p.innerHTML = 'Nobody is rewarded';
+      container.appendChild(p);
+      return;
+    }
+
+    let list = document.createElement('ol');
+
+
+    for(let employee of rewarded){
+      let li = document.createElement('li');
+      li.innerHTML = `${employee.first_name} ${employee.last_name}`;
+      list.appendChild(li);
+    }
+
+
+    container.appendChild(list);
+  });
+
 
 });
