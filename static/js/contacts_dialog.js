@@ -1,9 +1,3 @@
-document.addEventListener('DOMContentLoaded', () => {
-  document.getElementById('new-btn').addEventListener('click', () => {
-    document.getElementById('dialog').showModal();
-  });
-
-
 
 function validateUrl(url){
   return /^http[s]:\/\/.*(\.php|\.html)$/.test(url);
@@ -14,8 +8,31 @@ function validatePhoneNumber(phone){
     return /((80\d\d|8 \(0\d\d\) )\d{7}|\+375 \(\d\d\) \d{3}[- ]\d{2}[- ]\d{2})/gm.test(phone);
 }
 
-
+document.addEventListener('DOMContentLoaded', async () => {
+  const dialog = document.getElementById('dialog');
+  const inputElements = dialog.querySelectorAll('input,textarea');
   const form = document.getElementById('new-employee-form');
+  const submitBtn = form.querySelector('input[type="submit"]');
+
+  document.getElementById('new-btn').addEventListener('click', () => {
+    dialog.showModal();
+  });
+
+  dialog.addEventListener('input', async () => {
+    let allNonEmpty = true;
+    for (const inp of inputElements){
+      allNonEmpty = allNonEmpty && Boolean(inp.value);
+    }
+
+    if(allNonEmpty){
+      submitBtn.classList.add('shown');
+    } else {
+      submitBtn.classList.remove('shown');
+    }
+
+  });
+
+
   form.addEventListener('submit', async (ev)=>{
     ev.preventDefault();
     const inputDialog = document.getElementById('dialog');

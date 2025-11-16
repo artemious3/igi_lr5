@@ -135,9 +135,15 @@ dialog {
 
 
 input[type="submit"]{
+    opacity: 0%;
     width: 95%;
     text-align: center;
     font-size: 16pt;
+    transition: opacity 0.2s ease-in;
+}
+input[type="submit"].shown{
+    opacity: 100%;
+    transition: opacity 0.3s ease-in;
 }
 
 input[data-invalid="true"]{
